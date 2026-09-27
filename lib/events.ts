@@ -1,4 +1,5 @@
-import { lumaEvents, type RawLumaStatus } from './luma-events';
+import { lumaEvents, type RawLumaStatus, type RawLumaEvent } from './luma-events';
+import { latestLumaEvents } from './luma-latest';
 
 export type Priority = 'primary' | 'secondary' | 'third';
 export type LumaStatus = RawLumaStatus | 'not_found' | 'external';
@@ -36,18 +37,26 @@ const highPriority = new Set([
   'payments-stablecoins-cafe',
   'onchain-horizons',
   'payments-treasury-tokenization',
+  'venture-connect',
+  'next-gen-payments-apac',
+  'agentic-finance-summit-odds',
   'agent-ready-usdc',
   'treasury-table',
+  'onchain-finance-connect',
+  'investors-institutions-innovators',
   'dat-summit',
+  'finality-forum',
   'rwa-summit',
   'bitangels',
+  'institutional-table',
   'founder-vc-day2',
 ]);
 
 const secondaryPriority = new Set([
   'mantle-rwa', 'ai-agent-summit', 'global-onchain-summit', 'animoca-portfolio-day',
   'future-money-payments', 'stablecoin-happy-hour', 'flow-state', 'network-state',
-  'sony-taisu', 'cointelegraph-connect', 'ultra-connect', 'utxo-pitch'
+  'sony-taisu', 'cointelegraph-connect', 'ultra-connect', 'utxo-pitch',
+  'penthouse-trackside', 'rwa-paddock'
 ]);
 
 function tagsFor(title: string, priority: Priority): string[] {
@@ -68,11 +77,18 @@ function routeHintFor(status: LumaStatus, priority: Priority): string {
   if (status === 'pending_approval' && priority === 'primary') return 'Pending approval. Keep this slot protected until the organizer responds; promote immediately when approved.';
   if (status === 'pending_approval') return 'Pending approval. Keep as a flexible alternative until access is confirmed.';
   if (status === 'waitlist') return 'Waitlisted. Do not route around this event unless Luma confirms a place.';
+  if (status === 'invited') return 'Invited on Luma. Confirm attendance before routing around this event.';
   if (status === 'external') return 'Access is managed outside Luma. Verify the official pass or registration before departure.';
   return 'No matching Luma registration found. Use the event source link to register or verify access.';
 }
 
-const lumaMapped: EventItem[] = lumaEvents.map((e) => {
+// Latest Luma records override the previous snapshot by stable itinerary id.
+const mergedLumaById = new Map<string, RawLumaEvent>();
+for (const event of lumaEvents) mergedLumaById.set(event.id, event);
+for (const event of latestLumaEvents) mergedLumaById.set(event.id, event);
+const mergedLumaEvents = [...mergedLumaById.values()];
+
+const lumaMapped: EventItem[] = mergedLumaEvents.map((e) => {
   const priority: Priority = highPriority.has(e.id) ? 'primary' : secondaryPriority.has(e.id) ? 'secondary' : 'third';
   return {
     id: e.id,
@@ -188,7 +204,13 @@ const externalEvents: EventItem[] = [
   }
 ];
 
-export const events: EventItem[] = [...lumaMapped, ...externalEvents].sort((a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
+// Prefer the connected-Luma version whenever an external listing has the same itinerary id.
+const lumaIds = new Set(lumaMapped.map((event) => event.id));
+const externalWithoutDuplicates = externalEvents.filter((event) => !lumaIds.has(event.id));
+
+export const events: EventItem[] = [...lumaMapped, ...externalWithoutDuplicates].sort(
+  (a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start),
+);
 
 export const priorityLabels: Record<Priority, string> = {
   primary: 'Primary',
