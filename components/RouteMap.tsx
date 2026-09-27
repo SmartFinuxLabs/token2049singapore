@@ -6,6 +6,7 @@ import type { EventItem } from '@/lib/events';
 declare global {
   interface Window {
     google?: any;
+    gm_authFailure?: () => void;
     __token2049GoogleMapsPromise?: Promise<void>;
   }
 }
@@ -50,7 +51,9 @@ type RouteMapProps = {
 };
 
 export default function RouteMap({ events = [], activeEventId = null }: RouteMapProps) {
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  // Normalize once so TypeScript always sees a string, while an unset/blank key still
+  // cleanly falls back to the embedded Google Maps view.
+  const apiKey = (process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '').trim();
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
@@ -65,6 +68,13 @@ export default function RouteMap({ events = [], activeEventId = null }: RouteMap
   useEffect(() => {
     if (!apiKey || !mapRef.current) return;
     let cancelled = false;
+
+    const previousAuthFailure = window.gm_authFailure;
+    window.gm_authFailure = () => {
+      if (!cancelled) {
+        setMapError('Google Maps rejected the API key. Check key restrictions, billing, and Maps JavaScript API access.');
+      }
+    };
 
     async function init() {
       try {
@@ -136,12 +146,13 @@ export default function RouteMap({ events = [], activeEventId = null }: RouteMap
     init();
     return () => {
       cancelled = true;
+      window.gm_authFailure = previousAuthFailure;
     };
   }, [apiKey, mappableEvents]);
 
   useEffect(() => {
     const google = window.google;
-    if (!google?.maps) return;
+    if (!google?.maps || mapError) return;
 
     markersRef.current.forEach((marker, id) => {
       const active = id === activeEventId;
@@ -164,9 +175,9 @@ export default function RouteMap({ events = [], activeEventId = null }: RouteMap
         if ((map.getZoom?.() ?? 0) < 14) map.setZoom(14);
       }
     }
-  }, [activeEventId]);
+  }, [activeEventId, mapError]);
 
-  if (!apiKey) {
+  if (!apiKey || mapError) {
     const active = events.find((event) => event.id === activeEventId) ?? events[0];
     const query = active ? eventQuery(active) : 'Marina Bay, Singapore';
     return (
@@ -179,9 +190,9 @@ export default function RouteMap({ events = [], activeEventId = null }: RouteMap
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
         />
-        <div className="border-t border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-800">
-          Add <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable all itinerary markers and hover highlighting. Hovering still refocuses this embedded map on the selected event.
-          {mapError ? ` ${mapError}` : ''}
+        <div className={`border-t p-3 text-xs leading-5 ${mapError ? 'border-rose-200 bg-rose-50 text-rose-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
+          {mapError ? mapError : <>Add <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable all itinerary markers and hover highlighting.</>}
+          {' '}The embedded Google Map remains available as a fallback.
         </div>
       </div>
     );
@@ -192,7 +203,6 @@ export default function RouteMap({ events = [], activeEventId = null }: RouteMap
       <div ref={mapRef} className="h-[520px] w-full" aria-label="Suggested route events on Google Maps" />
       <div className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
         All listed route events are plotted. Hover a route item to highlight and center its marker; click either the route item or marker to open Google Maps.
-        {mapError ? ` ${mapError}` : ''}
       </div>
     </div>
   );
