@@ -7,17 +7,17 @@ type NetworkHost = {
   avatarUrl?: string;
 };
 
-const lumaAvatarByName: Record<string, string> = {
-  'Gamma Prime': 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/uploads/rb/c175fce3-cf8b-4f44-89f5-2d4533cde929.jpg',
-  Sui: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/avatars/85/b6ee92f8-f6dd-4609-8a95-513bd808a6cc.png',
-  DFG: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/avatars/u3/3d6713e6-4f01-4288-b45c-52267c2b50dc',
-  'Taisu Ventures': 'https://cdn.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/avatars-default/community_avatar_20.png',
-  'Monad Foundation': 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/calendars/qd/1da73c96-6e00-4f31-be74-961c9307bcee.png',
-  'Noos Network': 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/uploads/12/5d8d51f1-d2da-4de3-a649-1328d0cccb52.png',
-  'Trust Wallet': 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/uploads/lz/4c1b47af-e236-46da-a3ea-0455f3a4e044.png',
-  TrustWalletEvent: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/uploads/lz/4c1b47af-e236-46da-a3ea-0455f3a4e044.png',
-  Codex: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=112,height=112/uploads/ka/78b84d52-ac6e-4bb9-9aeb-138ee8737cae.png',
-};
+const lumaAvatarHosts = new Set([
+  'Gamma Prime',
+  'Sui',
+  'DFG',
+  'Taisu Ventures',
+  'Monad Foundation',
+  'Noos Network',
+  'Trust Wallet',
+  'TrustWalletEvent',
+  'Codex',
+]);
 
 function slugify(value: string) {
   return value
@@ -55,7 +55,7 @@ const networkHosts: NetworkHost[] = (() => {
         id: slugify(name) || `host-${byName.size + 1}`,
         name,
         events: [eventRef],
-        avatarUrl: lumaAvatarByName[name],
+        avatarUrl: lumaAvatarHosts.has(name) ? `/api/luma-avatar?host=${encodeURIComponent(name)}` : undefined,
       });
     });
   });
@@ -79,7 +79,7 @@ function HostCard({ host }: { host: NetworkHost }) {
     <article className="w-[164px] shrink-0 rounded-3xl border border-slate-200 bg-white px-4 py-4 text-center shadow-sm sm:w-[184px]">
       <div className="mx-auto h-12 w-12 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-sm">
         {host.avatarUrl ? (
-          <img src={host.avatarUrl} alt={`${host.name} Luma avatar`} className="h-full w-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
+          <img src={host.avatarUrl} alt={`${host.name} Luma avatar`} className="h-full w-full object-cover" loading="lazy" />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-sm font-bold tracking-wide text-white">
             {initials(host.name) || '•'}
