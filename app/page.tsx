@@ -88,23 +88,25 @@ export default function HomePage() {
     <main className="min-h-screen bg-slate-50">
       <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
         <header className="absolute inset-x-0 top-0 z-20 border-b border-white/45 bg-white/38 backdrop-blur-md">
-          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:px-8">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">Connextium · Singapore 2026</div>
-            <div className="flex items-center gap-2">
+          <div className="mx-auto flex max-w-6xl justify-end px-3 py-2 sm:px-8 sm:py-3">
+            <div className="flex flex-col items-end gap-1.5 text-[10px] leading-tight sm:text-[11px] md:flex-row md:items-center md:gap-2 md:text-xs">
+              <div className="font-semibold uppercase tracking-[0.12em] text-slate-700 md:hidden">Connextium · Singapore 2026</div>
               <a
                 href="https://luma.com/user/Terence_Hej"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center rounded-full border border-white/80 bg-white/78 px-3 py-2 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/78 px-2.5 py-1.5 font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
               >
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-[8px] font-bold text-white">L</span>
                 Luma · Terence_Hej
               </a>
               <a
                 href="https://x.com/XYZconnextium"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center rounded-full border border-white/80 bg-white/78 px-3 py-2 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/78 px-2.5 py-1.5 font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
               >
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-slate-950 text-[9px] font-semibold text-white">𝕏</span>
                 X · @XYZconnextium
               </a>
             </div>
