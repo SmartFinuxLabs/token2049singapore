@@ -1,54 +1,193 @@
 'use client';
 
-import { ExternalLink, MapPin } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { EventItem } from '@/lib/events';
 
-const venues = [
-  { name: 'Marina Bay Sands', address: '10 Bayfront Ave, Singapore 018956' },
-  { name: 'Conrad Singapore Marina Bay', address: '2 Temasek Blvd, Singapore 038982' },
-  { name: 'Singapore Land Tower / The Exchange', address: '50 Raffles Pl, Singapore 048623' },
-  { name: 'Furama RiverFront', address: '405 Havelock Rd, Singapore 169633' },
-];
+declare global {
+  interface Window {
+    google?: any;
+    __token2049GoogleMapsPromise?: Promise<void>;
+  }
+}
 
 function googleMapsUrl(query: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-export default function RouteMap() {
-  const embedUrl = 'https://www.google.com/maps?q=Marina%20Bay%2C%20Singapore&z=13&output=embed';
+function eventQuery(event: EventItem) {
+  return event.address || `${event.location}, Singapore`;
+}
+
+function loadGoogleMaps(apiKey: string) {
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (window.google?.maps) return Promise.resolve();
+  if (window.__token2049GoogleMapsPromise) return window.__token2049GoogleMapsPromise;
+
+  window.__token2049GoogleMapsPromise = new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>('script[data-token2049-google-maps]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      existing.addEventListener('error', () => reject(new Error('Google Maps failed to load')), { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&v=weekly`;
+    script.async = true;
+    script.defer = true;
+    script.dataset.token2049GoogleMaps = 'true';
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Google Maps failed to load'));
+    document.head.appendChild(script);
+  });
+
+  return window.__token2049GoogleMapsPromise;
+}
+
+export default function RouteMap({ events, activeEventId }: { events: EventItem[]; activeEventId: string | null }) {
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const markersRef = useRef<Map<string, any>>(new Map());
+  const positionsRef = useRef<Map<string, any>>(new Map());
+  const [mapError, setMapError] = useState<string | null>(null);
+
+  const mappableEvents = useMemo(
+    () => events.filter((event) => Boolean(event.address || event.location)),
+    [events]
+  );
+
+  useEffect(() => {
+    if (!apiKey || !mapRef.current) return;
+    let cancelled = false;
+
+    async function init() {
+      try {
+        await loadGoogleMaps(apiKey);
+        if (cancelled || !mapRef.current || !window.google?.maps) return;
+
+        const google = window.google;
+        const map = new google.maps.Map(mapRef.current, {
+          center: { lat: 1.2868, lng: 103.8545 },
+          zoom: 13,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          gestureHandling: 'cooperative',
+        });
+        mapInstanceRef.current = map;
+
+        const geocoder = new google.maps.Geocoder();
+        const bounds = new google.maps.LatLngBounds();
+        markersRef.current.forEach((marker) => marker.setMap(null));
+        markersRef.current.clear();
+        positionsRef.current.clear();
+
+        await Promise.all(
+          mappableEvents.map(async (event, index) => {
+            try {
+              const response = await geocoder.geocode({ address: eventQuery(event) });
+              if (cancelled || !response.results?.length) return;
+              const position = response.results[0].geometry.location;
+              positionsRef.current.set(event.id, position);
+              bounds.extend(position);
+
+              const marker = new google.maps.Marker({
+                map,
+                position,
+                title: event.title,
+                label: {
+                  text: String(index + 1),
+                  color: '#ffffff',
+                  fontSize: '11px',
+                  fontWeight: '700',
+                },
+                icon: {
+                  path: google.maps.SymbolPath.CIRCLE,
+                  scale: 11,
+                  fillColor: '#0f172a',
+                  fillOpacity: 1,
+                  strokeColor: '#ffffff',
+                  strokeWeight: 2,
+                },
+              });
+
+              marker.addListener('click', () => {
+                window.open(googleMapsUrl(`${event.title}, ${eventQuery(event)}`), '_blank', 'noopener,noreferrer');
+              });
+              markersRef.current.set(event.id, marker);
+            } catch {
+              // Keep the rest of the itinerary usable if one venue cannot be geocoded.
+            }
+          })
+        );
+
+        if (!cancelled && !bounds.isEmpty()) map.fitBounds(bounds, 48);
+      } catch {
+        if (!cancelled) setMapError('Interactive Google Maps could not be loaded.');
+      }
+    }
+
+    init();
+    return () => {
+      cancelled = true;
+    };
+  }, [apiKey, mappableEvents]);
+
+  useEffect(() => {
+    const google = window.google;
+    if (!google?.maps) return;
+
+    markersRef.current.forEach((marker, id) => {
+      const active = id === activeEventId;
+      marker.setIcon({
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: active ? 16 : 11,
+        fillColor: active ? '#2563eb' : '#0f172a',
+        fillOpacity: 1,
+        strokeColor: '#ffffff',
+        strokeWeight: active ? 3 : 2,
+      });
+      marker.setZIndex(active ? 1000 : undefined);
+    });
+
+    if (activeEventId) {
+      const position = positionsRef.current.get(activeEventId);
+      const map = mapInstanceRef.current;
+      if (position && map) {
+        map.panTo(position);
+        if ((map.getZoom?.() ?? 0) < 14) map.setZoom(14);
+      }
+    }
+  }, [activeEventId]);
+
+  if (!apiKey) {
+    const active = events.find((event) => event.id === activeEventId) ?? events[0];
+    const query = active ? eventQuery(active) : 'Marina Bay, Singapore';
+    return (
+      <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-card">
+        <iframe
+          title="TOKEN2049 Singapore venues on Google Maps"
+          src={`https://www.google.com/maps?q=${encodeURIComponent(query)}&z=14&output=embed`}
+          className="h-[520px] w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+        <div className="border-t border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-800">
+          Add <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable all itinerary markers and hover highlighting. Hovering still refocuses this embedded map on the selected event.
+          {mapError ? ` ${mapError}` : ''}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-card">
-      <iframe
-        title="TOKEN2049 Singapore venues on Google Maps"
-        src={embedUrl}
-        className="h-[380px] w-full border-0"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        allowFullScreen
-      />
-
-      <div className="border-t border-slate-200 p-4">
-        <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-700">
-          <MapPin size={16} /> Key venues
-        </div>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {venues.map((venue) => (
-            <a
-              key={venue.name}
-              href={googleMapsUrl(`${venue.name}, ${venue.address}`)}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-start justify-between gap-3 rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:border-blue-300 hover:bg-blue-50"
-            >
-              <span>
-                <span className="block font-semibold text-slate-800">{venue.name}</span>
-                <span className="mt-0.5 block text-xs leading-5 text-slate-500">{venue.address}</span>
-              </span>
-              <ExternalLink size={14} className="mt-0.5 shrink-0 text-slate-400 group-hover:text-blue-600" />
-            </a>
-          ))}
-        </div>
-        <p className="mt-3 text-xs leading-5 text-slate-500">Venue links use Google Maps universal URLs, which open the Google Maps app when supported and otherwise open Google Maps in the browser.</p>
+      <div ref={mapRef} className="h-[520px] w-full" aria-label="Suggested route events on Google Maps" />
+      <div className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
+        All listed route events are plotted. Hover a route item to highlight and center its marker; click either the route item or marker to open Google Maps.
+        {mapError ? ` ${mapError}` : ''}
       </div>
     </div>
   );
