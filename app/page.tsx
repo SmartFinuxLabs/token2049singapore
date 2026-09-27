@@ -88,8 +88,12 @@ export default function HomePage() {
     <main className="min-h-screen bg-slate-50">
       <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
         <div
-          className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] bg-cover md:hidden"
-          style={{ backgroundPosition: 'center -110px' }}
+          className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] md:hidden"
+          style={{
+            backgroundPosition: 'center top',
+            backgroundSize: '100% auto',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
         <div
           className="absolute inset-0 -z-20 hidden bg-[url('/happy-hour-infinite-hero.svg')] bg-cover md:block"
@@ -98,7 +102,7 @@ export default function HomePage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/10 via-white/34 to-white/94" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/82 via-white/56 to-slate-50/28" />
 
-        <div className="mx-auto w-full max-w-6xl px-5 pb-10 pt-[31rem] sm:px-8 sm:pb-12 sm:pt-[33rem] md:pb-14 md:pt-[29rem] lg:pt-[31rem]">
+        <div className="mx-auto w-full max-w-6xl px-5 pb-10 pt-[105vw] sm:px-8 sm:pb-12 sm:pt-[33rem] md:pb-14 md:pt-[29rem] lg:pt-[31rem]">
           <div className="rounded-[28px] border border-white/75 bg-white/74 p-5 shadow-sm backdrop-blur-md sm:p-6 lg:p-7">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
@@ -152,7 +156,7 @@ export default function HomePage() {
               </select>
             </label>
             <div className="flex items-end gap-2">
-              <button onClick={() => { setDayFilter('all'); setStatusFilter('all'); }} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium hover:bg-slate-50">Reset</button>
+              <button onClick={() => { setDayFilter('all'); setStatusFilter('approved'); }} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium hover:bg-slate-50">Reset</button>
               <button onClick={() => setShowHidden((x) => !x)} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium hover:bg-slate-50">
                 {showHidden ? <EyeOff size={16} /> : <Eye size={16} />} {showHidden ? 'Hide excluded' : 'Show excluded'}
               </button>
