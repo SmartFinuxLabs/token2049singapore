@@ -54,43 +54,84 @@ const statusStyles: Record<LumaStatus, { bar: string; chip: string; dot: string 
   },
 };
 
-function toHour(value: string) {
+function toMinutes(value: string) {
   const [h = '0', m = '0'] = value.split(':');
-  return Number(h) + Number(m) / 60;
+  return Number(h) * 60 + Number(m);
+}
+
+function dayIndex(date: string, baseDate: string) {
+  const start = new Date(`${baseDate}T00:00:00+08:00`).getTime();
+  const current = new Date(`${date}T00:00:00+08:00`).getTime();
+  return Math.round((current - start) / 86_400_000);
+}
+
+function shortDate(date: string) {
+  return new Intl.DateTimeFormat('en-SG', {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'Asia/Singapore',
+  }).format(new Date(`${date}T12:00:00+08:00`));
+}
+
+function slotDateTime(baseDate: string, hourIndex: number) {
+  const base = new Date(`${baseDate}T00:00:00+08:00`);
+  const value = new Date(base.getTime() + hourIndex * 3_600_000);
+  return {
+    date: value.toISOString().slice(0, 10),
+    hour: Number(
+      new Intl.DateTimeFormat('en-SG', {
+        hour: '2-digit',
+        hour12: false,
+        timeZone: 'Asia/Singapore',
+      }).format(value)
+    ),
+  };
 }
 
 export default function EventStatusChart({ events, statusFilter, onStatusChange }: Props) {
   const chart = useMemo(() => {
-    const normalized = events.map((event) => {
-      const start = toHour(event.start);
-      let end = toHour(event.end);
-      if (end <= start) end += 24;
-      return { ...event, startHour: start, endHour: end };
-    });
-
-    if (normalized.length === 0) {
-      return { hours: [] as number[], rows: [] as Array<{ hour: number; counts: Record<LumaStatus, number>; total: number }>, maxTotal: 0 };
+    if (events.length === 0) {
+      return {
+        rows: [] as Array<{ slot: number; date: string; hour: number; counts: Record<LumaStatus, number>; total: number }>,
+        maxTotal: 0,
+      };
     }
 
-    const minStart = Math.max(0, Math.floor(Math.min(...normalized.map((e) => e.startHour))));
-    const maxEnd = Math.min(30, Math.ceil(Math.max(...normalized.map((e) => e.endHour))));
-    const hours = Array.from({ length: Math.max(1, maxEnd - minStart) }, (_, index) => minStart + index);
+    const orderedDates = [...new Set(events.map((event) => event.date))].sort();
+    const baseDate = orderedDates[0];
 
-    const rows = hours.map((hour) => {
+    const normalized = events.map((event) => {
+      const day = dayIndex(event.date, baseDate);
+      const start = day * 1440 + toMinutes(event.start);
+      let end = day * 1440 + toMinutes(event.end);
+      if (end <= start) end += 1440;
+      return { ...event, startMinute: start, endMinute: end };
+    });
+
+    const minSlot = Math.floor(Math.min(...normalized.map((event) => event.startMinute)) / 60);
+    const maxSlot = Math.ceil(Math.max(...normalized.map((event) => event.endMinute)) / 60);
+
+    const rows = Array.from({ length: Math.max(1, maxSlot - minSlot) }, (_, index) => {
+      const slot = minSlot + index;
+      const slotStart = slot * 60;
+      const slotEnd = slotStart + 60;
       const counts = Object.fromEntries(statuses.map((status) => [status, 0])) as Record<LumaStatus, number>;
+
       for (const event of normalized) {
         const status = event.lumaStatus ?? 'external';
-        if (event.startHour < hour + 1 && event.endHour > hour) counts[status] += 1;
+        if (event.startMinute < slotEnd && event.endMinute > slotStart) counts[status] += 1;
       }
+
       const total = statuses.reduce((sum, status) => {
         if (statusFilter !== 'all' && status !== statusFilter) return sum;
         return sum + counts[status];
       }, 0);
-      return { hour, counts, total };
+
+      const dt = slotDateTime(baseDate, slot);
+      return { slot, date: dt.date, hour: dt.hour, counts, total };
     });
 
     return {
-      hours,
       rows,
       maxTotal: Math.max(1, ...rows.map((row) => row.total)),
     };
@@ -103,8 +144,8 @@ export default function EventStatusChart({ events, statusFilter, onStatusChange 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-500">Event density</div>
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Events by time and registration status</h2>
-          <p className="mt-1 text-sm leading-6 text-slate-500">Each bar represents one Singapore-time hour. Height is the number of overlapping events; colors stack by registration status. The chart follows the selected day and hidden-event filters.</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Events by date, time and registration status</h2>
+          <p className="mt-1 text-sm leading-6 text-slate-500">The X-axis is a continuous Singapore date-and-time timeline. Each hourly bar shows the number of overlapping events, stacked by registration status. The chart follows the selected day and hidden-event filters.</p>
         </div>
         <div className="text-sm text-slate-500">{events.length} events in scope</div>
       </div>
@@ -137,19 +178,19 @@ export default function EventStatusChart({ events, statusFilter, onStatusChange 
         <div className="mt-6 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">No events are available for the current filters.</div>
       ) : (
         <div className="mt-6 overflow-x-auto pb-2">
-          <div className="min-w-[760px]">
+          <div style={{ minWidth: `${Math.max(900, chart.rows.length * 42)}px` }}>
             <div className="relative h-[240px] border-b border-slate-300">
               <div className="absolute inset-x-0 bottom-1/4 border-t border-dashed border-slate-200" />
               <div className="absolute inset-x-0 bottom-2/4 border-t border-dashed border-slate-200" />
               <div className="absolute inset-x-0 bottom-3/4 border-t border-dashed border-slate-200" />
 
-              <div className="absolute inset-0 flex items-end gap-1.5 px-1">
+              <div className="absolute inset-0 flex items-end gap-1 px-1">
                 {chart.rows.map((row) => (
-                  <div key={row.hour} className="flex h-full min-w-0 flex-1 items-end justify-center">
+                  <div key={row.slot} className="flex h-full min-w-0 flex-1 items-end justify-center">
                     <div
-                      className="group relative flex w-full max-w-[48px] flex-col-reverse overflow-hidden rounded-t-md bg-slate-100 transition hover:ring-2 hover:ring-blue-300"
+                      className="group relative flex w-full max-w-[36px] flex-col-reverse overflow-hidden rounded-t-md bg-slate-100 transition hover:ring-2 hover:ring-blue-300"
                       style={{ height: `${Math.max(row.total > 0 ? 8 : 2, (row.total / chart.maxTotal) * 100)}%` }}
-                      title={`${String(row.hour % 24).padStart(2, '0')}:00–${String((row.hour + 1) % 24).padStart(2, '0')}:00 · ${row.total} event${row.total === 1 ? '' : 's'}`}
+                      title={`${shortDate(row.date)} ${String(row.hour).padStart(2, '0')}:00–${String((row.hour + 1) % 24).padStart(2, '0')}:00 · ${row.total} event${row.total === 1 ? '' : 's'}`}
                     >
                       {visibleStatuses.map((status) => {
                         const count = row.counts[status];
@@ -172,14 +213,20 @@ export default function EventStatusChart({ events, statusFilter, onStatusChange 
               </div>
             </div>
 
-            <div className="mt-2 flex gap-1.5 px-1">
-              {chart.hours.map((hour) => (
-                <div key={hour} className="min-w-0 flex-1 text-center text-[10px] font-medium tabular-nums text-slate-500">
-                  {String(hour % 24).padStart(2, '0')}:00
-                </div>
-              ))}
+            <div className="mt-2 flex gap-1 px-1">
+              {chart.rows.map((row, index) => {
+                const previous = chart.rows[index - 1];
+                const showDate = index === 0 || previous?.date !== row.date;
+                const showHour = row.hour % 3 === 0 || showDate;
+                return (
+                  <div key={row.slot} className="min-w-0 flex-1 text-center text-[10px] font-medium tabular-nums text-slate-500">
+                    {showDate && <div className="font-semibold text-slate-700">{shortDate(row.date)}</div>}
+                    {showHour && <div>{String(row.hour).padStart(2, '0')}:00</div>}
+                  </div>
+                );
+              })}
             </div>
-            <div className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-slate-400">Singapore time</div>
+            <div className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-slate-400">Singapore date &amp; time</div>
           </div>
         </div>
       )}
