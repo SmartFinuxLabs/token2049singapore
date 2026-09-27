@@ -10,14 +10,20 @@ export type AnalyticsGeoPoint = {
   lng: number;
   count: number;
   detail?: string;
+  sourceUrl?: string;
+  sourceType?: string;
 };
 
 export default function AnalyticsGeoMap({ points }: { points: AnalyticsGeoPoint[] }) {
-  const center: [number, number] = [1.2921, 103.8458];
+  const fallbackCenter: [number, number] = [20, 0];
+  const center: [number, number] = points.length > 0
+    ? [points.reduce((sum, point) => sum + point.lat, 0) / points.length, points.reduce((sum, point) => sum + point.lng, 0) / points.length]
+    : fallbackCenter;
+  const zoom = points.length > 0 ? 2 : 1;
 
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <MapContainer center={center} zoom={12} scrollWheelZoom={false} className="h-[430px] w-full">
+      <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} className="h-[430px] w-full">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -35,13 +41,14 @@ export default function AnalyticsGeoMap({ points }: { points: AnalyticsGeoPoint[
                 <div className="mt-1 text-sm">{point.location}</div>
                 <div className="mt-1 text-sm">{point.count} analytics record{point.count === 1 ? '' : 's'}</div>
                 {point.detail && <div className="mt-1 text-xs text-slate-500">{point.detail}</div>}
+                {point.sourceUrl && <a className="mt-2 inline-block text-xs font-medium text-blue-600" href={point.sourceUrl} target="_blank" rel="noreferrer">Location source</a>}
               </div>
             </Popup>
           </CircleMarker>
         ))}
       </MapContainer>
       <div className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-        Geography represents public event presence in Singapore, not an inferred company headquarters or participant home location.
+        Geography uses verified company-profile locations for Organizations and verified personal/professional-profile locations for Participants. Event venue coordinates are never substituted. Records without a verified profile location are intentionally omitted from the map.
       </div>
     </div>
   );
