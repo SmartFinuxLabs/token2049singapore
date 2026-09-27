@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.58" stop-color="#f1f5f9"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dbeafe" stop-opacity="0.8"/>
+      <stop offset="0.35" stop-color="#fce7f3" stop-opacity="0.45"/>
+      <stop offset="0.68" stop-color="#e0e7ff" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#d1fae5" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="lower" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a21caf" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fb7185" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#a3e635" stop-opacity="0.13"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#fade)"/>
+  <g opacity="0.35" filter="url(#blur)">
+    <rect x="72" y="155" width="110" height="36" rx="8" fill="#bef264"/>
+    <rect x="210" y="282" width="74" height="44" rx="10" fill="#fda4af"/>
+    <rect x="300" y="270" width="46" height="48" rx="10" fill="#a3e635"/>
+    <rect x="498" y="124" width="42" height="42" rx="10" fill="#bef264"/>
+    <rect x="540" y="520" width="90" height="120" rx="20" fill="#fda4af"/>
+  </g>
+  <rect x="0" y="620" width="1600" height="280" fill="url(#lower)"/>
+  <g transform="translate(700,190)" stroke="#cbd5e1" stroke-width="6" opacity="0.8">
+    <rect x="0" y="210" width="250" height="350" rx="8" fill="url(#glass)"/>
+    <rect x="310" y="160" width="245" height="400" rx="8" fill="url(#glass)"/>
+    <rect x="620" y="115" width="245" height="445" rx="8" fill="url(#glass)"/>
+    <rect x="905" y="175" width="210" height="385" rx="8" fill="url(#glass)"/>
+    <path d="M-45 195 C80 150, 180 145, 325 170 C470 195, 585 160, 725 120 C860 82, 980 95, 1135 130 L1120 185 C980 155, 860 150, 735 180 C575 220, 465 245, 325 225 C185 205, 80 215,-20 250 Z" fill="url(#glass)"/>
+    <rect x="52" y="245" width="145" height="28" rx="14" fill="#dbeafe" stroke="none" opacity="0.7"/>
+    <rect x="355" y="204" width="155" height="30" rx="15" fill="#fce7f3" stroke="none" opacity="0.55"/>
+    <rect x="665" y="160" width="150" height="28" rx="14" fill="#d1fae5" stroke="none" opacity="0.55"/>
+  </g>
+  <g opacity="0.16" fill="#9d174d" font-family="Georgia, serif">
+    <text x="90" y="230" font-size="104">Happy Hour Infinite</text>
+    <text x="94" y="330" font-size="46">6 Oct - 8 Oct</text>
+  </g>
+  <rect width="1600" height="900" fill="#ffffff" opacity="0.22"/>
+</svg>
