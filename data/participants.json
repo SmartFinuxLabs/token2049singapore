@@ -1,5 +1,172 @@
 {
   "schemaVersion": 1,
-  "generatedAt": null,
-  "records": []
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "records": [
+    {
+      "id": "michael-heinrich",
+      "name": "Michael Heinrich",
+      "role": "CEO & Co-Founder",
+      "company": "0G Labs",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/in/mheinrich",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://www.linkedin.com/in/mheinrich" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/in/mheinrich", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "weisi-yuen",
+      "name": "Weisi Yuen",
+      "company": "0G",
+      "profileLocation": {
+        "display": "San Francisco, California, United States",
+        "city": "San Francisco",
+        "region": "California",
+        "country": "United States",
+        "lat": 37.7749,
+        "lng": -122.4194,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/in/weisi-yuen-63a52a8",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://www.linkedin.com/in/weisi-yuen-63a52a8" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/in/weisi-yuen-63a52a8", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "will-riches",
+      "name": "Will Riches",
+      "company": "0G Labs",
+      "profileLocation": {
+        "display": "Exeter, United Kingdom",
+        "city": "Exeter",
+        "country": "United Kingdom",
+        "lat": 50.7184,
+        "lng": -3.5339,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/pub/dir/Will/Riches",
+        "verifiedAt": "2026-09-27",
+        "confidence": "medium"
+      },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/pub/dir/Will/Riches", "verifiedAt": "2026-09-27", "confidence": "medium" }
+      ]
+    },
+    {
+      "id": "mark-tang",
+      "name": "Mark Tang",
+      "role": "VP, Client Solutions",
+      "company": "Hydra X",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://sg.linkedin.com/in/mark-tang89",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://sg.linkedin.com/in/mark-tang89" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/in/mark-tang89", "verifiedAt": "2026-09-27", "confidence": "high" },
+        { "field": "role", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/company/hydra-x", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "hui-yi-ho",
+      "name": "Hui Yi HO",
+      "role": "Chief Strategy Officer",
+      "company": "Global Fintech Institute (GFI)",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://sg.linkedin.com/in/huiyi-ho",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://sg.linkedin.com/in/huiyi-ho" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/in/huiyi-ho", "verifiedAt": "2026-09-27", "confidence": "high" },
+        { "field": "role", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/in/huiyi-ho", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "raphael-taisu",
+      "name": "Raphael",
+      "role": "Investor",
+      "company": "Taisu Ventures",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://sg.linkedin.com/in/wahchun",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://sg.linkedin.com/in/wahchun" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/in/wahchun", "verifiedAt": "2026-09-27", "confidence": "high" },
+        { "field": "role", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/in/wahchun", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "lu-li",
+      "name": "Lu Li",
+      "company": "Grego AI",
+      "profileLocation": {
+        "display": "Lisbon Metropolitan Area, Portugal",
+        "city": "Lisbon",
+        "country": "Portugal",
+        "lat": 38.7223,
+        "lng": -9.1393,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/pub/dir/Lu/%2B",
+        "verifiedAt": "2026-09-27",
+        "confidence": "medium"
+      },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/pub/dir/Lu/%2B", "verifiedAt": "2026-09-27", "confidence": "medium" }
+      ]
+    },
+    {
+      "id": "daniel-holmes",
+      "name": "Daniel Holmes",
+      "company": "Haruko",
+      "profileLocation": {
+        "display": "London, United Kingdom",
+        "city": "London",
+        "country": "United Kingdom",
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://uk.linkedin.com/in/daniel-holmes-30126a19",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "linkedin": "https://uk.linkedin.com/in/daniel-holmes-30126a19" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://uk.linkedin.com/in/daniel-holmes-30126a19", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    }
+  ]
 }
