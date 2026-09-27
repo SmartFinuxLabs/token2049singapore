@@ -19,6 +19,20 @@ export type EventItem = {
 
 export const events: EventItem[] = [
   {
+    id: 'rwa-capital-forum',
+    title: 'RWA Capital Forum',
+    host: 'Taisu Ventures',
+    date: '2026-10-05',
+    start: '11:30',
+    end: '15:00',
+    location: 'Singapore · exact venue after approval',
+    priority: 'primary',
+    status: 'Approval required',
+    tags: ['RWA', 'Family Offices', 'Institutional Investors', 'Capital'],
+    luma: 'https://luma.com/ydaq5h18',
+    routeHint: 'Use as the opening fundraising event of the week; focus on capital providers and RWA infrastructure conversations.'
+  },
+  {
     id: 'open-monad',
     title: 'Open',
     host: 'Monad Foundation',
@@ -97,7 +111,7 @@ export const events: EventItem[] = [
     title: 'TOKEN2049 Singapore · Main Conference Day 1',
     host: 'TOKEN2049',
     date: '2026-10-07',
-    start: '09:00',
+    start: '07:30',
     end: '18:00',
     location: 'Marina Bay Sands',
     address: '10 Bayfront Ave, Singapore 018956',
@@ -108,11 +122,25 @@ export const events: EventItem[] = [
     routeHint: 'Stay at Marina Bay Sands unless a confirmed investor meeting provides higher value.'
   },
   {
+    id: 'investor-hours',
+    title: 'TOKEN2049 Investor Hours',
+    host: 'TOKEN2049 Week',
+    date: '2026-10-07',
+    start: '14:00',
+    end: '17:00',
+    location: 'Singapore · verify registration details',
+    priority: 'primary',
+    status: 'Featured event · free registration',
+    tags: ['VC', 'Investors', 'Fundraising'],
+    source: 'https://week.token2049.com/',
+    routeHint: 'Treat as a high-priority fundraising block; schedule around confirmed investor conversations.'
+  },
+  {
     id: 'token-main-day2',
     title: 'TOKEN2049 Singapore · Main Conference Day 2',
     host: 'TOKEN2049',
     date: '2026-10-08',
-    start: '09:00',
+    start: '07:30',
     end: '18:00',
     location: 'Marina Bay Sands',
     address: '10 Bayfront Ave, Singapore 018956',
@@ -137,18 +165,18 @@ export const events: EventItem[] = [
     routeHint: 'Use for targeted stablecoin/payment meetings rather than all-day attendance.'
   },
   {
-    id: 'founder-vc-day2',
-    title: 'Founder × VC Summit · Happy Hour',
-    host: 'BackersStage Capital',
-    date: '2026-10-09',
-    start: '17:00',
-    end: '20:00',
-    location: 'Singapore · separate RSVP',
-    priority: 'secondary',
-    status: 'Separate Day 2 RSVP',
-    tags: ['VC', 'Founders', 'Networking'],
-    luma: 'https://luma.com/gdqakgz3?tk=2ClOHT',
-    routeHint: 'Good late-day fundraising follow-up after a daytime institutional summit.'
+    id: 'treasury-table',
+    title: 'The Treasury Table',
+    host: 'Locus',
+    date: '2026-10-08',
+    start: '15:30',
+    end: '18:30',
+    location: 'Singapore · address shared upon approval',
+    priority: 'primary',
+    status: 'Closed-door · approval required',
+    tags: ['Treasury', 'Stablecoins', 'Payments', 'Business Banking'],
+    luma: 'https://luma.com/k8jylkcm',
+    routeHint: 'One of the strongest Connextium-fit sessions; prioritize if approved, especially for treasury and settlement conversations.'
   },
   {
     id: 'finality-forum',
@@ -177,6 +205,20 @@ export const events: EventItem[] = [
     tags: ['RWA', 'Capital', 'Institutional Finance'],
     source: 'https://media-grill.com/token2049/',
     routeHint: 'Secondary to Finality Forum unless investor meetings are specifically arranged around RWA capital.'
+  },
+  {
+    id: 'founder-vc-day2',
+    title: 'Founder × VC Summit · Happy Hour',
+    host: 'BackersStage Capital',
+    date: '2026-10-09',
+    start: '17:00',
+    end: '20:00',
+    location: 'Singapore · separate RSVP',
+    priority: 'secondary',
+    status: 'Separate Day 2 RSVP',
+    tags: ['VC', 'Founders', 'Networking'],
+    luma: 'https://luma.com/gdqakgz3?tk=2ClOHT',
+    routeHint: 'Good late-day fundraising follow-up after a daytime institutional summit.'
   }
 ];
 
