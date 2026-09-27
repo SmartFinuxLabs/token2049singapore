@@ -110,9 +110,27 @@ export default function HomePage() {
                 <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
                 <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
               </div>
-              <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
-                <Share2 size={17} /> Share itinerary
-              </button>
+              <div className="flex w-fit flex-wrap items-center gap-2">
+                <a
+                  href="https://luma.com/user/Terence_Hej"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center rounded-2xl border border-slate-300 bg-white/85 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+                >
+                  Luma · Terence_Hej
+                </a>
+                <a
+                  href="https://x.com/XYZconnextium"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center rounded-2xl border border-slate-300 bg-white/85 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+                >
+                  X · @XYZconnextium
+                </a>
+                <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
+                  <Share2 size={17} /> Share itinerary
+                </button>
+              </div>
             </div>
 
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
