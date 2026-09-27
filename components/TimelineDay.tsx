@@ -1,15 +1,14 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink, Eye, EyeOff, MapPin, X } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, MapPin, X } from 'lucide-react';
 import { lumaStatusLabels, priorityLabels, type EventItem, type Priority } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
 
 const HOUR_PX = 64;
+const MOBILE_HOUR_PX = 72;
 const GUTTER = 72;
-const MOBILE_PX_PER_MIN = 1.45;
-const MOBILE_CARD_HEIGHT = 106;
-const MOBILE_LANE_OFFSET = 58;
+const MOBILE_GUTTER = 54;
 
 function toMinutes(value: string) {
   const [h, m] = value.split(':').map(Number);
@@ -96,25 +95,12 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
   }, [layout.dayStart, layout.dayEnd]);
 
   const totalHeight = ((layout.dayEnd - layout.dayStart) / 60) * HOUR_PX;
-  const mobileTrackWidth = Math.max((layout.dayEnd - layout.dayStart) * MOBILE_PX_PER_MIN + 96, 720);
-  const mobileTrackHeight = 82 + Math.min(layout.columns, 4) * MOBILE_LANE_OFFSET + MOBILE_CARD_HEIGHT;
+  const mobileTotalHeight = ((layout.dayEnd - layout.dayStart) / 60) * MOBILE_HOUR_PX;
 
   function overlapGroup(item: (typeof layout.placed)[number]) {
     return layout.placed
       .filter((other) => other.start < item.end && other.end > item.start)
       .sort((a, b) => a.start - b.start || a.end - b.end || a.event.title.localeCompare(b.event.title));
-  }
-
-  function cycleOverlap(item: (typeof layout.placed)[number], direction: -1 | 1) {
-    const group = overlapGroup(item);
-    if (group.length === 0) return;
-
-    const currentId = frontEventId && group.some((candidate) => candidate.event.id === frontEventId)
-      ? frontEventId
-      : item.event.id;
-    const currentIndex = Math.max(0, group.findIndex((candidate) => candidate.event.id === currentId));
-    const nextIndex = (currentIndex + direction + group.length) % group.length;
-    setFrontEventId(group[nextIndex].event.id);
   }
 
   return (
@@ -123,7 +109,7 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="min-w-0">
             <div className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">{date}</div>
-            <div className="mt-1 text-sm leading-5 text-slate-500 md:hidden">Swipe the time bar. Tap a card to open it; tap its left or right edge to bring overlapping events to the front.</div>
+            <div className="mt-1 text-sm leading-5 text-slate-500 md:hidden">Vertical time view. Tap an exposed event edge to bring that event to the front; tap the center of the card to open details.</div>
             <div className="mt-1 hidden text-sm text-slate-500 md:block">Click any event card to open details. Overlaps are stacked side-by-side.</div>
           </div>
           <div className="text-xs font-medium text-slate-400">{events.length} events · Singapore time</div>
@@ -131,96 +117,93 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
       </div>
 
       <div className="md:hidden">
-        <div className="overflow-x-auto overscroll-x-contain px-2 pb-3 pt-2 [scrollbar-width:thin]" style={{ touchAction: 'pan-x pan-y' }}>
-          <div className="relative" style={{ width: mobileTrackWidth, height: mobileTrackHeight }}>
-            <div className="absolute left-8 right-8 top-10 h-px bg-slate-300" />
+        <div className="relative" style={{ height: mobileTotalHeight + 20 }}>
+          {hours.map((hour) => {
+            const top = ((hour - layout.dayStart) / 60) * MOBILE_HOUR_PX;
+            return (
+              <div key={hour} className="absolute inset-x-0" style={{ top }}>
+                <div className="absolute left-0 w-[46px] -translate-y-2 text-right text-[10px] font-semibold tabular-nums text-slate-400">{formatHour(hour)}</div>
+                <div className="absolute left-[54px] right-0 border-t border-dashed border-slate-200" />
+              </div>
+            );
+          })}
 
-            {hours.map((hour) => {
-              const left = 32 + (hour - layout.dayStart) * MOBILE_PX_PER_MIN;
-              return (
-                <div key={hour} className="absolute top-5" style={{ left }}>
-                  <div className="h-5 w-px bg-slate-300" />
-                  <div className="mt-1 -translate-x-1/2 whitespace-nowrap text-[10px] font-semibold tabular-nums text-slate-400">{formatHour(hour)}</div>
-                </div>
-              );
-            })}
+          <div className="absolute bottom-0 left-[52px] top-0 w-px bg-slate-300" />
 
-            {layout.placed.map((item) => {
-              const { event, start, end, column } = item;
-              const effectivePriority = priorities[event.id] ?? event.priority;
-              const hiddenNow = hidden.includes(event.id);
-              const front = frontEventId === event.id;
-              const group = overlapGroup(item);
-              const hasOverlap = group.length > 1;
-              const left = 32 + (start - layout.dayStart) * MOBILE_PX_PER_MIN;
-              const durationWidth = (end - start) * MOBILE_PX_PER_MIN;
-              const width = Math.max(156, Math.min(durationWidth, 238));
-              const top = 68 + Math.min(column, 3) * MOBILE_LANE_OFFSET;
+          {layout.placed.map((item) => {
+            const { event, start, end, column } = item;
+            const top = ((start - layout.dayStart) / 60) * MOBILE_HOUR_PX;
+            const height = Math.max(((end - start) / 60) * MOBILE_HOUR_PX, 56);
+            const hiddenNow = hidden.includes(event.id);
+            const effectivePriority = priorities[event.id] ?? event.priority;
+            const group = overlapGroup(item);
+            const groupIndex = Math.max(0, group.findIndex((candidate) => candidate.event.id === event.id));
+            const hasOverlap = group.length > 1;
+            const front = frontEventId === event.id;
+            const layerOffset = hasOverlap ? Math.min(groupIndex, 4) * 12 : 0;
+            const rightOffset = hasOverlap ? Math.max(0, Math.min(group.length - groupIndex - 1, 4)) * 7 : 0;
+            const left = MOBILE_GUTTER + 8 + layerOffset;
+            const right = 10 + rightOffset;
 
-              return (
-                <div
-                  key={event.id}
-                  className={`absolute origin-center transition-all duration-200 ${hiddenNow ? 'opacity-35' : ''}`}
-                  style={{
-                    left,
-                    top,
-                    width,
-                    height: MOBILE_CARD_HEIGHT,
-                    zIndex: front ? 90 : priorityZ(effectivePriority) + Math.max(0, 6 - column),
-                    transform: front ? 'translateY(-8px) scale(1.025)' : undefined,
-                  }}
-                >
+            return (
+              <div
+                key={event.id}
+                className={`absolute transition-all duration-150 ${hiddenNow ? 'opacity-35' : ''}`}
+                style={{
+                  top: top + 3,
+                  height: Math.max(height - 6, 50),
+                  left,
+                  right,
+                  zIndex: front ? 90 : priorityZ(effectivePriority) + groupIndex,
+                  transform: front ? 'translateX(-4px) scale(1.01)' : undefined,
+                }}
+              >
+                <div className={`absolute inset-0 overflow-hidden rounded-xl border border-l-4 shadow-sm transition ${front ? 'shadow-lg ring-2 ring-blue-500/25' : ''} ${attendanceClass(event.lumaStatus)}`}>
                   <button
                     type="button"
-                    onClick={() => {
-                      setFrontEventId(event.id);
-                      setSelected(event);
-                    }}
-                    className={`absolute inset-0 overflow-hidden rounded-2xl border border-l-4 px-8 py-3 text-left shadow-sm transition ${front ? 'shadow-xl ring-2 ring-blue-500/30' : 'shadow-md'} ${attendanceClass(event.lumaStatus)}`}
-                    aria-label={`Open ${event.title}`}
+                    onClick={() => setSelected(event)}
+                    className="absolute inset-y-0 left-4 right-4 z-10 px-2 py-2 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                    aria-label={`Open details for ${event.title}`}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="truncate text-[10px] font-bold uppercase tracking-wide text-slate-500">{event.start}–{event.end}</span>
-                      <span className="shrink-0 rounded-full bg-white/80 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{priorityLabels[effectivePriority]}</span>
+                      <span className="shrink-0 rounded-full bg-white/75 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{priorityLabels[effectivePriority]}</span>
                     </div>
                     <div className="mt-1 line-clamp-2 text-[13px] font-semibold leading-4 text-slate-950">{event.title}</div>
-                    <div className="mt-1 truncate text-[11px] text-slate-500">{event.location}</div>
+                    {height > 78 && <div className="mt-1 truncate text-[11px] text-slate-500">{event.location}</div>}
                   </button>
-
-                  {hasOverlap && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          cycleOverlap(item, -1);
-                        }}
-                        className="absolute inset-y-0 left-0 z-[100] flex w-8 items-center justify-center rounded-l-2xl bg-white/30 text-slate-500 backdrop-blur-[1px] active:bg-white/80"
-                        aria-label={`Show previous overlapping event near ${event.start}`}
-                      >
-                        <ChevronLeft size={17} />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          cycleOverlap(item, 1);
-                        }}
-                        className="absolute inset-y-0 right-0 z-[100] flex w-8 items-center justify-center rounded-r-2xl bg-white/30 text-slate-500 backdrop-blur-[1px] active:bg-white/80"
-                        aria-label={`Show next overlapping event near ${event.start}`}
-                      >
-                        <ChevronRight size={17} />
-                      </button>
-                    </>
-                  )}
                 </div>
-              );
-            })}
-          </div>
+
+                {hasOverlap && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setFrontEventId(event.id);
+                      }}
+                      className="absolute inset-y-0 -left-1 z-[110] w-5 rounded-l-xl bg-transparent"
+                      aria-label={`Bring ${event.title} to front`}
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setFrontEventId(event.id);
+                      }}
+                      className="absolute inset-y-0 -right-1 z-[110] w-5 rounded-r-xl bg-transparent"
+                      aria-label={`Bring ${event.title} to front`}
+                    />
+                  </>
+                )}
+              </div>
+            );
+          })}
         </div>
+
         <div className="flex items-center justify-between border-t border-slate-100 px-4 py-2 text-[11px] text-slate-400">
-          <span>← swipe time →</span>
-          <span>edge tap switches overlap</span>
+          <span>edge = bring to front</span>
+          <span>center = details</span>
         </div>
       </div>
 
