@@ -87,24 +87,24 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
-        <header className="absolute inset-y-0 right-0 z-20 w-[8.75rem] border-l border-white/45 bg-white/38 backdrop-blur-md md:inset-x-0 md:bottom-auto md:w-auto md:border-b md:border-l-0">
-          <div className="flex h-full justify-end px-2 py-3 md:mx-auto md:h-auto md:max-w-6xl md:px-8 md:py-3">
-            <div className="flex h-full w-full flex-col items-stretch gap-2 text-[10px] leading-tight md:h-auto md:w-auto md:flex-row md:items-center md:gap-2 md:text-xs">
+        <header className="absolute right-0 top-0 z-20 h-[56.25vw] w-[5.75rem] border-l border-white/45 bg-white/38 backdrop-blur-md md:inset-x-0 md:h-auto md:w-auto md:border-b md:border-l-0">
+          <div className="flex h-full justify-end px-1.5 py-2 md:mx-auto md:h-auto md:max-w-6xl md:px-8 md:py-3">
+            <div className="flex h-full w-full flex-col items-stretch gap-1.5 text-[8px] leading-tight sm:text-[9px] md:h-auto md:w-auto md:flex-row md:items-center md:gap-2 md:text-xs">
               <a
                 href="https://luma.com/user/Terence_Hej"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/80 bg-white/78 px-2 py-1.5 text-center font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/80 bg-white/78 px-1.5 py-1 text-center font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
               >
-                Luma · Terence_Hej
+                Terence_Hej
               </a>
               <a
                 href="https://x.com/XYZconnextium"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/80 bg-white/78 px-2 py-1.5 text-center font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/80 bg-white/78 px-1.5 py-1 text-center font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white md:px-3 md:py-2"
               >
-                X · @XYZconnextium
+                @XYZconnextium
               </a>
             </div>
           </div>
