@@ -1,5 +1,7 @@
+import { lumaEvents, type RawLumaStatus } from './luma-events';
+
 export type Priority = 'primary' | 'secondary' | 'third';
-export type LumaStatus = 'approved' | 'pending_approval' | 'waitlist' | 'not_found' | 'external';
+export type LumaStatus = RawLumaStatus | 'not_found' | 'external';
 
 export type EventItem = {
   id: string;
@@ -19,104 +21,78 @@ export type EventItem = {
   routeHint: string;
 };
 
-export const events: EventItem[] = [
-  {
-    id: 'rwa-capital-forum',
-    title: 'RWA Capital Forum',
-    host: 'Taisu Ventures',
-    date: '2026-10-05',
-    start: '11:30',
-    end: '15:00',
-    location: '21 Collyer Quay',
-    address: '21 Collyer Quay, Singapore 049320',
-    priority: 'primary',
-    status: 'Approval required',
-    lumaStatus: 'approved',
-    tags: ['High Priority', 'RWA', 'Family Offices', 'Institutional Investors', 'Capital'],
-    luma: 'https://luma.com/ydaq5h18',
-    routeHint: 'You are approved. Use as the opening fundraising event of the week; focus on capital providers and RWA infrastructure conversations.'
-  },
-  {
-    id: 'open-monad',
-    title: 'Open',
-    host: 'Monad Foundation',
-    date: '2026-10-06',
-    start: '09:00',
-    end: '17:00',
-    location: 'Jiak Kim House',
-    address: '5 Jiak Kim St, #01–17, Singapore 169425',
-    priority: 'primary',
-    status: 'Approval required · Reserve Access available',
-    lumaStatus: 'approved',
-    tags: ['High Priority', 'VC', 'Institutions', 'Payments', 'RWA', 'Infrastructure'],
-    luma: 'https://luma.com/open-2026?lm_source=embed&tk=gDMQbC',
-    source: 'https://media-grill.com/event/open/',
-    routeHint: 'You are approved. Use as the Oct 6 morning anchor; Reserve Access is especially valuable for partner and investor conversations.'
-  },
-  {
-    id: 'founder-vc-day1',
-    title: 'Founder × VC Summit · Day 1 Demo Day',
-    host: 'BackersStage Capital + AWS Web3',
-    date: '2026-10-06',
-    start: '11:00',
-    end: '17:00',
-    location: 'Furama RiverFront',
-    address: '405 Havelock Rd, Singapore 169633',
-    priority: 'secondary',
-    status: 'Founder Pass sold out · pitching slot approval available',
-    lumaStatus: 'pending_approval',
-    tags: ['High Priority if pitch confirmed', 'Fundraising', 'VC', 'Pitch', 'Stablecoins', 'AI'],
-    luma: 'https://luma.com/gdqakgz3?tk=2ClOHT',
-    routeHint: 'Pending approval. Promote to primary if a pitching slot or pre-arranged investor meetings are confirmed.'
-  },
-  {
-    id: 'ai-founders-investors',
-    title: 'AI Founders & Investors Forum',
-    host: 'Taisu Ventures ecosystem',
-    date: '2026-10-06',
-    start: '11:30',
-    end: '15:00',
-    location: 'Singapore · verify venue in registration page',
-    priority: 'third',
-    status: 'Registration required',
-    lumaStatus: 'not_found',
-    tags: ['AI', 'VC', 'Founders', 'Agentic Finance'],
-    source: 'https://media-grill.com/event/ai-founders-investors-forum/',
-    routeHint: 'No matching registration was found in your connected Luma account. Use if Open/Founder × VC access is not confirmed.'
-  },
-  {
-    id: 'mantle-rwa',
-    title: 'Mantle RWA Day · TOKEN2049 SG Edition',
-    host: 'Mantle',
-    date: '2026-10-06',
-    start: '12:30',
-    end: '17:00',
-    location: 'The Exchange · Singapore Land Tower',
-    address: '50 Raffles Pl, Level 4 Singapore Land Tower, Singapore 048623',
-    priority: 'secondary',
-    status: 'Free · approval required',
-    lumaStatus: 'pending_approval',
-    tags: ['RWA', 'Stablecoins', 'Treasury', 'Institutional Finance'],
-    luma: 'https://luma.com/mantle-2pek',
-    source: 'https://media-grill.com/token2049/',
-    routeHint: 'Pending approval. Strong afternoon alternative in the CBD/Marina Bay institutional cluster.'
-  },
-  {
-    id: 'institutional-onchain',
-    title: 'Institutional Onchain Finance Summit 2026',
-    host: 'Cregis · FOMO Pay · Stable · Width',
-    date: '2026-10-06',
-    start: '13:00',
-    end: '17:00',
-    location: 'Conrad Singapore Marina Bay',
-    address: '2 Temasek Blvd, Singapore 038982',
-    priority: 'primary',
-    status: 'Private · curated · approval required',
-    lumaStatus: 'approved',
-    tags: ['High Priority', 'Banks', 'Stablecoins', 'Payments', 'Investment', 'Infrastructure'],
-    luma: 'https://luma.com/lnga4ied?lm_source=embed&tk=FtO4gG',
-    routeHint: 'You are approved. Counted as a high-priority institutional event and a strong Oct 6 afternoon anchor.'
-  },
+const highPriority = new Set([
+  'rwa-capital-forum',
+  'gamma-prime',
+  'open-monad',
+  'agentic-finance-payments',
+  'founder-vc-day1',
+  'institutional-onchain',
+  'stablecoin-funds-flow',
+  'agentic-money',
+  'open-board',
+  'institutional-ark',
+  'stablecoin-sessions',
+  'payments-stablecoins-cafe',
+  'onchain-horizons',
+  'payments-treasury-tokenization',
+  'agent-ready-usdc',
+  'treasury-table',
+  'dat-summit',
+  'rwa-summit',
+  'bitangels',
+  'founder-vc-day2',
+]);
+
+const secondaryPriority = new Set([
+  'mantle-rwa', 'ai-agent-summit', 'global-onchain-summit', 'animoca-portfolio-day',
+  'future-money-payments', 'stablecoin-happy-hour', 'flow-state', 'network-state',
+  'sony-taisu', 'cointelegraph-connect', 'ultra-connect', 'utxo-pitch'
+]);
+
+function tagsFor(title: string, priority: Priority): string[] {
+  const t = title.toLowerCase();
+  const tags: string[] = [];
+  if (priority === 'primary') tags.push('High Priority');
+  if (t.includes('vc') || t.includes('invest') || t.includes('capital') || t.includes('funders') || t.includes('pitch')) tags.push('VC / Capital');
+  if (t.includes('stablecoin') || t.includes('payment') || t.includes('money')) tags.push('Payments / Stablecoins');
+  if (t.includes('rwa') || t.includes('tokeniz')) tags.push('RWA / Tokenization');
+  if (t.includes('agent') || t.includes('ai')) tags.push('AI / Agentic');
+  if (t.includes('institution') || t.includes('bank') || t.includes('treasury')) tags.push('Institutional Finance');
+  return tags.length ? tags : ['TOKEN2049 Week'];
+}
+
+function routeHintFor(status: LumaStatus, priority: Priority): string {
+  if (status === 'approved' && priority === 'primary') return "You're in. Treat this as an anchor event; leave only for a confirmed investor, partner, or pitch meeting with higher value.";
+  if (status === 'approved') return "You're in. Keep this available as a confirmed option and use it to fill gaps around higher-priority meetings.";
+  if (status === 'pending_approval' && priority === 'primary') return 'Pending approval. Keep this slot protected until the organizer responds; promote immediately when approved.';
+  if (status === 'pending_approval') return 'Pending approval. Keep as a flexible alternative until access is confirmed.';
+  if (status === 'waitlist') return 'Waitlisted. Do not route around this event unless Luma confirms a place.';
+  if (status === 'external') return 'Access is managed outside Luma. Verify the official pass or registration before departure.';
+  return 'No matching Luma registration found. Use the event source link to register or verify access.';
+}
+
+const lumaMapped: EventItem[] = lumaEvents.map((e) => {
+  const priority: Priority = highPriority.has(e.id) ? 'primary' : secondaryPriority.has(e.id) ? 'secondary' : 'third';
+  return {
+    id: e.id,
+    title: e.title,
+    host: e.host,
+    date: e.date,
+    start: e.start,
+    end: e.end,
+    location: e.location,
+    address: e.address,
+    priority,
+    status: e.status === 'approved' ? 'Luma registration confirmed' : e.status === 'pending_approval' ? 'Luma approval required' : e.status === 'waitlist' ? 'Luma waitlist' : 'Luma invitation',
+    lumaStatus: e.status,
+    tags: tagsFor(e.title, priority),
+    luma: e.url,
+    routeHint: routeHintFor(e.status, priority),
+  };
+});
+
+const externalEvents: EventItem[] = [
   {
     id: 'token-main-day1',
     title: 'TOKEN2049 Singapore · Main Conference Day 1',
@@ -129,9 +105,9 @@ export const events: EventItem[] = [
     priority: 'primary',
     status: 'Conference pass required',
     lumaStatus: 'external',
-    tags: ['Core Conference', 'Investors', 'Infrastructure'],
+    tags: ['High Priority', 'Main Conference', 'Investors', 'Infrastructure'],
     source: 'https://www.token2049.com/singapore/agenda',
-    routeHint: 'Main conference access is not represented by your Luma guest status. Stay at MBS unless a confirmed investor meeting provides higher value.'
+    routeHint: routeHintFor('external', 'primary'),
   },
   {
     id: 'investor-hours',
@@ -140,13 +116,13 @@ export const events: EventItem[] = [
     date: '2026-10-07',
     start: '14:00',
     end: '17:00',
-    location: 'Singapore · verify registration details',
+    location: 'Singapore · verify official listing',
     priority: 'primary',
-    status: 'Featured event · free registration',
+    status: 'Featured TOKEN2049 Week event',
     lumaStatus: 'not_found',
-    tags: ['High Priority', 'VC', 'Investors', 'Fundraising'],
+    tags: ['High Priority', 'VC / Capital', 'Fundraising'],
     source: 'https://week.token2049.com/',
-    routeHint: 'No matching Luma registration was found. Treat as a high-priority fundraising block if you register or confirm access.'
+    routeHint: routeHintFor('not_found', 'primary'),
   },
   {
     id: 'token-main-day2',
@@ -160,88 +136,59 @@ export const events: EventItem[] = [
     priority: 'primary',
     status: 'Conference pass required',
     lumaStatus: 'external',
-    tags: ['Core Conference', 'Institutions', 'VC'],
+    tags: ['High Priority', 'Main Conference', 'Institutions', 'VC'],
     source: 'https://www.token2049.com/singapore/agenda',
-    routeHint: 'Main conference access is not represented by your Luma guest status. Use MBS as the base for Oct 8.'
+    routeHint: routeHintFor('external', 'primary'),
   },
   {
     id: 'stablecoin-summit',
     title: 'Stablecoin Summit 2026',
-    host: 'TOKEN2049 Week ecosystem',
+    host: 'XREX',
     date: '2026-10-08',
     start: '09:00',
     end: '18:00',
-    location: 'Singapore · verify venue before travel',
+    location: 'Andaz Singapore',
+    address: '5 Fraser St, Singapore 189354',
     priority: 'secondary',
-    status: 'Registration required',
+    status: 'External registration',
     lumaStatus: 'not_found',
-    tags: ['Stablecoins', 'Payments', 'Treasury'],
-    source: 'https://media-grill.com/token2049/',
-    routeHint: 'No matching Luma registration was found. Use for targeted stablecoin/payment meetings rather than all-day attendance.'
-  },
-  {
-    id: 'treasury-table',
-    title: 'The Treasury Table',
-    host: 'Locus',
-    date: '2026-10-08',
-    start: '15:30',
-    end: '18:30',
-    location: 'Singapore · address shared upon approval',
-    priority: 'primary',
-    status: 'Closed-door · approval required',
-    lumaStatus: 'pending_approval',
-    tags: ['High Priority', 'Treasury', 'Stablecoins', 'Payments', 'Business Banking'],
-    luma: 'https://luma.com/k8jylkcm',
-    routeHint: 'Pending approval. One of the strongest Connextium-fit sessions; prioritize immediately if approved.'
+    tags: ['Payments / Stablecoins', 'Institutional Finance'],
+    source: 'https://sg26.stablecoinsummit.com/',
+    routeHint: routeHintFor('not_found', 'secondary'),
   },
   {
     id: 'finality-forum',
-    title: 'Finality Forum',
-    host: 'TOKEN2049 Week ecosystem',
+    title: 'Finality Forum @ Token2049 SG 2026',
+    host: 'Ethene Labs + Four Pillars + Mira',
     date: '2026-10-09',
     start: '10:00',
     end: '18:00',
-    location: 'Singapore · verify venue before travel',
+    location: 'Singapore · address after approval',
     priority: 'primary',
-    status: 'Registration required',
-    lumaStatus: 'not_found',
-    tags: ['High Priority', 'Settlement', 'Finality', 'Infrastructure'],
-    source: 'https://media-grill.com/token2049/',
-    routeHint: 'No matching Luma registration was found. Best technical fit for T0 settlement/finality if access is confirmed.'
-  },
-  {
-    id: 'rwa-summit',
-    title: 'RWA Summit Singapore',
-    host: 'RWA WEEK · UVECON.VC',
-    date: '2026-10-09',
-    start: '10:00',
-    end: '17:00',
-    location: 'Marina One West Tower',
-    address: '9 Straits View, Singapore 018937',
-    priority: 'secondary',
     status: 'Approval required',
-    lumaStatus: 'approved',
-    tags: ['RWA', 'Capital', 'Institutional Finance'],
-    luma: 'https://luma.com/rwasummit',
-    source: 'https://media-grill.com/token2049/',
-    routeHint: 'You are approved. Strong RWA/capital option on Oct 9; promote if investor meetings are arranged around it.'
+    lumaStatus: 'not_found',
+    tags: ['High Priority', 'Settlement', 'Payments / Stablecoins', 'RWA / Tokenization'],
+    source: 'https://luma.com/g2lg0htf',
+    routeHint: routeHintFor('not_found', 'primary'),
   },
   {
-    id: 'founder-vc-day2',
-    title: 'Founder × VC Summit · Day 2 Happy Hour',
-    host: 'BackersStage Capital',
-    date: '2026-10-09',
-    start: '18:00',
-    end: '22:00',
-    location: 'Singapore · exact venue after approval',
+    id: 'ai-founders-investors',
+    title: 'AI Founders & Investors Forum',
+    host: 'TOKEN2049 Week ecosystem',
+    date: '2026-10-06',
+    start: '12:00',
+    end: '17:00',
+    location: 'Singapore · see event page',
     priority: 'secondary',
-    status: 'Separate Day 2 RSVP · approval required',
-    lumaStatus: 'pending_approval',
-    tags: ['VC', 'Founders', 'Networking'],
-    luma: 'https://luma.com/4lzbeit3',
-    routeHint: 'Pending approval. Good fundraising follow-up after a daytime institutional or RWA event.'
+    status: 'External registration',
+    lumaStatus: 'not_found',
+    tags: ['VC / Capital', 'AI / Agentic'],
+    source: 'https://media-grill.com/event/ai-founders-investors-forum/',
+    routeHint: routeHintFor('not_found', 'secondary'),
   }
 ];
+
+export const events: EventItem[] = [...lumaMapped, ...externalEvents].sort((a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
 
 export const priorityLabels: Record<Priority, string> = {
   primary: 'Primary',
@@ -253,6 +200,7 @@ export const lumaStatusLabels: Record<LumaStatus, string> = {
   approved: "You're in",
   pending_approval: 'Pending approval',
   waitlist: 'Waitlist',
+  invited: 'Invited',
   not_found: 'Not in Luma',
   external: 'External pass',
 };
