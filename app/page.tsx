@@ -85,14 +85,16 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen">
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
+    <main className="min-h-screen bg-slate-50">
+      <section className="relative isolate flex min-h-[64svh] items-center overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[68svh]">
+        <div className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] bg-cover bg-center" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/92 via-white/78 to-slate-50/58" />
+        <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">Connextium · Singapore 2026</p>
-              <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Connextium · Singapore 2026</p>
+              <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] sm:text-6xl">TOKEN2049 itinerary</h1>
+              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
             </div>
             <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
               <Share2 size={17} /> Share itinerary
@@ -106,9 +108,9 @@ export default function HomePage() {
               [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
               [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
             ].map(([value, label]) => (
-              <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div key={label} className="rounded-2xl border border-white/80 bg-white/78 p-4 shadow-sm backdrop-blur-sm">
                 <div className="text-xl font-semibold text-slate-950">{value}</div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">{label}</div>
+                <div className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-600">{label}</div>
               </div>
             ))}
           </div>
