@@ -86,33 +86,44 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-slate-50">
-      <section className="relative isolate flex min-h-[64svh] items-center overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[68svh]">
-        <div className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] bg-cover bg-center" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/92 via-white/78 to-slate-50/58" />
-        <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Connextium · Singapore 2026</p>
-              <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] sm:text-6xl">TOKEN2049 itinerary</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
-            </div>
-            <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
-              <Share2 size={17} /> Share itinerary
-            </button>
-          </div>
+      <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
+        <div
+          className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] bg-cover md:hidden"
+          style={{ backgroundPosition: 'center -110px' }}
+        />
+        <div
+          className="absolute inset-0 -z-20 hidden bg-[url('/happy-hour-infinite-hero.svg')] bg-cover md:block"
+          style={{ backgroundPosition: 'center top' }}
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/10 via-white/34 to-white/94" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/82 via-white/56 to-slate-50/28" />
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              ['Oct 4–10', 'Planning window'],
-              [`${events.length}`, 'Tracked events'],
-              [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
-              [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-2xl border border-white/80 bg-white/78 p-4 shadow-sm backdrop-blur-sm">
-                <div className="text-xl font-semibold text-slate-950">{value}</div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-600">{label}</div>
+        <div className="mx-auto w-full max-w-6xl px-5 pb-10 pt-[31rem] sm:px-8 sm:pb-12 sm:pt-[33rem] md:pb-14 md:pt-[29rem] lg:pt-[31rem]">
+          <div className="rounded-[28px] border border-white/75 bg-white/74 p-5 shadow-sm backdrop-blur-md sm:p-6 lg:p-7">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Connextium · Singapore 2026</p>
+                <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
+                <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
               </div>
-            ))}
+              <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
+                <Share2 size={17} /> Share itinerary
+              </button>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                ['Oct 4–10', 'Planning window'],
+                [`${events.length}`, 'Tracked events'],
+                [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
+                [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-2xl border border-white/90 bg-white/82 p-4 shadow-sm backdrop-blur-sm">
+                  <div className="text-xl font-semibold text-slate-950">{value}</div>
+                  <div className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-600">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
