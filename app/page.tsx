@@ -54,10 +54,11 @@ export default function HomePage() {
   const suggested = useMemo(() => {
     return events
       .filter((e) => !hidden.includes(e.id))
+      .filter((e) => statusFilter === 'all' || e.lumaStatus === statusFilter)
       .map((e) => ({ ...e, effectivePriority: priorities[e.id] ?? e.priority }))
       .filter((e) => e.effectivePriority === 'primary')
       .sort((a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
-  }, [hidden, priorities]);
+  }, [hidden, priorities, statusFilter]);
 
   async function share() {
     const data = {
@@ -149,8 +150,9 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-blue-600"><Route size={20} /><span className="text-sm font-semibold uppercase tracking-[0.15em]">Suggested route</span></div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Minimize travel; maximize confirmed conversations.</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">All primary itinerary items are plotted on the map. Hover a route item to highlight its map point. Click an item to open its venue directly in Google Maps.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-500">Primary itinerary items matching the selected status are plotted on the map. Hover a route item to highlight its map point. Click an item to open its venue directly in Google Maps.</p>
             <div className="mt-6 max-h-[520px] space-y-3 overflow-y-auto pr-1">
+              {suggested.length === 0 && <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-500">No primary route events match the selected status.</div>}
               {suggested.map((event, index) => {
                 const active = activeRouteEventId === event.id;
                 return (
