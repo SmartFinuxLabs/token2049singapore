@@ -27,33 +27,45 @@ button, a, input, textarea, select {
   font: inherit;
 }
 
-a[href="https://luma.com/user/Terence_Hej"]::before,
-a[href="https://x.com/XYZconnextium"]::before {
-  display: inline-flex;
-  width: 1.4rem;
-  height: 1.4rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.4rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  line-height: 1;
+.host-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: host-marquee-scroll 58s linear infinite;
+  will-change: transform;
 }
 
-a[href="https://luma.com/user/Terence_Hej"]::before {
-  content: "L";
-  background: linear-gradient(135deg, #ff6b8a 0%, #9b6cff 52%, #5d8dff 100%);
-  color: #fff;
-  box-shadow: 0 1px 4px rgb(99 102 241 / 24%);
+.host-marquee-group {
+  display: flex;
+  flex: none;
+  gap: 1rem;
 }
 
-a[href="https://x.com/XYZconnextium"]::before {
-  content: "𝕏";
-  background: #0f172a;
-  color: #fff;
-  box-shadow: 0 1px 4px rgb(15 23 42 / 22%);
+.host-marquee:hover .host-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes host-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .host-marquee {
+    overflow-x: auto;
+  }
+
+  .host-marquee-track {
+    animation: none;
+  }
+
+  .host-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 .leaflet-container {
