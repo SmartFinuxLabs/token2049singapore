@@ -44,7 +44,12 @@ function loadGoogleMaps(apiKey: string) {
   return window.__token2049GoogleMapsPromise;
 }
 
-export default function RouteMap({ events, activeEventId }: { events: EventItem[]; activeEventId: string | null }) {
+type RouteMapProps = {
+  events?: EventItem[];
+  activeEventId?: string | null;
+};
+
+export default function RouteMap({ events = [], activeEventId = null }: RouteMapProps) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<any>(null);
