@@ -28,7 +28,7 @@ export const events: EventItem[] = [
     location: 'Singapore · exact venue after approval',
     priority: 'primary',
     status: 'Approval required',
-    tags: ['RWA', 'Family Offices', 'Institutional Investors', 'Capital'],
+    tags: ['High Priority', 'RWA', 'Family Offices', 'Institutional Investors', 'Capital'],
     luma: 'https://luma.com/ydaq5h18',
     routeHint: 'Use as the opening fundraising event of the week; focus on capital providers and RWA infrastructure conversations.'
   },
@@ -42,10 +42,10 @@ export const events: EventItem[] = [
     location: 'Singapore · exact venue revealed after approval',
     priority: 'primary',
     status: 'Approval required · Reserve Access available',
-    tags: ['VC', 'Institutions', 'Payments', 'RWA', 'Infrastructure'],
+    tags: ['High Priority', 'VC', 'Institutions', 'Payments', 'RWA', 'Infrastructure'],
     luma: 'https://luma.com/open-2026?lm_source=embed&tk=gDMQbC',
     source: 'https://media-grill.com/event/open/',
-    routeHint: 'Use as the anchor event for Oct 6 morning. Leave only for a confirmed pitch or investor meeting.'
+    routeHint: 'Use as the anchor event for Oct 6 morning. Reserve Access is especially valuable for partner and investor conversations; leave only for a confirmed pitch or investor meeting.'
   },
   {
     id: 'founder-vc-day1',
@@ -58,7 +58,7 @@ export const events: EventItem[] = [
     address: '405 Havelock Rd, Singapore 169633',
     priority: 'secondary',
     status: 'Founder Pass sold out · pitching slot approval available',
-    tags: ['Fundraising', 'VC', 'Pitch', 'Stablecoins', 'AI'],
+    tags: ['High Priority if pitch confirmed', 'Fundraising', 'VC', 'Pitch', 'Stablecoins', 'AI'],
     luma: 'https://luma.com/gdqakgz3?tk=2ClOHT',
     routeHint: 'Promote to primary if a pitching slot or pre-arranged investor meetings are confirmed.'
   },
@@ -102,9 +102,9 @@ export const events: EventItem[] = [
     address: '2 Temasek Blvd, Singapore 038982',
     priority: 'primary',
     status: 'Private · curated · approval required',
-    tags: ['Banks', 'Stablecoins', 'Payments', 'Investment', 'Infrastructure'],
+    tags: ['High Priority', 'Banks', 'Stablecoins', 'Payments', 'Investment', 'Infrastructure'],
     luma: 'https://luma.com/lnga4ied?lm_source=embed&tk=FtO4gG',
-    routeHint: 'Highest-value institutional alternative to Open in the afternoon; prioritize if approved and meetings are pre-booked.'
+    routeHint: 'Counted as a high-priority institutional event. Highest-value afternoon alternative to Open; prioritize if approved and meetings are pre-booked.'
   },
   {
     id: 'token-main-day1',
@@ -117,7 +117,7 @@ export const events: EventItem[] = [
     address: '10 Bayfront Ave, Singapore 018956',
     priority: 'primary',
     status: 'Conference pass required',
-    tags: ['Main Conference', 'Investors', 'Infrastructure'],
+    tags: ['Core Conference', 'Investors', 'Infrastructure'],
     source: 'https://www.token2049.com/singapore/agenda',
     routeHint: 'Stay at Marina Bay Sands unless a confirmed investor meeting provides higher value.'
   },
@@ -131,7 +131,7 @@ export const events: EventItem[] = [
     location: 'Singapore · verify registration details',
     priority: 'primary',
     status: 'Featured event · free registration',
-    tags: ['VC', 'Investors', 'Fundraising'],
+    tags: ['High Priority', 'VC', 'Investors', 'Fundraising'],
     source: 'https://week.token2049.com/',
     routeHint: 'Treat as a high-priority fundraising block; schedule around confirmed investor conversations.'
   },
@@ -146,7 +146,7 @@ export const events: EventItem[] = [
     address: '10 Bayfront Ave, Singapore 018956',
     priority: 'primary',
     status: 'Conference pass required',
-    tags: ['Main Conference', 'Institutions', 'VC'],
+    tags: ['Core Conference', 'Institutions', 'VC'],
     source: 'https://www.token2049.com/singapore/agenda',
     routeHint: 'Use MBS as the base; leave for Treasury / stablecoin / investor sessions only when access is confirmed.'
   },
@@ -174,7 +174,7 @@ export const events: EventItem[] = [
     location: 'Singapore · address shared upon approval',
     priority: 'primary',
     status: 'Closed-door · approval required',
-    tags: ['Treasury', 'Stablecoins', 'Payments', 'Business Banking'],
+    tags: ['High Priority', 'Treasury', 'Stablecoins', 'Payments', 'Business Banking'],
     luma: 'https://luma.com/k8jylkcm',
     routeHint: 'One of the strongest Connextium-fit sessions; prioritize if approved, especially for treasury and settlement conversations.'
   },
@@ -188,7 +188,7 @@ export const events: EventItem[] = [
     location: 'Singapore · verify venue before travel',
     priority: 'primary',
     status: 'Registration required',
-    tags: ['Settlement', 'Finality', 'Infrastructure'],
+    tags: ['High Priority', 'Settlement', 'Finality', 'Infrastructure'],
     source: 'https://media-grill.com/token2049/',
     routeHint: 'Best technical fit for T0 settlement/finality; pair with an investor networking event later in the day.'
   },
