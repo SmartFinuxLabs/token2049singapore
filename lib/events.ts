@@ -38,6 +38,7 @@ const highPriority = new Set([
   'onchain-horizons',
   'payments-treasury-tokenization',
   'venture-connect',
+  'global-capital-onchain',
   'next-gen-payments-apac',
   'agentic-finance-summit-odds',
   'agent-ready-usdc',
