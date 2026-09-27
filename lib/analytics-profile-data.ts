@@ -59,12 +59,26 @@ export type AnalyticsParticipant = {
 
 type OrganizationOverlay = Partial<AnalyticsOrganization> & { id?: string; name: string };
 type ParticipantOverlay = Partial<AnalyticsParticipant> & { id?: string; name: string };
+type LumaCalendarRecord = PublicCalendarEvent & {
+  presentedBy?: string[];
+  hostedBy?: string[];
+  organizations?: string[];
+};
 
 const organizationOverlays = (organizationJson.records ?? []) as OrganizationOverlay[];
 const participantOverlays = (participantJson.records ?? []) as ParticipantOverlay[];
+const lumaCalendarRecords = (lumaPublicCalendarJson.records ?? []) as LumaCalendarRecord[];
 
 function mergeMedia(base: MediaLinks, overlay?: MediaLinks): MediaLinks {
   return { ...base, ...(overlay ?? {}) };
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 function mergeOrganization(base: AnalyticsOrganization, overlay: OrganizationOverlay): AnalyticsOrganization {
@@ -96,11 +110,56 @@ function mergeParticipant(base: AnalyticsParticipant, overlay: ParticipantOverla
   };
 }
 
-const baseOrganizations: AnalyticsOrganization[] = legacyOrganizations.map((org) => ({
-  ...org,
-  profileLocation: null,
-  provenance: [],
-}));
+const baseOrganizations: AnalyticsOrganization[] = (() => {
+  const byName = new Map<string, AnalyticsOrganization>();
+
+  legacyOrganizations.forEach((org) => {
+    byName.set(org.name.toLowerCase(), {
+      ...org,
+      profileLocation: null,
+      provenance: [],
+    });
+  });
+
+  lumaCalendarRecords.forEach((event) => {
+    (event.organizations ?? []).forEach((name) => {
+      const key = name.toLowerCase();
+      const existing = byName.get(key);
+      const eventIds = [...new Set([...(existing?.eventIds ?? []), event.id])];
+      const eventPresence = [...new Set([...(existing?.eventPresence ?? []), event.location].filter(Boolean))];
+      const source: Provenance = {
+        field: 'organizationEventAssociation',
+        sourceType: 'luma',
+        sourceUrl: event.url,
+        sourceEvent: event.name,
+        verifiedAt: lumaPublicCalendarJson.fetchedAt,
+        confidence: 'high',
+      };
+
+      if (existing) {
+        byName.set(key, {
+          ...existing,
+          eventIds,
+          eventPresence,
+          provenance: [...existing.provenance, source],
+        });
+      } else {
+        byName.set(key, {
+          id: slugify(name),
+          name,
+          services: [],
+          profileLocation: null,
+          eventPresence,
+          eventIds,
+          media: {},
+          provenance: [source],
+        });
+      }
+    });
+  });
+
+  return [...byName.values()];
+})();
 
 const baseParticipants: AnalyticsParticipant[] = legacyParticipants.map((person) => ({
   id: person.id,
@@ -159,11 +218,11 @@ export const participants: AnalyticsParticipant[] = (() => {
   return [...byKey.values()];
 })();
 
-export const publicCalendarEvents = (lumaPublicCalendarJson.records ?? []) as PublicCalendarEvent[];
+export const publicCalendarEvents = lumaCalendarRecords as PublicCalendarEvent[];
 
 export const analyticsSnapshot = {
   calendarName: lumaPublicCalendarJson.calendarName,
   calendarUrl: lumaPublicCalendarJson.calendarUrl,
   capturedAt: lumaPublicCalendarJson.fetchedAt,
-  coverage: 'Refreshed from the public TOKEN2049 Singapore Luma calendar. The connected Luma API does not provide manage access to this calendar, so private registration data is not included. Approved attendees may see guest lists in the Luma UI when the event host enables them.',
+  coverage: 'Refreshed from the public TOKEN2049 Singapore Luma calendar and event pages. Organization analytics now includes normalized organizations from both Presented by and Hosted By, while individual hosts remain participant records rather than organizations.',
 };
