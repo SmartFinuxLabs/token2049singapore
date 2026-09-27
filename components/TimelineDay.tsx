@@ -26,6 +26,11 @@ function formatHour(mins: number) {
   return `${String(h).padStart(2, '0')}:00`;
 }
 
+function googleMapsUrl(event: EventItem) {
+  const query = event.address || `${event.location}, Singapore`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
 function attendanceClass(status?: EventItem['lumaStatus']) {
   if (status === 'approved') return 'border-emerald-300 bg-emerald-50';
   if (status === 'pending_approval') return 'border-amber-300 bg-amber-50';
@@ -141,7 +146,20 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
 
             <div className="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 sm:grid-cols-2">
               <div><span className="font-semibold">Time:</span> {selected.start}–{selected.end}</div>
-              <div className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 shrink-0" /><span>{selected.location}{selected.address ? ` · ${selected.address}` : ''}</span></div>
+              <a
+                href={googleMapsUrl(selected)}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-start gap-2 rounded-xl -m-2 p-2 hover:bg-blue-50"
+                aria-label={`Open ${selected.location} in Google Maps`}
+              >
+                <MapPin size={16} className="mt-0.5 shrink-0 text-blue-600" />
+                <span className="min-w-0">
+                  <span className="block font-semibold text-slate-800 group-hover:text-blue-700">{selected.location}</span>
+                  {selected.address && <span className="mt-0.5 block text-xs leading-5 text-slate-500 group-hover:text-blue-600">{selected.address}</span>}
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-600">Open in Google Maps <ExternalLink size={12} /></span>
+                </span>
+              </a>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
