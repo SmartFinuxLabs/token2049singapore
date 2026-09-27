@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ExternalLink, Eye, EyeOff, MapPin, X } from 'lucide-react';
+import { ExternalLink, Eye, EyeOff, MapPin, Utensils, Wine, X } from 'lucide-react';
 import { lumaStatusLabels, priorityLabels, type EventItem, type Priority } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
 
@@ -54,6 +54,37 @@ function priorityZ(priority: Priority) {
   if (priority === 'primary') return 30;
   if (priority === 'secondary') return 20;
   return 10;
+}
+
+function refreshmentsFor(event: EventItem) {
+  const text = `${event.title} ${event.location}`.toLowerCase();
+  const food = /\b(dinner|breakfast|brunch|lunch|supper|cafe|café|coffee|izakaya|restaurant)\b/.test(text);
+  const drink = /\b(cocktail|cocktails|happy hour|drinks?|mixer|mixers|bar|pub|brewery|wine|beer)\b/.test(text);
+  return { food, drink };
+}
+
+function RefreshmentBadges({ event, compact = false }: { event: EventItem; compact?: boolean }) {
+  const { food, drink } = refreshmentsFor(event);
+  if (!food && !drink) return null;
+
+  const label = `${food ? 'Food' : ''}${food && drink ? ' + ' : ''}${drink ? 'Drinks' : ''}`;
+
+  return (
+    <div className="flex items-center gap-1" aria-label={`${label} indicated`} title={`${label} indicated by the event title or venue`}>
+      {food && (
+        <span className="inline-flex items-center gap-1 rounded-full border border-orange-200 bg-white/90 px-1.5 py-1 font-semibold text-orange-700 shadow-sm">
+          <Utensils size={compact ? 11 : 12} />
+          {!compact && <span className="text-[10px]">Food</span>}
+        </span>
+      )}
+      {drink && (
+        <span className="inline-flex items-center gap-1 rounded-full border border-rose-200 bg-white/90 px-1.5 py-1 font-semibold text-rose-700 shadow-sm">
+          <Wine size={compact ? 11 : 12} />
+          {!compact && <span className="text-[10px]">Drink</span>}
+        </span>
+      )}
+    </div>
+  );
 }
 
 export default function TimelineDay({ date, events }: { date: string; events: EventItem[] }) {
@@ -160,13 +191,16 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
                   }}
                 >
                   <div className={`absolute inset-0 overflow-hidden rounded-2xl border border-l-4 shadow-md transition ${front ? 'shadow-xl ring-2 ring-blue-500/25' : ''} ${attendanceClass(event.lumaStatus)}`}>
+                    <div className="pointer-events-none absolute right-2 top-2 z-20">
+                      <RefreshmentBadges event={event} compact />
+                    </div>
                     <button
                       type="button"
                       onClick={() => setSelected(event)}
                       className="absolute inset-y-0 left-6 right-6 z-10 px-1 py-3 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
                       aria-label={`Open details for ${event.title}`}
                     >
-                      <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center justify-between gap-2 pr-7">
                         <span className="truncate text-[10px] font-bold uppercase tracking-wide text-slate-500">{event.start}–{event.end}</span>
                         <span className="shrink-0 rounded-full bg-white/80 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{priorityLabels[effectivePriority]}</span>
                       </div>
@@ -241,7 +275,10 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
                 style={{ top: top + 3, height: height - 6, left, width, zIndex: priorityZ(effectivePriority) }}
                 aria-label={`Open ${event.title}`}
               >
-                <div className="h-full px-3 py-2">
+                <div className="pointer-events-none absolute right-2 top-2 z-20">
+                  <RefreshmentBadges event={event} compact />
+                </div>
+                <div className="h-full px-3 py-2 pr-10">
                   <div className="flex items-center justify-between gap-2">
                     <span className="truncate text-[11px] font-bold uppercase tracking-wide text-slate-500">{event.start}–{event.end}</span>
                     <span className="shrink-0 rounded-full bg-white/70 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500">{priorityLabels[effectivePriority]}</span>
@@ -264,6 +301,7 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
                 <div className="flex flex-wrap gap-2">
                   <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white">{priorityLabels[priorities[selected.id] ?? selected.priority]}</span>
                   {selected.lumaStatus && <span className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">{lumaStatusLabels[selected.lumaStatus]}</span>}
+                  <RefreshmentBadges event={selected} />
                 </div>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">{selected.title}</h3>
                 <p className="mt-1 text-sm font-medium text-slate-500">{selected.host}</p>
