@@ -1,5 +1,163 @@
 {
   "schemaVersion": 1,
-  "generatedAt": null,
-  "records": []
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "records": [
+    {
+      "id": "hydrax",
+      "name": "Hydra X",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://sg.linkedin.com/company/hydra-x",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "https://www.hydrax.io", "linkedin": "https://sg.linkedin.com/company/hydra-x" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://sg.linkedin.com/company/hydra-x", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "gfi",
+      "name": "Global Fintech Institute",
+      "profileLocation": {
+        "display": "Singapore",
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "sourceType": "official-website",
+        "sourceUrl": "https://globalfintechinstitute.org/",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "https://globalfintechinstitute.org/", "linkedin": "https://www.linkedin.com/company/globalfintechinstitute" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "official-website", "sourceUrl": "https://globalfintechinstitute.org/", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "utila",
+      "name": "Utila",
+      "profileLocation": {
+        "display": "New York City, New York, United States",
+        "city": "New York City",
+        "region": "New York",
+        "country": "United States",
+        "lat": 40.7128,
+        "lng": -74.006,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/company/utila-io",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "https://utila.io/", "linkedin": "https://www.linkedin.com/company/utila-io" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/company/utila-io", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "kalshi",
+      "name": "Kalshi",
+      "profileLocation": {
+        "display": "New York, New York, United States",
+        "city": "New York",
+        "region": "New York",
+        "country": "United States",
+        "lat": 40.7128,
+        "lng": -74.006,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/company/kalshi",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "https://kalshi.com", "linkedin": "https://www.linkedin.com/company/kalshi" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/company/kalshi", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "profileLocation": {
+        "display": "Stamford, Connecticut, United States",
+        "city": "Stamford",
+        "region": "Connecticut",
+        "country": "United States",
+        "lat": 41.0534,
+        "lng": -73.5387,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/company/grayscale-investments/",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "http://www.grayscale.com", "linkedin": "https://www.linkedin.com/company/grayscale-investments/" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/company/grayscale-investments/", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "alixpartners",
+      "name": "AlixPartners",
+      "profileLocation": {
+        "display": "New York, New York, United States",
+        "city": "New York",
+        "region": "New York",
+        "country": "United States",
+        "lat": 40.7128,
+        "lng": -74.006,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://www.linkedin.com/company/alixpartners",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "http://www.alixpartners.com", "linkedin": "https://www.linkedin.com/company/alixpartners" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://www.linkedin.com/company/alixpartners", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "bitgo",
+      "name": "BitGo",
+      "profileLocation": {
+        "display": "Sioux Falls, South Dakota, United States",
+        "city": "Sioux Falls",
+        "region": "South Dakota",
+        "country": "United States",
+        "lat": 43.5446,
+        "lng": -96.7311,
+        "sourceType": "linkedin",
+        "sourceUrl": "https://ca.linkedin.com/company/bitgo",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "http://bitgo.com", "linkedin": "https://ca.linkedin.com/company/bitgo" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "linkedin", "sourceUrl": "https://ca.linkedin.com/company/bitgo", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    },
+    {
+      "id": "haruko",
+      "name": "Haruko",
+      "profileLocation": {
+        "display": "London, United Kingdom",
+        "city": "London",
+        "country": "United Kingdom",
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "sourceType": "official-website",
+        "sourceUrl": "https://www.haruko.io/about-us/",
+        "verifiedAt": "2026-09-27",
+        "confidence": "high"
+      },
+      "media": { "website": "https://www.haruko.io/", "linkedin": "https://uk.linkedin.com/company/harukotech" },
+      "provenance": [
+        { "field": "profileLocation", "sourceType": "official-website", "sourceUrl": "https://www.haruko.io/about-us/", "verifiedAt": "2026-09-27", "confidence": "high" }
+      ]
+    }
+  ]
 }
