@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 import { Eye, EyeOff, Filter, MessageCircle, Route, Share2 } from 'lucide-react';
+import EventStatusChart from '@/components/EventStatusChart';
 import TimelineDay from '@/components/TimelineDay';
 import { events, lumaStatusLabels, type EventItem, type LumaStatus } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
@@ -47,12 +48,16 @@ export default function HomePage() {
 
   const availableDays = useMemo(() => [...new Set(events.map((e) => e.date))].sort(), []);
 
-  const filteredEvents = useMemo(() => {
+  const chartEvents = useMemo(() => {
     return events
       .filter((e) => showHidden || !hidden.includes(e.id))
-      .filter((e) => dayFilter === 'all' || e.date === dayFilter)
+      .filter((e) => dayFilter === 'all' || e.date === dayFilter);
+  }, [hidden, showHidden, dayFilter]);
+
+  const filteredEvents = useMemo(() => {
+    return chartEvents
       .filter((e) => statusFilter === 'all' || e.lumaStatus === statusFilter);
-  }, [hidden, showHidden, dayFilter, statusFilter]);
+  }, [chartEvents, statusFilter]);
 
   const days = useMemo(() => {
     const grouped = new Map<string, EventItem[]>();
@@ -142,6 +147,12 @@ export default function HomePage() {
           </div>
           <div className="text-sm text-slate-500">Showing {filteredEvents.length} of {events.length} tracked events.</div>
         </div>
+
+        <EventStatusChart
+          events={chartEvents}
+          statusFilter={statusFilter}
+          onStatusChange={setStatusFilter}
+        />
 
         <div className="mb-6">
           <h2 className="text-2xl font-semibold tracking-tight">Daily timeline</h2>
