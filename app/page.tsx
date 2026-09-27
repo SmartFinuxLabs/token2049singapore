@@ -88,7 +88,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
-        <header className="absolute right-0 top-0 z-20 h-[56.25vw] w-[5.75rem] border-l border-white/45 bg-white/38 backdrop-blur-md md:inset-x-0 md:h-auto md:w-auto md:border-b md:border-l-0">
+        <header className="absolute right-0 top-0 z-20 h-[56.25vw] w-[5.75rem] border-l border-white/45 bg-transparent md:inset-x-0 md:h-auto md:w-auto md:border-b md:border-l-0 md:bg-white/38 md:backdrop-blur-md">
           <div className="flex h-full justify-end px-1.5 py-2 md:mx-auto md:h-auto md:max-w-6xl md:px-8 md:py-3">
             <div className="flex h-full w-full flex-col items-stretch gap-1.5 text-[8px] leading-tight sm:text-[9px] md:h-auto md:w-auto md:flex-row md:items-center md:gap-2 md:text-xs">
               <a
