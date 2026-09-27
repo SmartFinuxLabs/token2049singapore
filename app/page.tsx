@@ -102,7 +102,7 @@ export default function HomePage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/10 via-white/34 to-white/94" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/82 via-white/56 to-slate-50/28" />
 
-        <div className="mx-auto w-full max-w-6xl px-5 pb-10 pt-[calc(105vw-6rem)] sm:px-8 sm:pb-12 sm:pt-[33rem] md:pb-14 md:pt-[29rem] lg:pt-[31rem]">
+        <div className="mx-auto w-full max-w-6xl px-5 pb-10 pt-[calc(105vw-12rem)] sm:px-8 sm:pb-12 sm:pt-[33rem] md:pb-14 md:pt-[29rem] lg:pt-[31rem]">
           <div className="rounded-[28px] border border-white/75 bg-white/74 p-5 shadow-sm backdrop-blur-md sm:p-6 lg:p-7">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
