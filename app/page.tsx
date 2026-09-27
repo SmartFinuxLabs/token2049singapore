@@ -130,7 +130,7 @@ export default function HomePage() {
           <div className="rounded-[28px] border border-white/75 bg-white/74 p-5 shadow-sm backdrop-blur-md sm:p-6 lg:p-7">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Connextium · Singapore 2026</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Connextium · AI · Singapore 2026</p>
                 <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
                 <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
               </div>
