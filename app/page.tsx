@@ -146,40 +146,45 @@ export default function HomePage() {
       </section>
 
       <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
+        <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+          <div className="mb-8 rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
             <div className="flex items-center gap-2 text-blue-600"><Route size={20} /><span className="text-sm font-semibold uppercase tracking-[0.15em]">Suggested route</span></div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Minimize travel; maximize confirmed conversations.</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">Primary itinerary items matching the selected status are plotted on the map. Hover a route item to highlight its map point. Click an item to open its venue directly in Google Maps.</p>
-            <div className="mt-6 max-h-[520px] space-y-3 overflow-y-auto pr-1">
-              {suggested.length === 0 && <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-500">No primary route events match the selected status.</div>}
-              {suggested.map((event, index) => {
-                const active = activeRouteEventId === event.id;
-                return (
-                  <a
-                    key={event.id}
-                    href={googleMapsUrl(event)}
-                    target="_blank"
-                    rel="noreferrer"
-                    onMouseEnter={() => setActiveRouteEventId(event.id)}
-                    onMouseLeave={() => setActiveRouteEventId(null)}
-                    onFocus={() => setActiveRouteEventId(event.id)}
-                    onBlur={() => setActiveRouteEventId(null)}
-                    className={`group flex gap-3 rounded-2xl border p-4 transition ${active ? 'border-blue-300 bg-blue-50 shadow-sm' : 'border-transparent bg-slate-50 hover:border-blue-200 hover:bg-blue-50/60'}`}
-                  >
-                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition ${active ? 'bg-blue-600 scale-110' : 'bg-slate-950'}`}>{index + 1}</div>
-                    <div className="min-w-0">
-                      <div className="font-semibold text-slate-950">{prettyDate(event.date)} · {event.start} · {event.title}</div>
-                      <div className="mt-1 text-sm text-slate-500">{event.location} · {lumaStatusLabels[event.lumaStatus ?? 'external']}</div>
-                      {event.address && <div className="mt-1 truncate text-xs text-slate-400">{event.address}</div>}
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-            <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; approved curated institutional session &gt; passive networking. Re-check Luma before departure because status and venue details can change.</p>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-500">Primary itinerary items matching the selected status are plotted on the map. Hover a route item to highlight its map point. Click an item to open its venue directly in Google Maps.</p>
           </div>
-          <RouteMap events={suggested} activeEventId={activeRouteEventId} />
+
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <div className="max-h-[520px] space-y-3 overflow-y-auto pr-1">
+                {suggested.length === 0 && <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-500">No primary route events match the selected status.</div>}
+                {suggested.map((event, index) => {
+                  const active = activeRouteEventId === event.id;
+                  return (
+                    <a
+                      key={event.id}
+                      href={googleMapsUrl(event)}
+                      target="_blank"
+                      rel="noreferrer"
+                      onMouseEnter={() => setActiveRouteEventId(event.id)}
+                      onMouseLeave={() => setActiveRouteEventId(null)}
+                      onFocus={() => setActiveRouteEventId(event.id)}
+                      onBlur={() => setActiveRouteEventId(null)}
+                      className={`group flex gap-3 rounded-2xl border p-4 transition ${active ? 'border-blue-300 bg-blue-50 shadow-sm' : 'border-transparent bg-slate-50 hover:border-blue-200 hover:bg-blue-50/60'}`}
+                    >
+                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition ${active ? 'bg-blue-600 scale-110' : 'bg-slate-950'}`}>{index + 1}</div>
+                      <div className="min-w-0">
+                        <div className="font-semibold text-slate-950">{prettyDate(event.date)} · {event.start} · {event.title}</div>
+                        <div className="mt-1 text-sm text-slate-500">{event.location} · {lumaStatusLabels[event.lumaStatus ?? 'external']}</div>
+                        {event.address && <div className="mt-1 truncate text-xs text-slate-400">{event.address}</div>}
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+              <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; approved curated institutional session &gt; passive networking. Re-check Luma before departure because status and venue details can change.</p>
+            </div>
+            <RouteMap events={suggested} activeEventId={activeRouteEventId} />
+          </div>
         </div>
       </section>
 
