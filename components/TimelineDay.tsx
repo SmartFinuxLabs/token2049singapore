@@ -97,8 +97,9 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
             const height = Math.max(((end - start) / 60) * HOUR_PX, 42);
             const hiddenNow = hidden.includes(event.id);
             const effectivePriority = priorities[event.id] ?? event.priority;
-            const availableWidth = `calc((100% - ${GUTTER + 16}px) / ${layout.columns})`;
-            const left = `calc(${GUTTER + 8}px + ${column} * ((100% - ${GUTTER + 16}px) / ${layout.columns}))`;
+            const columnPct = 100 / layout.columns;
+            const left = `calc(${GUTTER + 8}px + ${column * columnPct}% - ${(column * (GUTTER + 16)) / layout.columns}px)`;
+            const width = `calc(${columnPct}% - ${(GUTTER + 16) / layout.columns + 8}px)`;
 
             return (
               <button
@@ -106,7 +107,7 @@ export default function TimelineDay({ date, events }: { date: string; events: Ev
                 type="button"
                 onClick={() => setSelected(event)}
                 className={`absolute overflow-hidden rounded-r-xl border border-l-4 text-left shadow-sm transition hover:z-30 hover:-translate-y-0.5 hover:shadow-md focus:z-30 focus:outline-none focus:ring-2 focus:ring-blue-500 ${attendanceClass(event.lumaStatus)} ${hiddenNow ? 'opacity-35' : ''}`}
-                style={{ top: top + 3, height: height - 6, left, width: `calc(${availableWidth} - 8px)`, zIndex: effectivePriority === 'primary' ? 20 : effectivePriority === 'secondary' ? 15 : 10 }}
+                style={{ top: top + 3, height: height - 6, left, width, zIndex: effectivePriority === 'primary' ? 20 : effectivePriority === 'secondary' ? 15 : 10 }}
                 aria-label={`Open ${event.title}`}
               >
                 <div className="h-full px-3 py-2">
