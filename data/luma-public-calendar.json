@@ -1,0 +1,30 @@
+{
+  "calendarId": "cal-WfTOVDTJaAVqK3S",
+  "calendarName": "TOKEN2049 Singapore",
+  "calendarUrl": "https://luma.com/token2049",
+  "fetchedAt": "2026-09-26",
+  "sourceMode": "public-calendar-page",
+  "note": "The connected Luma API does not grant manage access to this calendar, so this snapshot is refreshed from the public Luma calendar page. Public attendee counts are captured only when Luma exposes them.",
+  "records": [
+    {"id":"pre-token-ai-mixers","name":"Pre Token 2049 Web3 Ai : Mixers","url":"https://luma.com/rweo2o60","location":"Singapore","hosts":["Asia Web3 Ai Association (AWAA)","Insight Genesis"],"tags":["AI","Crypto","Networking"]},
+    {"id":"coinferencex-day-1","name":"CoinFerenceX the Best Event - Day 1","url":"https://coinferencex.com/singapore/","location":"Gardens by the Bay","hosts":["CoinFerenceX","The Best Event"],"tags":[]},
+    {"id":"0g-dev-day","name":"0G Dev Day: ZERO TO INFINITY","url":"https://luma.com/0g-devday-2026","location":"National Gallery Singapore","hosts":["0G Foundation"],"tags":["AI","Crypto","Infrastructure"],"goingCount":1685},
+    {"id":"dealflow-sg","name":"THE DEALFLOW SINGAPORE - INVESTOR BRUNCH","url":"https://luma.com/dealflowsg","location":"Downtown Core","hosts":["UVECON.VC","Joao Raza"],"tags":["Dining","Investing"]},
+    {"id":"rwa-capital-forum","name":"RWA Capital Forum","url":"https://luma.com/ydaq5h18","location":"Downtown Core","hosts":["Raphael | Taisu Ventures"],"tags":["Investing","Tokenization"]},
+    {"id":"blockchain-impact","name":"Blockchain Impact Singapore","url":"https://luma.com/y6nco425","location":"One Marina Boulevard","hosts":["Eric ALEXANDRE","Cecilia Wong"],"tags":["Crypto","Blockchain"],"goingCount":222},
+    {"id":"risky-business","name":"Risky Business - Singapore '26","url":"https://luma.com/dupkf78j","location":"Downtown Core","hosts":["Lu Li"],"tags":["Builders","DeFi"],"goingCount":59},
+    {"id":"grayscale-gfi","name":"Grayscale x Global Fintech Institute: Privacy, Proof and the Regulatory Perimeter","url":"https://luma.com/y362597j","location":"Tanjong Pagar","hosts":["Global Fintech Institute","Grayscale","Hui Yi HO"],"tags":["Regulation","Privacy","Crypto"]},
+    {"id":"grade-alliance","name":"GRADE Alliance: Composable, Compliant, Trusted: What It Actually Takes for a Tokenised Asset to Cross Borders","url":"https://luma.com/fh6aggg8","location":"Central Area","hosts":["Trina Gan","Mark Tang | Hydra X","Hydra X","Hui Ying"],"tags":["Tokenization","Compliance","Cross-border"]},
+    {"id":"roundtable","name":"Roundtable during TOKEN2049 week in Singapore","url":"https://luma.com/oyun7q74","location":"Central Area","hosts":["Anna Gates","Lucas Nicolet-Serra","Jussi AITTOLA"],"tags":["Legal","Regulation","Payments","Web3"]},
+    {"id":"haruko-kalshi","name":"Haruko and Kalshi Present: More than a million","url":"https://luma.com/zsgdwcee","location":"Downtown Core","hosts":["Adrian Rymill","Daniel Holmes","Elyse Quek","Andy Ross"],"tags":["Markets","Networking","Crypto"]},
+    {"id":"nodexx-pool","name":"SPLASH! NODEXX PRIVATE POOL PARTY","url":"https://luma.com/qlijhogl","location":"Bukit Timah","hosts":["NodeXX"],"tags":["Investing","Parties","Tokenization"]},
+    {"id":"afterdark","name":"The Best Event: AFTERDARK","url":"https://luma.com/tbe-afterdark","location":"Singapore","hosts":["Tobias Bauer","Brent Fulfer","Mihir Odhrani"],"tags":["Parties"],"goingCount":1784},
+    {"id":"fastx-yacht","name":"FastX Yacht Party","url":"https://luma.com/3uhh0ixb","location":"Southern Islands","hosts":["FastX Exchange"],"tags":["Crypto","Networking"]},
+    {"id":"bullish-bitgo","name":"Bullish & BitGo VIP Reception","url":"https://luma.com/mt2t442r","location":"Downtown Core","hosts":["Bullish Events","BitGo Events"],"tags":["Digital assets","Institutional"]},
+    {"id":"0g-vip","name":"0G Dev Day VIP Reception Dinner","url":"https://luma.com/0g-VIP-reception","location":"Central Area","hosts":["0G Foundation"],"tags":["AI","Crypto","Networking"]},
+    {"id":"skyline-social","name":"Skyline Social Singapore","url":"https://luma.com/q22mvxx7","location":"Downtown Core","hosts":["Raphael | Taisu Ventures"],"tags":["Dining","Parties"]},
+    {"id":"makebanc-vip","name":"Allocators | Managers | Providers | VIP Drinks (invite only)","url":"https://luma.com/a7awb2po","location":"Outram","hosts":["Chris Mihos | MakeBanc","Alex Zonneveld | MakeBanc"],"tags":["Allocators","Asset management","Infrastructure"]},
+    {"id":"run-the-bay","name":"Run the Bay: Crypto Whales Edition 🐳🏃🇸🇬","url":"https://luma.com/cja6d4ku","location":"Downtown Core","hosts":["A36 Labs"],"tags":["Builders","Dining","Sports"],"goingCount":3},
+    {"id":"utila-run","name":"Utila Run Club: TOKEN2049","url":"https://luma.com/utila-run-club","location":"Marina South","hosts":["Utila .io","Paz"],"tags":["Sports"]}
+  ]
+}
