@@ -32,6 +32,15 @@ function locationLabel(record: AnalyticsOrganization | AnalyticsParticipant) {
   return record.profileLocation?.display ?? 'Unknown / not yet verified';
 }
 
+function cityLabel(record: AnalyticsOrganization | AnalyticsParticipant) {
+  const location = record.profileLocation;
+  if (!location) return null;
+  const city = location.city?.trim() || location.display.trim();
+  if (!city) return null;
+  if (location.country && location.country.trim().toLowerCase() !== city.toLowerCase()) return `${city}, ${location.country}`;
+  return city;
+}
+
 function sourceLabel(type?: string) {
   if (!type) return '';
   return type.replaceAll('-', ' ');
@@ -62,17 +71,17 @@ export default function AnalyticsDashboard() {
 
   const locationOptions = useMemo(() => {
     const source = tab === 'organizations' ? organizations : participants;
-    return [...new Set(source.map((record) => record.profileLocation?.display).filter(Boolean) as string[])].sort();
+    return [...new Set(source.map((record) => cityLabel(record)).filter(Boolean) as string[])].sort();
   }, [tab]);
 
   const filteredOrganizations = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return organizations
       .filter((org) => {
-        const searchable = [org.name, ...org.services, org.profileLocation?.display, ...org.eventPresence].filter(Boolean).join(' ').toLowerCase();
+        const searchable = [org.name, ...org.services, org.profileLocation?.display, org.profileLocation?.city, org.profileLocation?.country, ...org.eventPresence].filter(Boolean).join(' ').toLowerCase();
         return (!needle || searchable.includes(needle))
           && (dimensionFilter === 'all' || org.services.includes(dimensionFilter))
-          && (locationFilter === 'all' || org.profileLocation?.display === locationFilter)
+          && (locationFilter === 'all' || cityLabel(org) === locationFilter)
           && (!verifiedOnly || Boolean(org.profileLocation));
       })
       .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
@@ -82,10 +91,10 @@ export default function AnalyticsDashboard() {
     const needle = query.trim().toLowerCase();
     return participants
       .filter((person) => {
-        const searchable = [person.name, person.role, person.company, person.profileLocation?.display, ...person.specialty].filter(Boolean).join(' ').toLowerCase();
+        const searchable = [person.name, person.role, person.company, person.profileLocation?.display, person.profileLocation?.city, person.profileLocation?.country, ...person.specialty].filter(Boolean).join(' ').toLowerCase();
         return (!needle || searchable.includes(needle))
           && (dimensionFilter === 'all' || person.specialty.includes(dimensionFilter))
-          && (locationFilter === 'all' || person.profileLocation?.display === locationFilter)
+          && (locationFilter === 'all' || cityLabel(person) === locationFilter)
           && (!verifiedOnly || Boolean(person.profileLocation));
       })
       .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
@@ -124,30 +133,62 @@ export default function AnalyticsDashboard() {
     : distribution(filteredParticipants.flatMap((person) => person.specialty)),
   [filteredOrganizations, filteredParticipants, tab]);
 
-  const locationDistribution = useMemo(() => distribution(records.map((record) => record.profileLocation?.display).filter(Boolean) as string[]), [records]);
+  const locationDistribution = useMemo(() => distribution(records.map((record) => cityLabel(record)).filter(Boolean) as string[]), [records]);
 
   const geoPoints = useMemo(() => {
-    const buckets = new Map<string, { lat: number; lng: number; count: number; names: string[]; sourceUrl?: string; sourceType?: string }>();
+    const buckets = new Map<string, {
+      city: string;
+      country?: string;
+      latTotal: number;
+      lngTotal: number;
+      count: number;
+      names: string[];
+      sourceUrl?: string;
+      sourceType?: string;
+    }>();
+
     records.forEach((record) => {
       const loc = record.profileLocation;
       if (!loc) return;
-      const key = `${loc.display}|${loc.lat}|${loc.lng}`;
-      const current = buckets.get(key) ?? { lat: loc.lat, lng: loc.lng, count: 0, names: [], sourceUrl: loc.sourceUrl, sourceType: loc.sourceType };
+      const city = loc.city?.trim() || loc.display.trim();
+      if (!city) return;
+      const country = loc.country?.trim() || undefined;
+      const key = `${city.toLowerCase()}|${(country ?? '').toLowerCase()}`;
+      const current = buckets.get(key) ?? {
+        city,
+        country,
+        latTotal: 0,
+        lngTotal: 0,
+        count: 0,
+        names: [],
+        sourceUrl: loc.sourceUrl,
+        sourceType: loc.sourceType,
+      };
+      current.latTotal += loc.lat;
+      current.lngTotal += loc.lng;
       current.count += 1;
-      if (current.names.length < 6) current.names.push(record.name);
+      if (current.names.length < 8) current.names.push(record.name);
       buckets.set(key, current);
     });
-    return [...buckets.entries()].map(([key, value]) => ({
-      id: key,
-      label: key.split('|')[0],
-      location: key.split('|')[0],
-      lat: value.lat,
-      lng: value.lng,
-      count: value.count,
-      detail: value.names.join(', '),
-      sourceUrl: value.sourceUrl,
-      sourceType: value.sourceType,
-    }));
+
+    return [...buckets.entries()].map(([key, value]) => {
+      const label = value.country && value.country.toLowerCase() !== value.city.toLowerCase()
+        ? `${value.city}, ${value.country}`
+        : value.city;
+      return {
+        id: key,
+        label,
+        location: label,
+        city: value.city,
+        country: value.country,
+        lat: value.latTotal / value.count,
+        lng: value.lngTotal / value.count,
+        count: value.count,
+        detail: value.names.join(', '),
+        sourceUrl: value.sourceUrl,
+        sourceType: value.sourceType,
+      };
+    }).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
   }, [records]);
 
   const verifiedLocationCount = records.filter((record) => Boolean(record.profileLocation)).length;
@@ -202,7 +243,7 @@ export default function AnalyticsDashboard() {
       <div className="mt-6 grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-4">
         <label className="text-sm font-medium text-slate-700">Search<div className="relative mt-2"><Search className="absolute left-3 top-3 text-slate-400" size={16} /><input value={query} onChange={(event) => { setQuery(event.target.value); resetDirectoryNavigation(); }} placeholder={tab === 'organizations' ? 'Company, service…' : 'Name, title, company…'} className="w-full rounded-xl border border-slate-200 py-2.5 pl-9 pr-3 text-sm outline-none focus:border-blue-400" /></div></label>
         <label className="text-sm font-medium text-slate-700">{tab === 'organizations' ? 'Service' : 'Specialty'}<select value={dimensionFilter} onChange={(event) => { setDimensionFilter(event.target.value); resetDirectoryNavigation(); }} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm"><option value="all">All</option>{dimensionOptions.map((value) => <option key={value}>{value}</option>)}</select></label>
-        <label className="text-sm font-medium text-slate-700">Verified profile location<select value={locationFilter} onChange={(event) => { setLocationFilter(event.target.value); resetDirectoryNavigation(); }} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm"><option value="all">All verified locations</option>{locationOptions.map((value) => <option key={value}>{value}</option>)}</select></label>
+        <label className="text-sm font-medium text-slate-700">Verified profile city<select value={locationFilter} onChange={(event) => { setLocationFilter(event.target.value); resetDirectoryNavigation(); }} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm"><option value="all">All verified cities</option>{locationOptions.map((value) => <option key={value}>{value}</option>)}</select></label>
         <label className="flex items-end"><button type="button" onClick={() => { setVerifiedOnly((value) => !value); resetDirectoryNavigation(); }} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-semibold ${verifiedOnly ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-700'}`}>{verifiedOnly ? 'Verified only' : 'Include unknown location'}</button></label>
       </div>
 
@@ -210,7 +251,7 @@ export default function AnalyticsDashboard() {
         <AnalyticsGeoMap points={geoPoints} />
         <div className="grid gap-6">
           <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><div className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Top {tab === 'organizations' ? 'services' : 'specialties'}</div><div className="mt-4 space-y-3">{dimensionDistribution.slice(0, 8).map(([label, count]) => <div key={label}><div className="flex items-center justify-between gap-3 text-xs"><span className="truncate font-medium text-slate-700">{label}</span><span>{count}</span></div><div className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-blue-500" style={{ width: `${count / topDimensionMax * 100}%` }} /></div></div>)}</div></div>
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><div className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Verified profile geography</div><div className="mt-4 space-y-3">{locationDistribution.length === 0 && <div className="text-sm text-slate-500">No verified profile locations have been loaded yet.</div>}{locationDistribution.slice(0, 8).map(([label, count]) => <div key={label}><div className="flex items-center justify-between gap-3 text-xs"><span className="truncate font-medium text-slate-700">{label}</span><span>{count}</span></div><div className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-slate-900" style={{ width: `${count / topLocationMax * 100}%` }} /></div></div>)}</div></div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><div className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Verified profile cities</div><div className="mt-4 space-y-3">{locationDistribution.length === 0 && <div className="text-sm text-slate-500">No verified profile cities have been loaded yet.</div>}{locationDistribution.slice(0, 8).map(([label, count]) => <div key={label}><div className="flex items-center justify-between gap-3 text-xs"><span className="truncate font-medium text-slate-700">{label}</span><span>{count}</span></div><div className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-slate-900" style={{ width: `${count / topLocationMax * 100}%` }} /></div></div>)}</div></div>
         </div>
       </div>
 
