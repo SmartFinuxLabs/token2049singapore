@@ -91,8 +91,8 @@ export default function HomePage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">Connextium · Singapore 2026</p>
-              <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary, optimized for capital, partners and financial infrastructure.</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Each day is shown as a vertical time schedule. Events are positioned against their actual time range; overlapping sessions stack side-by-side and remain clickable for full details.</p>
+              <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
+              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
             </div>
             <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
               <Share2 size={17} /> Share itinerary
