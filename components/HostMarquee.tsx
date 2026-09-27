@@ -100,10 +100,7 @@ export default function HostMarquee() {
   return (
     <section className="w-full overflow-hidden border-b border-slate-200 bg-white py-6 sm:py-8" aria-label="Network and organizations from approved Luma events">
       <div className="mb-4 flex items-end justify-between gap-4 px-5 sm:px-8">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Network &amp; Organization</p>
-          <p className="mt-1 text-xs text-slate-400">Hosts across {approvedEvents.length} approved Luma events</p>
-        </div>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Network &amp; Organization</p>
         <span className="text-xs text-slate-400">{networkHosts.length} hosts</span>
       </div>
       <div className="host-marquee overflow-hidden">
