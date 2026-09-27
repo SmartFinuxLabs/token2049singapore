@@ -6,7 +6,7 @@ import { DndContext, PointerSensor, useSensor, useSensors, closestCenter, type D
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { CalendarDays, ExternalLink, Eye, EyeOff, GripVertical, MapPin, MessageCircle, Route, Share2 } from 'lucide-react';
-import { events, priorityLabels, type EventItem, type Priority } from '@/lib/events';
+import { events, priorityLabels, lumaStatusLabels, type EventItem, type Priority } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
 
 const RouteMap = dynamic(() => import('@/components/RouteMap'), { ssr: false });
@@ -23,6 +23,14 @@ function EventCard({ event }: { event: EventItem }) {
   const priority = priorities[event.id] ?? event.priority;
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: event.id });
 
+  const attendanceStyle = event.lumaStatus === 'approved'
+    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    : event.lumaStatus === 'pending_approval'
+      ? 'bg-amber-50 text-amber-700 border-amber-200'
+      : event.lumaStatus === 'waitlist'
+        ? 'bg-violet-50 text-violet-700 border-violet-200'
+        : 'bg-slate-50 text-slate-600 border-slate-200';
+
   return (
     <article
       ref={setNodeRef}
@@ -38,6 +46,11 @@ function EventCard({ event }: { event: EventItem }) {
             <span className={`rounded-full px-3 py-1 text-xs font-semibold ${priority === 'primary' ? 'bg-slate-950 text-white' : priority === 'secondary' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>
               {priorityLabels[priority]}
             </span>
+            {event.lumaStatus && (
+              <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${attendanceStyle}`}>
+                Luma · {lumaStatusLabels[event.lumaStatus]}
+              </span>
+            )}
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">{event.status}</span>
           </div>
           <h3 className="text-xl font-semibold tracking-tight text-slate-950">{event.title}</h3>
@@ -143,7 +156,7 @@ export default function HomePage() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">Connextium · Singapore 2026</p>
               <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary, optimized for capital, partners and financial infrastructure.</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Switch overlapping events between Primary, Secondary and 3rd option, hide low-value sessions, drag to reorder, check Luma instantly, and keep the plan usable on mobile.</p>
+              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Switch overlapping events between Primary, Secondary and 3rd option, hide low-value sessions, drag to reorder, and see your connected Luma registration status directly on each event.</p>
             </div>
             <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
               <Share2 size={17} /> Share itinerary
@@ -152,10 +165,10 @@ export default function HomePage() {
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              ['Oct 6–9', 'Core itinerary'],
+              ['Oct 5–9', 'Core itinerary'],
               [`${events.length}`, 'Tracked events'],
-              [`${events.filter((e) => e.priority === 'primary').length}`, 'Primary defaults'],
-              [`${hidden.length}`, 'Hidden by you'],
+              [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
+              [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
             ].map(([value, label]) => (
               <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <div className="text-xl font-semibold text-slate-950">{value}</div>
@@ -170,7 +183,7 @@ export default function HomePage() {
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">Dynamic agenda</h2>
-            <p className="mt-1 text-sm text-slate-500">Drag cards to reorder your working plan. Preference changes persist in this browser.</p>
+            <p className="mt-1 text-sm text-slate-500">Luma status was synced from your connected account. Drag cards to reorder your working plan; preference changes persist in this browser.</p>
           </div>
           <button onClick={() => setShowHidden((x) => !x)} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium shadow-sm">
             {showHidden ? <EyeOff size={16} /> : <Eye size={16} />} {showHidden ? 'Hide excluded events' : 'Show excluded events'}
@@ -209,7 +222,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; curated institutional session &gt; passive networking. Verify final venue and approval status in Luma before departure.</p>
+            <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; curated institutional session &gt; passive networking. Re-check Luma before departure because approval status and venue details can change.</p>
           </div>
           <RouteMap />
         </div>
@@ -241,7 +254,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500 sm:px-8">Connextium · TOKEN2049 Singapore 2026 · Event details can change. Re-check Luma / organizer pages before travel.</div>
+        <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500 sm:px-8">Connextium · TOKEN2049 Singapore 2026 · Luma status is a snapshot from the connected account and may change.</div>
       </footer>
     </main>
   );
