@@ -5,13 +5,14 @@ import { useMemo, useState } from 'react';
 import { DndContext, PointerSensor, useSensor, useSensors, closestCenter, type DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { CalendarDays, ExternalLink, Eye, EyeOff, GripVertical, MapPin, MessageCircle, Route, Share2 } from 'lucide-react';
-import { events, priorityLabels, lumaStatusLabels, type EventItem, type Priority } from '@/lib/events';
+import { CalendarDays, ExternalLink, Eye, EyeOff, Filter, GripVertical, MapPin, MessageCircle, Route, Share2 } from 'lucide-react';
+import { events, priorityLabels, lumaStatusLabels, type EventItem, type Priority, type LumaStatus } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
 
 const RouteMap = dynamic(() => import('@/components/RouteMap'), { ssr: false });
-
 const priorityRank: Record<Priority, number> = { primary: 0, secondary: 1, third: 2 };
+
+type StatusFilter = 'all' | LumaStatus;
 
 function prettyDate(value: string) {
   return new Intl.DateTimeFormat('en-SG', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'Asia/Singapore' }).format(new Date(`${value}T12:00:00+08:00`));
@@ -29,7 +30,9 @@ function EventCard({ event }: { event: EventItem }) {
       ? 'bg-amber-50 text-amber-700 border-amber-200'
       : event.lumaStatus === 'waitlist'
         ? 'bg-violet-50 text-violet-700 border-violet-200'
-        : 'bg-slate-50 text-slate-600 border-slate-200';
+        : event.lumaStatus === 'invited'
+          ? 'bg-cyan-50 text-cyan-700 border-cyan-200'
+          : 'bg-slate-50 text-slate-600 border-slate-200';
 
   return (
     <article
@@ -48,11 +51,12 @@ function EventCard({ event }: { event: EventItem }) {
             </span>
             {event.lumaStatus && (
               <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${attendanceStyle}`}>
-                Luma · {lumaStatusLabels[event.lumaStatus]}
+                {event.lumaStatus === 'external' ? 'Access' : 'Luma'} · {lumaStatusLabels[event.lumaStatus]}
               </span>
             )}
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">{event.status}</span>
           </div>
+
           <h3 className="text-xl font-semibold tracking-tight text-slate-950">{event.title}</h3>
           <p className="mt-1 text-sm font-medium text-slate-500">{event.host}</p>
 
@@ -70,12 +74,7 @@ function EventCard({ event }: { event: EventItem }) {
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <select
-              aria-label="Event priority"
-              value={priority}
-              onChange={(e) => setPriority(event.id, e.target.value as Priority)}
-              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium"
-            >
+            <select aria-label="Event priority" value={priority} onChange={(e) => setPriority(event.id, e.target.value as Priority)} className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium">
               <option value="primary">Primary</option>
               <option value="secondary">Secondary</option>
               <option value="third">3rd option</option>
@@ -104,17 +103,23 @@ export default function HomePage() {
   const { hidden, priorities, comments, addComment } = useItineraryStore();
   const [items, setItems] = useState(events.map((e) => e.id));
   const [showHidden, setShowHidden] = useState(false);
+  const [dayFilter, setDayFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
+
+  const availableDays = useMemo(() => [...new Set(events.map((e) => e.date))].sort(), []);
 
   const orderedEvents = useMemo(() => {
     const byId = new Map(events.map((e) => [e.id, e]));
     return items
       .map((id) => byId.get(id))
       .filter((e): e is EventItem => Boolean(e))
-      .filter((e) => showHidden || !hidden.includes(e.id));
-  }, [items, hidden, showHidden]);
+      .filter((e) => showHidden || !hidden.includes(e.id))
+      .filter((e) => dayFilter === 'all' || e.date === dayFilter)
+      .filter((e) => statusFilter === 'all' || e.lumaStatus === statusFilter);
+  }, [items, hidden, showHidden, dayFilter, statusFilter]);
 
   const days = useMemo(() => {
     const grouped = new Map<string, EventItem[]>();
@@ -129,7 +134,8 @@ export default function HomePage() {
     return events
       .filter((e) => !hidden.includes(e.id))
       .map((e) => ({ ...e, effectivePriority: priorities[e.id] ?? e.priority }))
-      .sort((a, b) => a.date.localeCompare(b.date) || priorityRank[a.effectivePriority] - priorityRank[b.effectivePriority] || a.start.localeCompare(b.start));
+      .filter((e) => e.effectivePriority === 'primary')
+      .sort((a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
   }, [hidden, priorities]);
 
   function onDragEnd(evt: DragEndEvent) {
@@ -156,7 +162,7 @@ export default function HomePage() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">Connextium · Singapore 2026</p>
               <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary, optimized for capital, partners and financial infrastructure.</h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Switch overlapping events between Primary, Secondary and 3rd option, hide low-value sessions, drag to reorder, and see your connected Luma registration status directly on each event.</p>
+              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">Your connected Luma registrations are included from Sunday, October 4 through October 10. Filter by day or registration status, then use Primary / Secondary / 3rd option to resolve overlaps.</p>
             </div>
             <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
               <Share2 size={17} /> Share itinerary
@@ -165,7 +171,7 @@ export default function HomePage() {
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              ['Oct 5–9', 'Core itinerary'],
+              ['Oct 4–10', 'Planning window'],
               [`${events.length}`, 'Tracked events'],
               [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
               [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
@@ -180,19 +186,47 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Dynamic agenda</h2>
-            <p className="mt-1 text-sm text-slate-500">Luma status was synced from your connected account. Drag cards to reorder your working plan; preference changes persist in this browser.</p>
+        <div className="mb-6 flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-slate-500"><Filter size={16} /> Filters</div>
+          <div className="grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+            <label className="text-sm font-medium text-slate-700">
+              Day
+              <select value={dayFilter} onChange={(e) => setDayFilter(e.target.value)} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm">
+                <option value="all">All days · Oct 4–10</option>
+                {availableDays.map((date) => <option key={date} value={date}>{prettyDate(date)}</option>)}
+              </select>
+            </label>
+            <label className="text-sm font-medium text-slate-700">
+              Status
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm">
+                <option value="all">All statuses</option>
+                <option value="approved">You're in</option>
+                <option value="pending_approval">Pending approval</option>
+                <option value="waitlist">Waitlist</option>
+                <option value="invited">Invited</option>
+                <option value="not_found">Not in Luma</option>
+                <option value="external">External pass</option>
+              </select>
+            </label>
+            <div className="flex items-end gap-2">
+              <button onClick={() => { setDayFilter('all'); setStatusFilter('all'); }} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium hover:bg-slate-50">Reset</button>
+              <button onClick={() => setShowHidden((x) => !x)} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium hover:bg-slate-50">
+                {showHidden ? <EyeOff size={16} /> : <Eye size={16} />} {showHidden ? 'Hide excluded' : 'Show excluded'}
+              </button>
+            </div>
           </div>
-          <button onClick={() => setShowHidden((x) => !x)} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium shadow-sm">
-            {showHidden ? <EyeOff size={16} /> : <Eye size={16} />} {showHidden ? 'Hide excluded events' : 'Show excluded events'}
-          </button>
+          <div className="text-sm text-slate-500">Showing {orderedEvents.length} of {events.length} tracked events.</div>
+        </div>
+
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold tracking-tight">Dynamic agenda</h2>
+          <p className="mt-1 text-sm text-slate-500">Drag cards to reorder. Luma status reflects your connected account at the latest sync; local hide and priority preferences remain browser-specific.</p>
         </div>
 
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={orderedEvents.map((e) => e.id)} strategy={verticalListSortingStrategy}>
             <div className="space-y-10">
+              {days.length === 0 && <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">No events match the current filters.</div>}
               {days.map(([date, dayEvents]) => (
                 <section key={date}>
                   <div className="sticky top-0 z-10 mb-4 border-y border-slate-200 bg-[#f7f8fb]/95 py-3 backdrop-blur">
@@ -212,17 +246,17 @@ export default function HomePage() {
             <div className="flex items-center gap-2 text-blue-600"><Route size={20} /><span className="text-sm font-semibold uppercase tracking-[0.15em]">Suggested route</span></div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Minimize travel; maximize confirmed conversations.</h2>
             <div className="mt-6 space-y-3">
-              {suggested.filter((e) => e.effectivePriority === 'primary').slice(0, 8).map((event, index) => (
+              {suggested.slice(0, 12).map((event, index) => (
                 <div key={event.id} className="flex gap-3 rounded-2xl bg-slate-50 p-4">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-semibold text-white">{index + 1}</div>
                   <div>
                     <div className="font-semibold">{prettyDate(event.date)} · {event.start} · {event.title}</div>
-                    <div className="mt-1 text-sm text-slate-500">{event.location}</div>
+                    <div className="mt-1 text-sm text-slate-500">{event.location} · {lumaStatusLabels[event.lumaStatus ?? 'external']}</div>
                   </div>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; curated institutional session &gt; passive networking. Re-check Luma before departure because approval status and venue details can change.</p>
+            <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; approved curated institutional session &gt; passive networking. Re-check Luma before departure because status and venue details can change.</p>
           </div>
           <RouteMap />
         </div>
@@ -233,7 +267,7 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-blue-600"><MessageCircle size={20} /><span className="text-sm font-semibold uppercase tracking-[0.15em]">Comments</span></div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Working notes and social feedback.</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-500">No database is used. Comments are stored only in the current browser/device, so they are suitable for personal planning but not shared persistence.</p>
+            <p className="mt-3 text-sm leading-6 text-slate-500">No database is used. Comments are stored only in the current browser/device.</p>
             <form className="mt-6 space-y-3" onSubmit={(e) => { e.preventDefault(); if (!comment.trim()) return; addComment(name.trim() || 'Guest', comment.trim()); setComment(''); }}>
               <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-slate-400" />
               <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a note or comment..." rows={4} className="w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-slate-400" />
@@ -254,7 +288,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500 sm:px-8">Connextium · TOKEN2049 Singapore 2026 · Luma status is a snapshot from the connected account and may change.</div>
+        <div className="mx-auto max-w-6xl px-5 py-8 text-sm text-slate-500 sm:px-8">Connextium · TOKEN2049 Singapore 2026 · Luma registration data synced for Oct 4–10. Event details can change; re-check the Luma or source page before travel.</div>
       </footer>
     </main>
   );
