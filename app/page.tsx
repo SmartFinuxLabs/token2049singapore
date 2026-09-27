@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 import { Eye, EyeOff, Filter, MessageCircle, Route, Share2 } from 'lucide-react';
 import EventStatusChart from '@/components/EventStatusChart';
+import HostMarquee from '@/components/HostMarquee';
 import TimelineDay from '@/components/TimelineDay';
 import { events, lumaStatusLabels, type EventItem, type LumaStatus } from '@/lib/events';
 import { useItineraryStore } from '@/lib/store';
@@ -154,6 +155,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <HostMarquee />
 
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
         <div className="mb-6 flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
