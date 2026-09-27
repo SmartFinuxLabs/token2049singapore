@@ -19,11 +19,17 @@ function prettyDate(value: string) {
   }).format(new Date(`${value}T12:00:00+08:00`));
 }
 
+function googleMapsUrl(event: EventItem) {
+  const query = event.address || `${event.location}, Singapore`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${event.title}, ${query}`)}`;
+}
+
 export default function HomePage() {
   const { hidden, priorities, comments, addComment } = useItineraryStore();
   const [showHidden, setShowHidden] = useState(false);
   const [dayFilter, setDayFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [activeRouteEventId, setActiveRouteEventId] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
 
@@ -143,20 +149,35 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-blue-600"><Route size={20} /><span className="text-sm font-semibold uppercase tracking-[0.15em]">Suggested route</span></div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Minimize travel; maximize confirmed conversations.</h2>
-            <div className="mt-6 space-y-3">
-              {suggested.slice(0, 12).map((event, index) => (
-                <div key={event.id} className="flex gap-3 rounded-2xl bg-slate-50 p-4">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-semibold text-white">{index + 1}</div>
-                  <div>
-                    <div className="font-semibold">{prettyDate(event.date)} · {event.start} · {event.title}</div>
-                    <div className="mt-1 text-sm text-slate-500">{event.location} · {lumaStatusLabels[event.lumaStatus ?? 'external']}</div>
-                  </div>
-                </div>
-              ))}
+            <p className="mt-2 text-sm leading-6 text-slate-500">All primary itinerary items are plotted on the map. Hover a route item to highlight its map point. Click an item to open its venue directly in Google Maps.</p>
+            <div className="mt-6 max-h-[520px] space-y-3 overflow-y-auto pr-1">
+              {suggested.map((event, index) => {
+                const active = activeRouteEventId === event.id;
+                return (
+                  <a
+                    key={event.id}
+                    href={googleMapsUrl(event)}
+                    target="_blank"
+                    rel="noreferrer"
+                    onMouseEnter={() => setActiveRouteEventId(event.id)}
+                    onMouseLeave={() => setActiveRouteEventId(null)}
+                    onFocus={() => setActiveRouteEventId(event.id)}
+                    onBlur={() => setActiveRouteEventId(null)}
+                    className={`group flex gap-3 rounded-2xl border p-4 transition ${active ? 'border-blue-300 bg-blue-50 shadow-sm' : 'border-transparent bg-slate-50 hover:border-blue-200 hover:bg-blue-50/60'}`}
+                  >
+                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white transition ${active ? 'bg-blue-600 scale-110' : 'bg-slate-950'}`}>{index + 1}</div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-slate-950">{prettyDate(event.date)} · {event.start} · {event.title}</div>
+                      <div className="mt-1 text-sm text-slate-500">{event.location} · {lumaStatusLabels[event.lumaStatus ?? 'external']}</div>
+                      {event.address && <div className="mt-1 truncate text-xs text-slate-400">{event.address}</div>}
+                    </div>
+                  </a>
+                );
+              })}
             </div>
             <p className="mt-5 text-sm leading-6 text-slate-500">Routing rule: confirmed pitch/demo slot &gt; confirmed investor meeting &gt; approved curated institutional session &gt; passive networking. Re-check Luma before departure because status and venue details can change.</p>
           </div>
-          <RouteMap />
+          <RouteMap events={suggested} activeEventId={activeRouteEventId} />
         </div>
       </section>
 
