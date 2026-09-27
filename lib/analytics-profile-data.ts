@@ -1,11 +1,11 @@
 import participantJson from '@/data/participants.json';
 import organizationJson from '@/data/organizations.json';
+import lumaPublicCalendarJson from '@/data/luma-public-calendar.json';
 import {
   organizations as legacyOrganizations,
   participants as legacyParticipants,
-  publicCalendarEvents,
-  analyticsSnapshot,
   type MediaLinks,
+  type PublicCalendarEvent,
 } from '@/lib/token2049-public-data';
 
 export type SourceType = 'luma' | 'linkedin' | 'official-website' | 'x' | 'telegram' | 'other';
@@ -159,4 +159,11 @@ export const participants: AnalyticsParticipant[] = (() => {
   return [...byKey.values()];
 })();
 
-export { publicCalendarEvents, analyticsSnapshot };
+export const publicCalendarEvents = (lumaPublicCalendarJson.records ?? []) as PublicCalendarEvent[];
+
+export const analyticsSnapshot = {
+  calendarName: lumaPublicCalendarJson.calendarName,
+  calendarUrl: lumaPublicCalendarJson.calendarUrl,
+  capturedAt: lumaPublicCalendarJson.fetchedAt,
+  coverage: 'Refreshed from the public TOKEN2049 Singapore Luma calendar. The connected Luma API does not provide manage access to this calendar, so private registration data is not included. Approved attendees may see guest lists in the Luma UI when the event host enables them.',
+};
