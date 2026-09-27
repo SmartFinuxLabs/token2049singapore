@@ -31,7 +31,7 @@ button, a, input, textarea, select {
   display: flex;
   width: max-content;
   gap: 1rem;
-  animation: host-marquee-scroll 58s linear infinite;
+  animation: host-marquee-scroll 90s linear infinite;
   will-change: transform;
 }
 
