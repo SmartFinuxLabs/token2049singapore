@@ -12,7 +12,7 @@ export default function DashboardNav() {
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
         <Link href="/" className="min-w-0">
-          <div className="truncate text-sm font-semibold text-slate-950">Connextium · Agentics Foundation · TOKEN2049 Singapore</div>
+          <div className="truncate text-sm font-semibold text-slate-950">Connextium · AGENTICS FOUNDATION · TOKEN2049 Singapore</div>
           <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-slate-400">Event intelligence dashboard</div>
         </Link>
         <nav className="flex rounded-xl bg-slate-100 p-1" aria-label="Dashboard views">
