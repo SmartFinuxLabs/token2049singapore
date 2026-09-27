@@ -24,7 +24,7 @@ export const useItineraryStore = create<ItineraryState>()(
       hidden: [],
       priorities: {},
       comments: [],
-      statusFilter: 'all',
+      statusFilter: 'approved',
       toggleHidden: (id) => set((state) => ({
         hidden: state.hidden.includes(id) ? state.hidden.filter((x) => x !== id) : [...state.hidden, id],
       })),
@@ -34,6 +34,13 @@ export const useItineraryStore = create<ItineraryState>()(
         comments: [{ id: crypto.randomUUID(), name, text, createdAt: new Date().toISOString() }, ...state.comments],
       })),
     }),
-    { name: 'token2049-singapore-itinerary' }
+    {
+      name: 'token2049-singapore-itinerary',
+      version: 2,
+      migrate: (persistedState) => ({
+        ...(persistedState as Partial<ItineraryState>),
+        statusFilter: 'approved',
+      }),
+    }
   )
 );
