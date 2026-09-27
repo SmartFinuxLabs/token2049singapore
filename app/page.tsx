@@ -87,6 +87,30 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="relative isolate min-h-[820px] overflow-hidden border-b border-slate-200 bg-slate-100 sm:min-h-[860px] md:min-h-[800px] lg:min-h-[840px]">
+        <header className="absolute inset-x-0 top-0 z-20 border-b border-white/45 bg-white/38 backdrop-blur-md">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:px-8">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">Connextium · Singapore 2026</div>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://luma.com/user/Terence_Hej"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center rounded-full border border-white/80 bg-white/78 px-3 py-2 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+              >
+                Luma · Terence_Hej
+              </a>
+              <a
+                href="https://x.com/XYZconnextium"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center rounded-full border border-white/80 bg-white/78 px-3 py-2 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
+              >
+                X · @XYZconnextium
+              </a>
+            </div>
+          </div>
+        </header>
+
         <div
           className="absolute inset-0 -z-20 bg-[url('/happy-hour-infinite-hero.svg')] md:hidden"
           style={{
@@ -110,27 +134,9 @@ export default function HomePage() {
                 <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">TOKEN2049 itinerary</h1>
                 <p className="mt-5 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Optimized for capital, partners and financial infrastructure.</p>
               </div>
-              <div className="flex w-fit flex-wrap items-center gap-2">
-                <a
-                  href="https://luma.com/user/Terence_Hej"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center rounded-2xl border border-slate-300 bg-white/85 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
-                >
-                  Luma · Terence_Hej
-                </a>
-                <a
-                  href="https://x.com/XYZconnextium"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center rounded-2xl border border-slate-300 bg-white/85 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur hover:bg-white"
-                >
-                  X · @XYZconnextium
-                </a>
-                <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
-                  <Share2 size={17} /> Share itinerary
-                </button>
-              </div>
+              <button onClick={share} className="inline-flex w-fit items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-card hover:bg-blue-500">
+                <Share2 size={17} /> Share itinerary
+              </button>
             </div>
 
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
