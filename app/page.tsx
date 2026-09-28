@@ -144,7 +144,7 @@ export default function HomePage() {
                 ['Oct 4–10', 'Planning window'],
                 [`${events.length}`, 'Tracked events'],
                 [`${events.filter((e) => e.lumaStatus === 'approved').length}`, "You're in"],
-                [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending approval'],
+                [`${events.filter((e) => e.lumaStatus === 'pending_approval').length}`, 'Pending'],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-2xl border border-white/90 bg-white/82 p-4 shadow-sm backdrop-blur-sm">
                   <div className="text-xl font-semibold text-slate-950">{value}</div>
@@ -174,7 +174,7 @@ export default function HomePage() {
               <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm">
                 <option value="all">All statuses</option>
                 <option value="approved">You're in</option>
-                <option value="pending_approval">Pending approval</option>
+                <option value="pending_approval">Pending</option>
                 <option value="waitlist">Waitlist</option>
                 <option value="invited">Invited</option>
                 <option value="not_found">Not in Luma</option>
