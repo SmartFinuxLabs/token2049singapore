@@ -75,8 +75,8 @@ function tagsFor(title: string, priority: Priority): string[] {
 function routeHintFor(status: LumaStatus, priority: Priority): string {
   if (status === 'approved' && priority === 'primary') return "You're in. Treat this as an anchor event; leave only for a confirmed investor, partner, or pitch meeting with higher value.";
   if (status === 'approved') return "You're in. Keep this available as a confirmed option and use it to fill gaps around higher-priority meetings.";
-  if (status === 'pending_approval' && priority === 'primary') return 'Pending approval. Keep this slot protected until the organizer responds; promote immediately when approved.';
-  if (status === 'pending_approval') return 'Pending approval. Keep as a flexible alternative until access is confirmed.';
+  if (status === 'pending_approval' && priority === 'primary') return 'Pending. Keep this slot protected until the organizer responds; promote immediately when approved.';
+  if (status === 'pending_approval') return 'Pending. Keep as a flexible alternative until access is confirmed.';
   if (status === 'waitlist') return 'Waitlisted. Do not route around this event unless Luma confirms a place.';
   if (status === 'invited') return 'Invited on Luma. Confirm attendance before routing around this event.';
   if (status === 'external') return 'Access is managed outside Luma. Verify the official pass or registration before departure.';
@@ -221,7 +221,7 @@ export const priorityLabels: Record<Priority, string> = {
 
 export const lumaStatusLabels: Record<LumaStatus, string> = {
   approved: "You're in",
-  pending_approval: 'Pending approval',
+  pending_approval: 'Pending',
   waitlist: 'Waitlist',
   invited: 'Invited',
   not_found: 'Not in Luma',
