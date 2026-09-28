@@ -1,6 +1,8 @@
 import participantJson from '@/data/participants.json';
 import organizationJson from '@/data/organizations.json';
 import lumaPublicCalendarJson from '@/data/luma-public-calendar.json';
+import { lumaEvents, type RawLumaEvent } from '@/lib/luma-events';
+import { latestLumaEvents } from '@/lib/luma-latest';
 import {
   organizations as legacyOrganizations,
   participants as legacyParticipants,
@@ -63,6 +65,7 @@ type LumaCalendarRecord = PublicCalendarEvent & {
   presentedBy?: string[];
   hostedBy?: string[];
   organizations?: string[];
+  registrationStatus?: RawLumaEvent['status'];
 };
 
 type LumaEntityClassification =
@@ -71,7 +74,6 @@ type LumaEntityClassification =
 
 const organizationOverlays = (organizationJson.records ?? []) as OrganizationOverlay[];
 const participantOverlays = (participantJson.records ?? []) as ParticipantOverlay[];
-const lumaCalendarRecords = (lumaPublicCalendarJson.records ?? []) as LumaCalendarRecord[];
 
 function mergeMedia(base: MediaLinks, overlay?: MediaLinks): MediaLinks {
   return { ...base, ...(overlay ?? {}) };
@@ -94,12 +96,75 @@ function entityKey(value: string) {
     .replace(/\s+/g, ' ');
 }
 
+function splitLumaHosts(value: string) {
+  return value
+    .split(/\s+\+\s+|\s+·\s+|\s+<>\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .filter((part) => !/^partners?$/i.test(part));
+}
+
 function looksLikeOrganization(value: string) {
   const v = entityKey(value);
   return /(^| )(association|alliance|capital|ventures?|labs?|foundation|institute|group|network|protocol|exchange|events?|calendar|forum|collective|partners?|cloud|finance|financial|payments?|bank|wallet|markets?|systems?|technologies|community|blockchain|web3|dao|week|summit|studio|fund|vc|io)( |$)/i.test(v)
     || /\b(inc|ltd|llc|plc)\b/i.test(v)
     || /\.(io|vc)$/i.test(value.trim());
 }
+
+function itineraryEventToAnalyticsRecord(event: RawLumaEvent): LumaCalendarRecord {
+  const hosts = splitLumaHosts(event.host);
+  return {
+    id: event.id,
+    name: event.title,
+    url: event.url,
+    location: event.location,
+    hosts,
+    tags: [],
+    presentedBy: [],
+    hostedBy: hosts,
+    // The itinerary's Luma host field is normalized to organizations/co-host labels.
+    // Keeping these explicit means approved/pending/waitlisted events can contribute
+    // organizations to ecosystem analytics even when they are absent from the public calendar snapshot.
+    organizations: hosts,
+    registrationStatus: event.status,
+  };
+}
+
+const mergedTrackedLumaEvents = (() => {
+  const byId = new Map<string, RawLumaEvent>();
+  lumaEvents.forEach((event) => byId.set(event.id, event));
+  latestLumaEvents.forEach((event) => byId.set(event.id, event));
+  return [...byId.values()].filter((event) => /^https?:\/\/(?:www\.)?(?:luma\.com|lu\.ma)\//i.test(event.url));
+})();
+
+const lumaCalendarRecords: LumaCalendarRecord[] = (() => {
+  const byId = new Map<string, LumaCalendarRecord>();
+
+  // First load every tracked Luma itinerary record, including events the user joined,
+  // has pending, waitlisted or invited status for.
+  mergedTrackedLumaEvents
+    .map(itineraryEventToAnalyticsRecord)
+    .forEach((event) => byId.set(event.id, event));
+
+  // Public TOKEN2049 calendar/event-page records are richer (Presented by, Hosted By,
+  // explicit organizations, counts), so they override matching fields while retaining
+  // the itinerary registration status where one exists.
+  ((lumaPublicCalendarJson.records ?? []) as LumaCalendarRecord[]).forEach((event) => {
+    const existing = byId.get(event.id);
+    byId.set(event.id, {
+      ...existing,
+      ...event,
+      registrationStatus: existing?.registrationStatus ?? event.registrationStatus,
+      presentedBy: event.presentedBy?.length ? event.presentedBy : existing?.presentedBy,
+      hostedBy: event.hostedBy?.length ? event.hostedBy : existing?.hostedBy,
+      organizations: event.organizations?.length ? event.organizations : existing?.organizations,
+      hosts: event.hosts?.length ? event.hosts : existing?.hosts ?? [],
+      tags: event.tags?.length ? event.tags : existing?.tags ?? [],
+    });
+  });
+
+  return [...byId.values()];
+})();
 
 function classifyLumaEntity(rawName: string, explicitOrganizations: string[]): LumaEntityClassification {
   const raw = rawName.trim();
@@ -357,5 +422,7 @@ export const analyticsSnapshot = {
   calendarName: lumaPublicCalendarJson.calendarName,
   calendarUrl: lumaPublicCalendarJson.calendarUrl,
   capturedAt: lumaPublicCalendarJson.fetchedAt,
-  coverage: 'Refreshed from the public TOKEN2049 Singapore Luma calendar and event pages. Discovery evaluates both Presented by and Hosted By as entity sources: organization-like records are included in Organizations, while individual presenters and hosts are included in Participants. Ambiguous compound labels already represented by normalized organizations are deduplicated rather than guessed.',
+  sourceEventCount: lumaCalendarRecords.length,
+  trackedLumaEventCount: mergedTrackedLumaEvents.length,
+  coverage: 'Analytics now combines the public TOKEN2049 Singapore Luma calendar/event pages with every tracked Luma itinerary event, including approved, pending, waitlisted and invited registrations. Public calendar metadata remains the richer source when both datasets contain the same event. Presented by and Hosted By are evaluated as entity sources; normalized itinerary host labels contribute organization associations for Luma-only events.',
 };
