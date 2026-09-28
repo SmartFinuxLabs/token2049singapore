@@ -3,6 +3,7 @@ import organizationJson from '@/data/organizations.json';
 import lumaPublicCalendarJson from '@/data/luma-public-calendar.json';
 import { lumaEvents, type RawLumaEvent } from '@/lib/luma-events';
 import { latestLumaEvents } from '@/lib/luma-latest';
+import { liveLumaEvents } from '@/lib/luma-live-refresh';
 import {
   organizations as legacyOrganizations,
   participants as legacyParticipants,
@@ -122,9 +123,6 @@ function itineraryEventToAnalyticsRecord(event: RawLumaEvent): LumaCalendarRecor
     tags: [],
     presentedBy: [],
     hostedBy: hosts,
-    // The itinerary's Luma host field is normalized to organizations/co-host labels.
-    // Keeping these explicit means approved/pending/waitlisted events can contribute
-    // organizations to ecosystem analytics even when they are absent from the public calendar snapshot.
     organizations: hosts,
     registrationStatus: event.status,
   };
@@ -134,21 +132,21 @@ const mergedTrackedLumaEvents = (() => {
   const byId = new Map<string, RawLumaEvent>();
   lumaEvents.forEach((event) => byId.set(event.id, event));
   latestLumaEvents.forEach((event) => byId.set(event.id, event));
+  liveLumaEvents.forEach((event) => byId.set(event.id, event));
   return [...byId.values()].filter((event) => /^https?:\/\/(?:www\.)?(?:luma\.com|lu\.ma)\//i.test(event.url));
 })();
 
 const lumaCalendarRecords: LumaCalendarRecord[] = (() => {
   const byId = new Map<string, LumaCalendarRecord>();
 
-  // First load every tracked Luma itinerary record, including events the user joined,
-  // has pending, waitlisted or invited status for.
+  // Use every Luma-sourced itinerary record, including events where the connected
+  // account is approved, pending, waitlisted or invited.
   mergedTrackedLumaEvents
     .map(itineraryEventToAnalyticsRecord)
     .forEach((event) => byId.set(event.id, event));
 
-  // Public TOKEN2049 calendar/event-page records are richer (Presented by, Hosted By,
-  // explicit organizations, counts), so they override matching fields while retaining
-  // the itinerary registration status where one exists.
+  // Public TOKEN2049 calendar/event-page records contain richer Presented by / Hosted By
+  // metadata and override those fields while retaining the connected-account status.
   ((lumaPublicCalendarJson.records ?? []) as LumaCalendarRecord[]).forEach((event) => {
     const existing = byId.get(event.id);
     byId.set(event.id, {
@@ -169,9 +167,7 @@ const lumaCalendarRecords: LumaCalendarRecord[] = (() => {
 function classifyLumaEntity(rawName: string, explicitOrganizations: string[]): LumaEntityClassification {
   const raw = rawName.trim();
   const pipe = raw.match(/^(.+?)\s+\|\s+(.+)$/);
-  if (pipe) {
-    return { kind: 'participant', name: pipe[1].trim(), company: pipe[2].trim() };
-  }
+  if (pipe) return { kind: 'participant', name: pipe[1].trim(), company: pipe[2].trim() };
 
   const rawKey = entityKey(raw);
   const matchingOrganizations = explicitOrganizations.filter((org) => {
@@ -179,24 +175,10 @@ function classifyLumaEntity(rawName: string, explicitOrganizations: string[]): L
     return orgKey === rawKey || rawKey.includes(orgKey) || orgKey.includes(rawKey);
   });
 
-  if (matchingOrganizations.length >= 2) {
-    // Compound labels such as "Haruko <> Kalshi" are already represented by
-    // their normalized organization records; do not create a duplicate entity.
-    return { kind: 'organization', name: null };
-  }
-
-  if (matchingOrganizations.length === 1) {
-    return { kind: 'organization', name: matchingOrganizations[0] };
-  }
-
-  if (/event calendar$/i.test(raw) && explicitOrganizations.length === 1) {
-    return { kind: 'organization', name: explicitOrganizations[0] };
-  }
-
-  if (looksLikeOrganization(raw)) {
-    return { kind: 'organization', name: raw };
-  }
-
+  if (matchingOrganizations.length >= 2) return { kind: 'organization', name: null };
+  if (matchingOrganizations.length === 1) return { kind: 'organization', name: matchingOrganizations[0] };
+  if (/event calendar$/i.test(raw) && explicitOrganizations.length === 1) return { kind: 'organization', name: explicitOrganizations[0] };
+  if (looksLikeOrganization(raw)) return { kind: 'organization', name: raw };
   return { kind: 'participant', name: raw };
 }
 
@@ -251,12 +233,7 @@ const baseOrganizations: AnalyticsOrganization[] = (() => {
     const source = lumaSource(event, field);
 
     if (existing) {
-      byName.set(key, {
-        ...existing,
-        eventIds,
-        eventPresence,
-        provenance: [...existing.provenance, source],
-      });
+      byName.set(key, { ...existing, eventIds, eventPresence, provenance: [...existing.provenance, source] });
     } else {
       byName.set(key, {
         id: slugify(name),
@@ -272,11 +249,7 @@ const baseOrganizations: AnalyticsOrganization[] = (() => {
   };
 
   legacyOrganizations.forEach((org) => {
-    byName.set(entityKey(org.name), {
-      ...org,
-      profileLocation: null,
-      provenance: [],
-    });
+    byName.set(entityKey(org.name), { ...org, profileLocation: null, provenance: [] });
   });
 
   lumaCalendarRecords.forEach((event) => {
@@ -291,9 +264,7 @@ const baseOrganizations: AnalyticsOrganization[] = (() => {
     sourceFields.forEach(([field, names]) => {
       names.forEach((rawName) => {
         const classified = classifyLumaEntity(rawName, explicitOrganizations);
-        if (classified.kind === 'organization' && classified.name) {
-          addOrganization(classified.name, event, field);
-        }
+        if (classified.kind === 'organization' && classified.name) addOrganization(classified.name, event, field);
       });
     });
   });
@@ -362,9 +333,7 @@ const baseParticipants: AnalyticsParticipant[] = (() => {
     sourceFields.forEach(([field, names]) => {
       names.forEach((rawName) => {
         const classified = classifyLumaEntity(rawName, explicitOrganizations);
-        if (classified.kind === 'participant' && classified.name) {
-          addParticipant(classified.name, event, field, classified.company);
-        }
+        if (classified.kind === 'participant' && classified.name) addParticipant(classified.name, event, field, classified.company);
       });
     });
   });
@@ -421,8 +390,9 @@ export const publicCalendarEvents = lumaCalendarRecords as PublicCalendarEvent[]
 export const analyticsSnapshot = {
   calendarName: lumaPublicCalendarJson.calendarName,
   calendarUrl: lumaPublicCalendarJson.calendarUrl,
-  capturedAt: lumaPublicCalendarJson.fetchedAt,
+  capturedAt: '2026-09-27',
   sourceEventCount: lumaCalendarRecords.length,
   trackedLumaEventCount: mergedTrackedLumaEvents.length,
-  coverage: 'Analytics now combines the public TOKEN2049 Singapore Luma calendar/event pages with every tracked Luma itinerary event, including approved, pending, waitlisted and invited registrations. Public calendar metadata remains the richer source when both datasets contain the same event. Presented by and Hosted By are evaluated as entity sources; normalized itinerary host labels contribute organization associations for Luma-only events.',
+  liveLumaEventCount: liveLumaEvents.length,
+  coverage: 'Analytics combines the public TOKEN2049 Singapore Luma calendar/event pages with every tracked Luma itinerary event and the latest connected-account refresh, including approved, pending, waitlisted and invited registrations. Public calendar metadata remains the richer source when both datasets contain the same event. Presented by and Hosted By are evaluated as entity sources; normalized itinerary host labels contribute organization associations for Luma-only events.',
 };
