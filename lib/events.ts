@@ -1,5 +1,6 @@
 import { lumaEvents, type RawLumaStatus, type RawLumaEvent } from './luma-events';
 import { latestLumaEvents } from './luma-latest';
+import { liveLumaEvents } from './luma-live-refresh';
 
 export type Priority = 'primary' | 'secondary' | 'third';
 export type LumaStatus = RawLumaStatus | 'not_found' | 'external';
@@ -83,10 +84,12 @@ function routeHintFor(status: LumaStatus, priority: Priority): string {
   return 'No matching Luma registration found. Use the event source link to register or verify access.';
 }
 
-// Latest Luma records override the previous snapshot by stable itinerary id.
+// Merge in increasing freshness. The live connected-Luma refresh wins over
+// the historical and previous latest snapshots when an itinerary id matches.
 const mergedLumaById = new Map<string, RawLumaEvent>();
 for (const event of lumaEvents) mergedLumaById.set(event.id, event);
 for (const event of latestLumaEvents) mergedLumaById.set(event.id, event);
+for (const event of liveLumaEvents) mergedLumaById.set(event.id, event);
 const mergedLumaEvents = [...mergedLumaById.values()];
 
 const lumaMapped: EventItem[] = mergedLumaEvents.map((e) => {
