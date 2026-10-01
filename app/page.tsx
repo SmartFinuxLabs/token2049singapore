@@ -40,6 +40,7 @@ export default function HomePage() {
     statusFilter,
     setStatusFilter,
     addComment,
+    toggleHidden,
   } = useItineraryStore();
   const [showHidden, setShowHidden] = useState(false);
   const [dayFilter, setDayFilter] = useState('all');
@@ -188,7 +189,29 @@ export default function HomePage() {
               </button>
             </div>
           </div>
-          <div className="text-sm text-slate-500">Showing {filteredEvents.length} of {events.length} tracked events.</div>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-500">
+            <span>Showing {filteredEvents.length} of {events.length} tracked events.</span>
+            {hidden.length > 0 && (
+              <span>{hidden.length} hidden event{hidden.length === 1 ? '' : 's'} · use Show excluded to restore.</span>
+            )}
+          </div>
+          {showHidden && hidden.length > 0 && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-3">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-800">Hidden events</div>
+              <div className="flex flex-wrap gap-2">
+                {events.filter((event) => hidden.includes(event.id)).map((event) => (
+                  <button
+                    key={event.id}
+                    onClick={() => toggleHidden(event.id)}
+                    className="rounded-full border border-amber-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-amber-100"
+                    title={`Restore ${event.title} to the Daily timeline`}
+                  >
+                    Restore · {event.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <EventStatusChart
