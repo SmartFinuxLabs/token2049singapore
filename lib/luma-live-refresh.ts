@@ -14,7 +14,7 @@ const L = (
 ): RawLumaEvent => ({ id, title, host, date, start, end, location, address, status, url });
 
 // Connected-Luma refresh for TOKEN2049 Singapore week.
-// Retrieved from the signed-in Luma account on 2026-09-27 and intentionally
+// Retrieved from the signed-in Luma account; refreshed on 2026-10-01 and intentionally
 // limited to Singapore / TOKEN2049-week events. These records override older
 // snapshots in luma-events.ts and luma-latest.ts by stable itinerary id.
 export const liveLumaEvents: RawLumaEvent[] = [
@@ -63,5 +63,9 @@ export const liveLumaEvents: RawLumaEvent[] = [
 
   L('network-state', 'Network State Conference: Singapore Oct 9, 2026', 'Network School + Balaji + Zcash', '2026-10-09', '09:00', '20:00', 'Sands Expo & Convention Centre', 'approved', 'https://luma.com/ns2026', '10 Bayfront Ave, Singapore 018956'),
   L('finality-forum', 'Finality Forum @ Token2049 SG 2026', 'Ethene Labs + Four Pillars + Mira', '2026-10-09', '10:00', '18:00', 'The Exchange (Singapore Land Tower)', 'approved', 'https://luma.com/g2lg0htf', '50 Raffles Pl, Level 4 Singapore Land Tower, Singapore 048623'),
-  L('rwa-summit', 'RWA SUMMIT SINGAPORE', 'UVECON.VC', '2026-10-09', '10:00', '17:00', 'Marina One West Tower', 'approved', 'https://luma.com/rwasummit', '9 Straits View, Singapore 018937'),
+  L('rwa-summit', 'RWA SUMMIT SINGAPORE', 'UVECON.VC + Theoriq', '2026-10-09', '10:00', '17:00', 'Marina One West Tower', 'approved', 'https://luma.com/rwasummit', '9 Straits View, Singapore 018937'),
+  L('agentic-finance-summit', 'Agentic Finance Summit + The Odds: Prediction Markets Live', 'More & More + etoro Events + Alpaca + partners', '2026-10-08', '14:00', '20:00', 'Suntec Singapore Convention & Exhibition Centre', 'approved', 'https://luma.com/8oxs8lco', '1 Raffles Blvd, #326, Singapore 039593'),
+  L('sparky-game-on', 'SPARKY: GAME ON! 🎮', 'Sparky + MiniApps Store', '2026-10-09', '19:00', '02:00', 'Singapore', 'approved', 'https://luma.com/rruavcge', 'Singapore'),
+  L('chinese-night', 'Chinese Night: AI & Token Era for Chinese Founders Going Global', 'UniqueBloom + Master Concept', '2026-10-09', '19:30', '22:00', 'Google Singapore', 'approved', 'https://luma.com/token2026', '70 Pasir Panjang Rd, #03-71, Singapore 117371'),
+  L('digital-assets-tokenization-trackside', 'DIGITAL ASSETS & TOKENIZATION SUMMIT - TRACKSIDE EDITION', 'Luna PR', '2026-10-09', '09:00', '17:00', 'Singapore', 'pending_approval', 'https://luma.com/a19msg9w'),
 ];
