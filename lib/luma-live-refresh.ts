@@ -14,11 +14,11 @@ const L = (
 ): RawLumaEvent => ({ id, title, host, date, start, end, location, address, status, url });
 
 // Connected-Luma refresh for TOKEN2049 Singapore week.
-// Retrieved from the signed-in Luma account; refreshed on 2026-10-01 and intentionally
+// Retrieved from the signed-in Luma account; refreshed on 2026-10-03 and intentionally
 // limited to Singapore / TOKEN2049-week events. These records override older
 // snapshots in luma-events.ts and luma-latest.ts by stable itinerary id.
 export const liveLumaEvents: RawLumaEvent[] = [
-  L('opening-mixer', 'TOKEN2049 Singapore — Opening Mixer 🇸🇬', 'CoinEasy + BTSE Enterprise Solutions + Singapore Blockchain Week + partners', '2026-10-04', '15:00', '18:00', 'Barouv Rooftop Bar', 'approved', 'https://luma.com/bae06r0t', '33 Erskine Rd, Level 4 Scarlet Hotel, Singapore 069333'),
+  L('opening-mixer', 'TOKEN2049 Singapore — Opening Mixer 🇸🇬', 'CoinEasy + BTSE Enterprise Solutions + Singapore Blockchain Week + partners', '2026-10-04', '17:00', '23:30', 'Abriza Rooftop Restaurant', 'approved', 'https://luma.com/bae06r0t', '32 Tras St, Level 4 ST Signature, Singapore 078972'),
   L('rwa-capital-forum', 'RWA Capital Forum', 'Taisu Ventures', '2026-10-05', '11:30', '15:00', '21 Collyer Quay', 'approved', 'https://luma.com/ydaq5h18', '21 Collyer Quay, Singapore 049320'),
   L('best-event-afterdark', 'The Best Event: AFTERDARK', 'The Best Event', '2026-10-05', '18:00', '02:00', 'Singapore', 'approved', 'https://luma.com/tbe-afterdark'),
   L('skyline-social', 'Skyline Social Singapore', 'Taisu Ventures', '2026-10-05', '18:30', '22:00', 'Red Dot Design Museum', 'approved', 'https://luma.com/q22mvxx7', '11 Marina Blvd, Red Dot Design, Singapore 018940'),
