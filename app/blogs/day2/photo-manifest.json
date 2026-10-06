@@ -1,0 +1,351 @@
+{
+  "method": "EXIF orientation applied; metadata removed; WebP quality 80, maximum 1600px; exact pixel duplicates merged. No generated or reconstructed images. All unique supplied photos retained. Truncated IMG_2580.jpeg recovered from intact IMG_2580(1).jpeg.",
+  "photos": [
+    {
+      "original": "IMG_2577.jpeg",
+      "file": "photos/IMG_2577.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 402540,
+      "optimizedBytes": 86082,
+      "sha256": "5ed2d63c061c18fa0a6a23f07703af003cb71d0334ff48b22be0218777defe47",
+      "duplicates": [
+        "IMG_2577(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2579.jpeg",
+      "file": "photos/IMG_2579.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 324787,
+      "optimizedBytes": 67598,
+      "sha256": "cc9bb3edb459188cd1d4765e1b732158563bdea4782f2c2f950a49fb269c9a2e",
+      "duplicates": [
+        "IMG_2579(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2580.jpeg",
+      "file": "photos/IMG_2580.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 397462,
+      "optimizedBytes": 92588,
+      "sha256": "d9b07729c5ac9c436178ae673d6807b3ebc9b0ccf299ed7eef14541537afa479",
+      "duplicates": [
+        "IMG_2580(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2582.jpeg",
+      "file": "photos/IMG_2582.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 931613,
+      "optimizedBytes": 384816,
+      "sha256": "fc48cb8b7d2aaec1dd1473cc5e6fa2022fe25897de625409a9c39252b564a564",
+      "duplicates": [
+        "IMG_2582(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2586.jpeg",
+      "file": "photos/IMG_2586.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 373649,
+      "optimizedBytes": 75462,
+      "sha256": "28e7888c41e7e8c12da6d1e214bd31d5cc7e59581f09505e3e62f8cc41bda65f",
+      "duplicates": [
+        "IMG_2586(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2588.jpeg",
+      "file": "photos/IMG_2588.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 787177,
+      "optimizedBytes": 271926,
+      "sha256": "e9fb5aff8c978e5617a7bb739928babc972bb5e52c4f6f8c7d0731fbd411e8a1",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2589.jpeg",
+      "file": "photos/IMG_2589.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 653984,
+      "optimizedBytes": 192868,
+      "sha256": "19624d25444b2d2139ba44b91dd5496b8569eaf4b0433cdc999968cde291b242",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2590.jpeg",
+      "file": "photos/IMG_2590.webp",
+      "width": 1152,
+      "height": 1536,
+      "originalBytes": 453815,
+      "optimizedBytes": 111568,
+      "sha256": "d20e2527fbd0ef619bae04735032238d05e935ce7c53ed43cfc40827b71c2428",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2591.jpeg",
+      "file": "photos/IMG_2591.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 491848,
+      "optimizedBytes": 130242,
+      "sha256": "b08a433d7bfa0adaa4d85f0cce8faf806814639bd4fce7d68325a9c51e206f82",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2600.jpeg",
+      "file": "photos/IMG_2600.webp",
+      "width": 1152,
+      "height": 1536,
+      "originalBytes": 368316,
+      "optimizedBytes": 76174,
+      "sha256": "0e6b411c5e6f7190ae725f65069f0a72c29735b55e620f692b2a57df29a4f06a",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2601.jpeg",
+      "file": "photos/IMG_2601.webp",
+      "width": 1152,
+      "height": 1536,
+      "originalBytes": 656035,
+      "optimizedBytes": 210868,
+      "sha256": "eb04a5cf3985b06ed13a2464036f24ff01bd36448ec9cf801833b2d436682c80",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2602.jpeg",
+      "file": "photos/IMG_2602.webp",
+      "width": 1152,
+      "height": 1536,
+      "originalBytes": 417306,
+      "optimizedBytes": 95882,
+      "sha256": "b92e49de82ed499829fc0cfcb9ad2218095319fb94478fab07486eb274c119f2",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2603.jpeg",
+      "file": "photos/IMG_2603.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 965954,
+      "optimizedBytes": 401104,
+      "sha256": "72f97eb004364087b762159c5d4683c6708dee6dacc2b1d01ce34048ac351041",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2604.jpeg",
+      "file": "photos/IMG_2604.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 677415,
+      "optimizedBytes": 215334,
+      "sha256": "0abd1f3dd29a50d36e4d08f55e00e802738341a4dc36db6fdcd2db88df808c07",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2606.jpeg",
+      "file": "photos/IMG_2606.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 350580,
+      "optimizedBytes": 73326,
+      "sha256": "3b695ca259ca6db06db43dde3f1175cffa4de385f2f4eb8fa380b6447be4204f",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2607.jpeg",
+      "file": "photos/IMG_2607.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 672040,
+      "optimizedBytes": 207702,
+      "sha256": "fc30c8997d31337bfebb09390a0a82f06663690ce50d03144283b5e766c6d83f",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2609.jpeg",
+      "file": "photos/IMG_2609.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 321876,
+      "optimizedBytes": 68396,
+      "sha256": "4bfa2dfdc52ffd151c0a0d0017a6851f5ec5b5b2b32cfaa21811e42d7bc9b922",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2612.jpeg",
+      "file": "photos/IMG_2612.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 541881,
+      "optimizedBytes": 153766,
+      "sha256": "81d387ca04262020192d957fc7d5830a0bb7b42096135e283d456e8dbb2c7e85",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2613.jpeg",
+      "file": "photos/IMG_2613.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 525200,
+      "optimizedBytes": 113900,
+      "sha256": "481ca89f7cc91965779b635c5644c0bc428020882530dee56713870e18f824cc",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2615.jpeg",
+      "file": "photos/IMG_2615.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 376888,
+      "optimizedBytes": 50370,
+      "sha256": "eece15de5186769cd86ed9022e4374da18ecf802e20fddb446418a7c034c815b",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2616.jpeg",
+      "file": "photos/IMG_2616.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 478307,
+      "optimizedBytes": 121114,
+      "sha256": "96b0fc2596f76cd861fce65d46f9d82aee5db118bb1018c29b1fbe25e0cd318e",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2617.jpeg",
+      "file": "photos/IMG_2617.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 620685,
+      "optimizedBytes": 174474,
+      "sha256": "9e536c40cfcf429c7e12a0124e8223d31f1cf48c57eb89c787a1dbb3174f2244",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2618.jpeg",
+      "file": "photos/IMG_2618.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 635334,
+      "optimizedBytes": 175094,
+      "sha256": "a021942683c71a579f2ef2d9d33e24114412c41126b62a45d0cff1855fcc9704",
+      "duplicates": [
+        "IMG_2618(1).jpeg"
+      ]
+    },
+    {
+      "original": "IMG_2619.jpeg",
+      "file": "photos/IMG_2619.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 768616,
+      "optimizedBytes": 242160,
+      "sha256": "a03057d99fca734e25487e37127d83c2a66f30fe619b8f64fce3268e97bd6a70",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2626.jpeg",
+      "file": "photos/IMG_2626.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 408659,
+      "optimizedBytes": 111562,
+      "sha256": "05a806cdab5fd3426fe0266cea11eac62ee1517cd74b4c835fa950d6f2f204fe",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2627.jpeg",
+      "file": "photos/IMG_2627.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 347595,
+      "optimizedBytes": 87740,
+      "sha256": "3cb04c9d94a38b30de2fd4d4fb04f386b4df1c8b5753cd55bb7c8745a36931e9",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2628.jpeg",
+      "file": "photos/IMG_2628.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 802864,
+      "optimizedBytes": 254242,
+      "sha256": "352701d3437243e2b4cb7ecb1eab4b152365e588633ebc3dc6b7c7eec8055f56",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2630.jpeg",
+      "file": "photos/IMG_2630.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 517136,
+      "optimizedBytes": 128706,
+      "sha256": "ec1069f63f2541583a442bd3978b1bd51e369baa2f3f25257ee5d445bb76dc80",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2637.jpeg",
+      "file": "photos/IMG_2637.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 696316,
+      "optimizedBytes": 197440,
+      "sha256": "b1a6be0703d278ca392da84eeabeaed37894f9263c8b399909240c670822e41b",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2638.jpeg",
+      "file": "photos/IMG_2638.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 543378,
+      "optimizedBytes": 130058,
+      "sha256": "9fdc73fd695d4cb85eb4cca17037fe501f3b5ac41051ab673ff2db42eef20594",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2639.jpeg",
+      "file": "photos/IMG_2639.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 567298,
+      "optimizedBytes": 153208,
+      "sha256": "2a145c544aeee573b811693c90db934f7617533f94270978528babc7153a7e68",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2640.jpeg",
+      "file": "photos/IMG_2640.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 615269,
+      "optimizedBytes": 144940,
+      "sha256": "2e534eda8c216cf9c639590ce1ffd1c072ca6059747294a8a8eccfe90e1e439d",
+      "duplicates": []
+    },
+    {
+      "original": "IMG_2595(1).jpeg",
+      "file": "photos/IMG_2595.webp",
+      "width": 1536,
+      "height": 1152,
+      "originalBytes": 481421,
+      "optimizedBytes": 121856,
+      "sha256": "49c545f1a3b436d5fabb1372682af6e8905b4f2f35946eccea677313cfee07eb",
+      "duplicates": []
+    }
+  ],
+  "inputCount": 39,
+  "uniqueCount": 33,
+  "originalBytes": 18173244,
+  "optimizedBytes": 5122566
+}

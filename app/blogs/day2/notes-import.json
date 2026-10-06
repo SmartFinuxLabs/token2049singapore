@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-06",
+  "timezone": "Asia/Singapore",
+  "rangeUTC": {
+    "start": "2026-10-05T16:00:00Z",
+    "end": "2026-10-06T15:59:59Z"
+  },
+  "recordingIds": [
+    "W6bkOTlQ",
+    "QkkzzPkW",
+    "0LpXVo0q",
+    "y20kiFvy",
+    "fx3l0HJC",
+    "Q36q1XCd"
+  ],
+  "recordCount": 6,
+  "primaryAudioCount": 5,
+  "derivativeSummaryCount": 1,
+  "publication": "Editorial summaries and attribution ledger are in report.ts and rendered on the page. Raw automatic transcripts are not republished.",
+  "deduplication": "QkkzzPkW summarizes W6bkOTlQ; not independent evidence."
+}

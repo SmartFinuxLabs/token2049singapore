@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import day2Hero from './day2/photos/IMG_2640.webp';
 import { Calendar, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -8,6 +9,20 @@ export const metadata: Metadata = {
 };
 
 const blogPosts = [
+  {
+    day: 'Day 2',
+    date: 'October 6, 2026',
+    slug: 'day2',
+    title: 'Stablecoins, Fragmentation and the Generalayer Thesis',
+    summary: 'Eight Singapore event groups, six imported Voicenotes and original photos: banks, cards, tokenized assets, agent ownership and Connextium’s proposed coordination of settlement across rails.',
+    image: day2Hero.src,
+    tags: ['Stablecoins', 'Generalayer', 'Payments', 'Tokenization', 'Agents'],
+    highlights: [
+      'Event-by-event speaker and company ecosystem maps',
+      'Bank acceptance, issuer connectivity and the accept-versus-hold distinction',
+      'Generalayer: from payment instruction to recipient credit and reconciliation',
+    ],
+  },
   {
     day: 'Day 1',
     date: 'October 5, 2026',
@@ -118,7 +133,7 @@ export default function BlogsIndexPage() {
                       href={`/blogs/${post.slug}`}
                       className="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-emerald-800 transition"
                     >
-                      Read Full Day 1 Field Report <ArrowRight size={14} />
+                      Read Full {post.day} Field Report <ArrowRight size={14} />
                     </Link>
                   </div>
                 </div>
@@ -130,3 +145,4 @@ export default function BlogsIndexPage() {
     </div>
   );
 }
+
