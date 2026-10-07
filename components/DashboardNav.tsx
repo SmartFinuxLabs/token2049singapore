@@ -117,6 +117,10 @@ export default function DashboardNav() {
                 onMouseLeave={() => { if (window.matchMedia('(min-width: 768px) and (hover: hover)').matches) setBlogsOpen(false); }}
                 className="relative mt-1.5 w-full md:absolute md:right-0 md:top-full md:w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg ring-1 ring-slate-950/5 z-50"
               >
+                <Link href="/blogs/day3" className="flex items-center gap-2 rounded-lg px-3 py-3 text-sm md:py-2 md:text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">
+                  <span className="flex h-5 w-5 items-center justify-center rounded bg-emerald-100 text-[10px] font-bold text-emerald-800">D3</span>
+                  Day 3
+                </Link>
                 <Link href="/blogs/day2" className="flex items-center gap-2 rounded-lg px-3 py-3 text-sm md:py-2 md:text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-950 transition">
                   <span className="flex h-5 w-5 items-center justify-center rounded bg-emerald-100 text-[10px] font-bold text-emerald-800">D2</span>
                   Day 2

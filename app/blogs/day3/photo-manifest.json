@@ -1,0 +1,189 @@
+[
+  {
+    "source": "IMG_2642.jpeg",
+    "file": "IMG_2642.webp",
+    "event": "neobankers-brunch",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 693119,
+    "optimized_bytes": 245440,
+    "sha256": "d78fbd53ea2e83512c5af3945d1d87f0f4235c9cd036c5960f272a2363a72a4d",
+    "caption": "Neobankers Brunch: café networking beside the green wall at Brunetti Oro."
+  },
+  {
+    "source": "IMG_2644.jpeg",
+    "file": "IMG_2644.webp",
+    "event": "neobankers-brunch",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 1032907,
+    "optimized_bytes": 643958,
+    "sha256": "120073f44a846adeedd795d171e32be3b542d6b3cf263ee11cebcb6597c1f214",
+    "caption": "Neobankers Brunch: the green wall and “Meet me in Milan” sign at Brunetti Oro."
+  },
+  {
+    "source": "IMG_2670.jpeg",
+    "file": "IMG_2670.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 1044476,
+    "optimized_bytes": 479982,
+    "sha256": "526e3586b6476ae49d9c1806cc89972b33586278666bd18ac9a5811b0e3e151d",
+    "caption": "Stablecon Salon: palms beneath the glass roof at the gathering’s venue."
+  },
+  {
+    "source": "IMG_2671.jpeg",
+    "file": "IMG_2671.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1152,
+      1536
+    ],
+    "dimensions": [
+      1152,
+      1536
+    ],
+    "original_bytes": 932931,
+    "optimized_bytes": 400988,
+    "sha256": "c65cd4fef9ce9f6a6332f27414595c9c5728b4b8b17e261ba0d871e74f6113c6",
+    "caption": "Stablecon Salon: a planted walkway beneath the glazed canopy."
+  },
+  {
+    "source": "IMG_2672(1).jpeg",
+    "file": "IMG_2672.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 794501,
+    "optimized_bytes": 321142,
+    "sha256": "6693850da2ce1002f376ef4406cd3facd6d7320a405d4a43c9238e47b7c7b973",
+    "caption": "Stablecon Salon: guests gathering near the café counter."
+  },
+  {
+    "source": "IMG_2673.jpeg",
+    "file": "IMG_2673.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 785606,
+    "optimized_bytes": 295756,
+    "sha256": "3ca0d03a58822aae92f4c54b0022095c3d1b6abaae9e6bd5daf7a0d7890cab33",
+    "caption": "Stablecon Salon: the bar and reception setting."
+  },
+  {
+    "source": "IMG_2674.jpeg",
+    "file": "IMG_2674.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 746676,
+    "optimized_bytes": 291834,
+    "sha256": "243f5d7c845f2e4e277d9a68716d1932a7a841a9406a8cc200c3c8aa2a5b1eb3",
+    "caption": "Stablecon Salon: a wider view of the glass-roofed networking space."
+  },
+  {
+    "source": "IMG_2675.jpeg",
+    "file": "IMG_2675.webp",
+    "event": "stablecon-salon",
+    "original_dimensions": [
+      1152,
+      1536
+    ],
+    "dimensions": [
+      1152,
+      1536
+    ],
+    "original_bytes": 752880,
+    "optimized_bytes": 248748,
+    "sha256": "b2814c216e8438d35e63144167e41ecd3978694bc6f8bbe145623e75d7a43629",
+    "caption": "Stablecon Salon: informal conversations as the gathering fills."
+  },
+  {
+    "source": "IMG_2676.jpeg",
+    "file": "IMG_2676.webp",
+    "event": "unprompted",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 538108,
+    "optimized_bytes": 145148,
+    "sha256": "949245958b6bdafef11f7ea051755b2cb083caf6ee083fbb1ea83ae869d6d1f9",
+    "caption": "UNPROMPTED at LeVeL33: the illuminated brewing tanks."
+  },
+  {
+    "source": "IMG_2677.jpeg",
+    "file": "IMG_2677.webp",
+    "event": "unprompted",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 613265,
+    "optimized_bytes": 173954,
+    "sha256": "e9f08e4febe0f63cc94708138837635d81bc177ce2d368f38ccb918dc3de3940",
+    "caption": "UNPROMPTED at LeVeL33: the brewery bar and service area."
+  },
+  {
+    "source": "IMG_2678.jpeg",
+    "file": "IMG_2678.webp",
+    "event": "unprompted",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 521966,
+    "optimized_bytes": 105568,
+    "sha256": "9018804d65938654e7e85aeefd3c0b9dfed6361662f55dd3708bb47e36ff543e",
+    "caption": "UNPROMPTED at LeVeL33: the evening gathering with Marina Bay beyond."
+  }
+]

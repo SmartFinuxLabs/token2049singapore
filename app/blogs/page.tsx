@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import day2Hero from './day2/photos/IMG_2640.webp';
+import day3Hero from './day3/photos/IMG_2674.webp';
 import { Calendar, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -9,6 +10,20 @@ export const metadata: Metadata = {
 };
 
 const blogPosts = [
+  {
+    day: 'Day 3',
+    date: 'October 7, 2026',
+    slug: 'day3',
+    title: 'Stablecoin Rails, Local Trust and the Business of Payments',
+    summary: 'Neobankers Brunch, Sui Basecamp, Stablecon Salon and UNPROMPTED: original photos and ecosystem research on how technical infrastructure becomes trusted business payments.',
+    image: day3Hero.src,
+    tags: ['Stablecoins', 'Payments', 'Treasury', 'Sui', 'Infrastructure'],
+    highlights: [
+      'Four event groups and eleven original photographs',
+      'Cobo, Sunrate, OpenFX and the technical and business levels of payments',
+      'Local partners, corridor economics and the remaining automation challenge',
+    ],
+  },
   {
     day: 'Day 2',
     date: 'October 6, 2026',
