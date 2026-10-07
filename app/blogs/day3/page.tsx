@@ -32,10 +32,10 @@ export default function Day3Blog() {
           <p className="mt-8 text-xs font-bold uppercase tracking-widest text-emerald-700">TOKEN2049 Singapore · Day 3 · October 7, 2026</p>
           <h1 className="mt-3 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">Stablecoin rails, local trust and the business of payments</h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">A relaxed day of conversations, meeting people and getting to know the industry’s approach to stablecoin adoption — from café networking to an evening overlooking Marina Bay.</p>
-          <p className="mt-5 text-sm text-slate-500">By Terence · Connextium field notes · Singapore time (UTC+8) · 4 event groups · 11 original photos</p>
+          <p className="mt-5 text-sm text-slate-500">By Terence · Connextium field notes · Singapore time (UTC+8) · 4 event groups · 14 original photos</p>
           <figure className="mt-8">
-            <Image src={photos.IMG_2674.image} alt={photos.IMG_2674.caption} priority sizes="(max-width: 1024px) 100vw, 1024px" placeholder="blur" className="max-h-[520px] w-full rounded-2xl object-cover" />
-            <figcaption className="mt-2 text-xs text-slate-500">The Stablecon Salon setting: informal conversations around the infrastructure of global money movement.</figcaption>
+            <Image src={photos.IMG_2647.image} alt={photos.IMG_2647.caption} priority sizes="(max-width: 1024px) 100vw, 1024px" placeholder="blur" className="max-h-[600px] w-full rounded-2xl bg-slate-950 object-contain" />
+            <figcaption className="mt-2 text-xs text-slate-500">Sui Basecamp at Marina Bay Sands: the stage, audience and on-chain finance presentation. Original Day 3 photograph.</figcaption>
           </figure>
         </div>
       </header>
@@ -161,7 +161,7 @@ export default function Day3Blog() {
             <li>Identify which partner owns recipient delivery and which team handles exceptions.</li>
             <li>Prepare a separate Sui edition covering the community, ecosystem and practical payment integrations.</li>
           </ul>
-          <p className="mt-6 text-xs leading-relaxed text-slate-500">Photo provenance: eleven original event photographs were inspected and converted to WebP, with orientation corrected and metadata removed. All are retained under this route’s photos directory; photo-manifest.json records source names, dimensions and hashes. The business-card image is not reproduced with personal contact details. No Sui-specific photo was identified in the attributed batches. Research adds company context to personal notes; it does not establish a transcript or an endorsement.</p>
+          <p className="mt-6 text-xs leading-relaxed text-slate-500">Photo provenance: fourteen original event photographs were inspected and converted to WebP, with orientation corrected and metadata removed. All are retained under this route’s photos directory; photo-manifest.json records source names, dimensions and hashes. The business-card image is not reproduced with personal contact details. The three Sui Basecamp photos include the stage, a projected tool interface and an on-chain finance stack slide. Research adds company context to personal notes; it does not establish a transcript or an endorsement.</p>
           <div className="mt-8 border-t border-slate-200 pt-5"><Link href="/blogs/day2" className="text-sm font-semibold text-emerald-800 hover:underline">← Day 2: Stablecoins, Fragmentation and the Generalayer Thesis</Link></div>
         </section>
       </main>

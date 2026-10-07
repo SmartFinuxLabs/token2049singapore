@@ -185,5 +185,56 @@
     "optimized_bytes": 105568,
     "sha256": "9018804d65938654e7e85aeefd3c0b9dfed6361662f55dd3708bb47e36ff543e",
     "caption": "UNPROMPTED at LeVeL33: the evening gathering with Marina Bay beyond."
+  },
+  {
+    "source": "IMG_2647.jpeg",
+    "file": "IMG_2647.webp",
+    "event": "sui-basecamp",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 622118,
+    "optimized_bytes": 189448,
+    "sha256": "c1de29709fbe71fb4e9d67c239d28b019cfe026009e9f83687e95158fa0e3279",
+    "caption": "Sui Basecamp: the stage and audience at Marina Bay Sands during an on-chain finance presentation."
+  },
+  {
+    "source": "IMG_2646.jpeg",
+    "file": "IMG_2646.webp",
+    "event": "sui-basecamp",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 346588,
+    "optimized_bytes": 68634,
+    "sha256": "dbbb36ce0de53d896071696574f7ca712b7260d28e7b006e27498a8da67b730a",
+    "caption": "Sui Basecamp: a projected interface showing Airdrop Scout, Security Guard and Privacy Guard tools."
+  },
+  {
+    "source": "IMG_2650.jpeg",
+    "file": "IMG_2650.webp",
+    "event": "sui-basecamp",
+    "original_dimensions": [
+      1536,
+      1152
+    ],
+    "dimensions": [
+      1536,
+      1152
+    ],
+    "original_bytes": 427407,
+    "optimized_bytes": 107686,
+    "sha256": "46d57c06511bfce93caa3431182182e45b938a790f5a6dac529083695ba32a33",
+    "caption": "Sui Basecamp: a presentation slide mapping five layers of on-chain finance, from infrastructure and rails to a yield engine."
   }
 ]

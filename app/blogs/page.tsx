@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import day2Hero from './day2/photos/IMG_2640.webp';
-import day3Hero from './day3/photos/IMG_2674.webp';
+import day3Hero from './day3/photos/IMG_2647.webp';
 import { Calendar, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -19,7 +19,7 @@ const blogPosts = [
     image: day3Hero.src,
     tags: ['Stablecoins', 'Payments', 'Treasury', 'Sui', 'Infrastructure'],
     highlights: [
-      'Four event groups and eleven original photographs',
+      'Four event groups and fourteen original photographs',
       'Cobo, Sunrate, OpenFX and the technical and business levels of payments',
       'Local partners, corridor economics and the remaining automation challenge',
     ],

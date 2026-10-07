@@ -30,8 +30,8 @@ export const events = [
     host: 'Sui',
     url: 'https://luma.com/suibasecamp2026',
     introduction: 'The next stop was Sui Basecamp. My impression was of a relaxed community with room to grow: an approachable environment for meeting builders and exploring ideas. A dedicated Sui and ecosystem edition will follow in a later log.',
-    observation: 'That community atmosphere matters alongside the technology. Payment adoption requires developers, product teams and operators to work together; an accessible builder environment can make those conversations easier. This entry records the visit and its impression rather than reconstructing talks that were not captured in the supplied notes.',
-    photos: [],
+    observation: 'That community atmosphere matters alongside the technology. Payment adoption requires developers, product teams and operators to work together; an accessible builder environment can make those conversations easier. The added photographs capture the stage, a projected interface for opportunity discovery and wallet security/privacy, and a slide presenting on-chain finance as a five-layer stack. The slide connects infrastructure and rails to liquidity, capital products, risk management and application channels. These are photographed presentation themes; a dedicated ecosystem edition will explore them further.',
+    photos: ['IMG_2647', 'IMG_2646', 'IMG_2650'],
     people: 'The published lineup includes Evan Cheng and Adeniyi Abiodun of Mysten Labs, Matt Stafford of Circle, and Kimberly Logan of Walrus Foundation. These are program-listed speakers, not a claim that I attended each talk or met them.',
     ecosystem: [
       ['Sui · Mysten Labs', 'Execution and builders', 'Sui documentation describes an asset-oriented smart-contract platform using Move. Basecamp brings its builders and broader community together.'],
