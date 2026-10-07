@@ -53,7 +53,7 @@ export const events = [
     host: 'Stablecon · powered by OpenFX and Faction',
     url: 'https://luma.com/j8huihey',
     introduction: 'The six photographs from this stop capture a plant-filled, glass-roofed setting and informal networking. Stablecon’s salon brought together people working on global money movement, stablecoins and FX infrastructure.',
-    observation: 'The field notes point to a market opportunity: payment services are technically intensive, while mature customer acquisition can become harder. Stablecoins and new corridors may create another route to growth. The opportunity is strongest where a new rail solves a specific treasury or payment problem, rather than adding technology without changing the customer outcome.',
+    observation: 'The field notes point to a market opportunity: payment services are technically intensive, while mature customer acquisition can become harder. Stablecoins and new corridors may create another route to growth. My takeaway from the OpenFX conversation was that roughly 2.5 years of product building had laid the foundation for faster market expansion. The model was described to me as deliberately focused: accepting major fiat currencies and providing exchange into and out of USDC and USDT through on-ramp and off-ramp services. These are conversation notes, rather than an independently verified development timeline or a complete list of supported currencies and routes.',
     photos: ['IMG_2670', 'IMG_2671', 'IMG_2672', 'IMG_2673', 'IMG_2674', 'IMG_2675'],
     people: 'The event listing names Clara Boh, Marc Palet and Rocco Puno among the hosts, alongside Stablecon, OpenFX and Faction. The supplied notes do not attribute particular remarks to them.',
     ecosystem: [
@@ -61,7 +61,7 @@ export const events = [
       ['OpenFX', 'FX liquidity and settlement', 'OpenFX describes round-the-clock FX infrastructure and a liquidity network for cross-border flows. The salon listing includes both fiat and stablecoins in its scope.'],
       ['Faction', 'Early-stage capital', 'Faction describes investments at Seed and Series A across blockchain infrastructure and applications, through equity and tokens. Its role here connects builders with venture capital.'],
     ],
-    analysis: 'Liquidity and market access turn a token transfer into a practical corridor. The commercial questions are who buys or redeems the asset, who supplies local currency, what funds must be prefunded, and who handles a failed payout. For a startup, a narrow corridor with measurable economics is a stronger starting point than an undifferentiated promise of global reach.',
+    analysis: 'The OpenFX discussion suggests how a focused conversion service can become a foundation for market expansion after a sustained product-building period. Keeping the asset scope simple can concentrate execution on liquidity, pricing and dependable ramps. Liquidity and market access turn a token transfer into a practical corridor: who supplies local currency, what funds must be prefunded, and who handles a failed payout? For Connextium.xyz, this reinforces the value of connecting specialized providers within the broader inter-ledger settlement and clearing model.',
     sources: [
       ['Salon listing and hosts', 'https://luma.com/j8huihey'],
       ['OpenFX product and liquidity network', 'https://www.openfx.com/'],
