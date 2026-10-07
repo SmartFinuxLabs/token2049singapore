@@ -31,7 +31,7 @@ export default function Day3Blog() {
           <Link href="/blogs" className="text-sm font-semibold text-emerald-700 hover:underline">← All field reports</Link>
           <p className="mt-8 text-xs font-bold uppercase tracking-widest text-emerald-700">TOKEN2049 Singapore · Day 3 · October 7, 2026</p>
           <h1 className="mt-3 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">Stablecoin rails, local trust and the business of payments</h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">A day of neobanks, a growing Sui community, FX infrastructure and institutional conversations — tracing how technical capabilities become usable financial services.</p>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">A relaxed day of conversations, meeting people and getting to know the industry’s approach to stablecoin adoption — from café networking to an evening overlooking Marina Bay.</p>
           <p className="mt-5 text-sm text-slate-500">By Terence · Connextium field notes · Singapore time (UTC+8) · 4 event groups · 11 original photos</p>
           <figure className="mt-8">
             <Image src={photos.IMG_2674.image} alt={photos.IMG_2674.caption} priority sizes="(max-width: 1024px) 100vw, 1024px" placeholder="blur" className="max-h-[520px] w-full rounded-2xl object-cover" />
@@ -43,6 +43,7 @@ export default function Day3Blog() {
       <main className="mx-auto max-w-5xl space-y-10 px-5 py-10 sm:px-8">
         <section className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 sm:p-8" aria-labelledby="day-thread">
           <h2 id="day-thread" className="text-2xl font-bold text-slate-950">The thread through the day</h2>
+          <p className="mt-4 leading-relaxed">Day 3 was a day for leisurely conversation and making connections. I spent time meeting people, listening to their experiences and developing a better understanding of how the industry is adopting stablecoins. The reflections below grew out of those informal exchanges, with company research added afterward to give them context.</p>
           <p className="mt-4 leading-relaxed">Stablecoin infrastructure is becoming a dense ecosystem. Some providers are unfamiliar outside technical circles, yet their work supports the brands that enterprises recognize. Today’s conversations suggested a useful model: a technical level that enables movement and control, and a business level that turns those capabilities into trusted services for institutions and customers.</p>
           <p className="mt-4 leading-relaxed">A wallet-to-wallet transfer can look like a direct remittance. For a business paying across regions, the destination may still be a local bank account, a different currency or a recipient with specific acceptance requirements. Trusted partners in the receiving market remain central to many such flows.</p>
           <p className="mt-4 text-sm leading-relaxed text-emerald-900">Field observations and our analysis are labeled separately from researched product descriptions. Event order follows the supplied notes; published windows do not establish exact arrival times. Company sources describe their own capabilities.</p>
@@ -56,6 +57,7 @@ export default function Day3Blog() {
           <div className="mt-5 flex flex-wrap gap-4 border-t border-slate-100 pt-4 text-sm font-semibold text-emerald-800">
             <a href="#operating-model" className="hover:underline">Technical and business levels</a>
             <a href="#corridors" className="hover:underline">Corridors and automation</a>
+            <a href="#connextium-research" className="hover:underline">Connextium.xyz research direction</a>
             <a href="#connections" className="hover:underline">Connections and follow-ups</a>
           </div>
         </nav>
@@ -111,8 +113,22 @@ export default function Day3Blog() {
           <p className="mt-4 leading-relaxed">My notes emphasize that manual operations remain a challenge in remittance. This is a field observation, not a measured industry-wide manual-processing rate. Cobo’s published settlement-network description independently identifies fund-status checks and record stitching as operational work it aims to reduce.</p>
           <p className="mt-3 text-xs text-emerald-300"><a href="https://website.cobo.com/post/cobo-settlement-network-launch" target="_blank" rel="noopener noreferrer" className="underline">Cobo: settlement execution and manual workflows ↗</a></p>
           <ol className="mt-5 space-y-4">{corridor.map(([step, detail], index) => <li key={step} className="rounded-xl border border-slate-700 p-4"><h4 className="font-semibold text-emerald-300">{index + 1}. {step}</h4><p className="mt-2 text-sm leading-relaxed">{detail}</p></li>)}</ol>
-          <p className="mt-6 leading-relaxed">For Connextium, the opportunity is to coordinate these states around the business obligation. An invoice payment should retain one reference through funding, token movement, conversion, recipient credit and accounting. Retries need duplicate protection; incomplete legs need explicit recovery ownership. These remain product design objectives to test in a pilot.</p>
           <p className="mt-4 leading-relaxed">A useful pilot would measure recipient-credit time, total fees and FX spread, prefunded capital, manual interventions and exception recovery. That would show whether a stablecoin corridor improves the service the customer actually receives.</p>
+        </section>
+
+        <section id="connextium-research" className="scroll-mt-24 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 sm:p-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-emerald-700">Connextium.xyz · proposed research direction</p>
+          <h2 className="mt-3 text-3xl font-bold text-slate-950">Distributed inter-ledger settlement and clearing</h2>
+          <p className="mt-5 leading-relaxed">These conversations inform the solution we are researching at Connextium.xyz: stablecoin payment infrastructure built as a distributed platform for settlement and clearing between ledgers. A portal or app can provide the customer interface, while the operational foundation connects the independent books and payment systems of businesses, payment providers and their partners across regions.</p>
+          <p className="mt-4 leading-relaxed">Participants would retain their own ledgers and local operating responsibilities. The platform would coordinate agreed payment obligations, funding availability, clearing positions and settlement evidence across those boundaries. Stablecoin rails would be one means of moving value alongside bank and local payout rails, with the route selected for the recipient’s requirements and the corridor’s operational constraints.</p>
+          <h3 className="mt-6 text-lg font-bold text-slate-950">What the proposed platform needs to coordinate</h3>
+          <ul className="mt-4 list-disc space-y-3 pl-5 leading-relaxed">
+            <li><strong>Obligations and clearing:</strong> preserve invoice and payment references, match what parties owe and, where agreed, calculate bilateral or multilateral net positions before settlement.</li>
+            <li><strong>Regional execution:</strong> connect authorized partners, liquidity and payout services, with clear responsibility for each leg of the payment.</li>
+            <li><strong>Inter-ledger evidence:</strong> distinguish a source debit, token confirmation, partner receipt and final beneficiary credit, then reconcile the corresponding entries in each participant’s books.</li>
+            <li><strong>Operational recovery:</strong> prevent duplicate payments during retries, identify incomplete legs and assign exception handling to the responsible operator.</li>
+          </ul>
+          <p className="mt-5 leading-relaxed">The intended outcome is more efficient cross-region operation: less repeated manual checking, clearer settlement positions and better traceability from instruction to accounting completion. Distributed coordination still needs agreed rules, trusted evidence and explicit failure handling. These are research and design objectives to validate with partners and a focused pilot.</p>
         </section>
 
         <section id="connections" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
