@@ -11,6 +11,20 @@ export const metadata: Metadata = {
 
 const blogPosts = [
   {
+    day: 'Day 4',
+    date: 'October 8, 2026',
+    slug: 'day4',
+    title: 'Tokenization, Stablecoins, and the Unfinished Playbook',
+    summary: 'TL;DR: Tokenization can improve collateral mobility and reconciliation, but liquidity, settlement finality and access still depend on dependable cash, enforceable rights and accountable operations.',
+    image: null,
+    tags: ['Tokenization', 'Stablecoins', 'Settlement', 'Collateral'],
+    highlights: [
+      'Different tokens carry different financial claims',
+      'Instant settlement trades shorter exposure for funding needs',
+      'Interoperability, recovery and complete operating costs determine value',
+    ],
+  },
+  {
     day: 'Day 3',
     date: 'October 7, 2026',
     slug: 'day3',
@@ -85,7 +99,7 @@ export default function BlogsIndexPage() {
             >
               <div className="grid md:grid-cols-12 gap-0">
                 {/* Image side */}
-                <div className="md:col-span-5 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-100">
+                {post.image ? <div className="md:col-span-5 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-100">
                   <img
                     src={post.image}
                     alt={post.title}
@@ -96,10 +110,10 @@ export default function BlogsIndexPage() {
                       {post.day}
                     </span>
                   </div>
-                </div>
+                </div> : null}
 
                 {/* Content side */}
-                <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                <div className={`${post.image ? 'md:col-span-7' : 'md:col-span-12'} p-6 sm:p-8 flex flex-col justify-between`}>
                   <div>
                     <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-3 font-medium">
                       <span className="inline-flex items-center gap-1 text-slate-600">
@@ -121,7 +135,7 @@ export default function BlogsIndexPage() {
 
                     <div className="mb-5 space-y-1.5 rounded-xl bg-slate-50 p-3.5 border border-slate-100">
                       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                        Key Session Highlights
+                        {post.slug === 'day4' ? 'Key Arguments' : 'Key Session Highlights'}
                       </div>
                       {post.highlights.map((highlight, idx) => (
                         <div key={idx} className="flex items-start gap-2 text-xs text-slate-700">
@@ -148,7 +162,7 @@ export default function BlogsIndexPage() {
                       href={`/blogs/${post.slug}`}
                       className="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-emerald-800 transition"
                     >
-                      Read Full {post.day} Field Report <ArrowRight size={14} />
+                      Read Full {post.day} {post.slug === 'day4' ? 'Essay' : 'Field Report'} <ArrowRight size={14} />
                     </Link>
                   </div>
                 </div>
