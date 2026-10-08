@@ -31,8 +31,15 @@ export default function Day4Blog() {
             <h2 id="day4-tldr" className="text-lg font-bold text-slate-950">TL;DR</h2>
             <p className="mt-3 leading-8">{report.tldr}</p>
           </section>
-          <div className="mt-8 space-y-6 text-base sm:text-lg">
-            {report.paragraphs.map((text, index) => <ResearchParagraph key={index} text={text} />)}
+          <div className="mt-10 space-y-10 text-base sm:text-lg">
+            {report.sections.map((section) => (
+              <section key={section.id} aria-labelledby={section.id}>
+                <h2 id={section.id} className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">{section.title}</h2>
+                <div className="mt-5 space-y-6">
+                  {section.paragraphs.map((text, index) => <ResearchParagraph key={index} text={text} />)}
+                </div>
+              </section>
+            ))}
           </div>
           <p className="mt-8 border-t border-slate-200 pt-5 text-sm leading-6 text-slate-500">Based on 48 Day 4 recordings, with published research added. Unreliable transcription fragments and unverified figures are excluded. Arguments and inferences express the author’s interpretation; speakers and participating institutions are anonymized. Numbered links identify the research supporting the relevant passages.</p>
           <nav aria-label="Adjacent blog reports" className="mt-8">
