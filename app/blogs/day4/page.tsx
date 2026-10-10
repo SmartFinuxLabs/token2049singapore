@@ -41,7 +41,7 @@ export default function Day4Blog() {
               </section>
             ))}
           </div>
-          <p className="mt-8 border-t border-slate-200 pt-5 text-sm leading-6 text-slate-500">Based on 48 Day 4 recordings, with published research added. Unreliable transcription fragments and unverified figures are excluded. Arguments and inferences express the author’s interpretation; speakers and participating institutions are anonymized. Numbered links identify the research supporting the relevant passages.</p>
+          <p className="mt-8 border-t border-slate-200 pt-5 text-sm leading-6 text-slate-500">Based on Day 4 discussions and published research. Arguments and inferences express the author’s interpretation; speakers and participating institutions are anonymized. Numbered links identify the research supporting the relevant passages.</p>
           <nav aria-label="Adjacent blog reports" className="mt-8">
             <Link href="/blogs/day3" className="text-sm font-semibold text-emerald-800 hover:underline">← Day 3: Stablecoin Rails, Local Trust and the Business of Payments</Link>
           </nav>
