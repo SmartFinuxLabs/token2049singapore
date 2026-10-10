@@ -43,7 +43,7 @@ const blogPosts = [
     date: 'October 6, 2026',
     slug: 'day2',
     title: 'Stablecoins, Fragmentation and the Generalayer Thesis',
-    summary: 'Eight Singapore event groups, six imported Voicenotes and original photos: banks, cards, tokenized assets, agent ownership and Connextium’s proposed coordination of settlement across rails.',
+    summary: 'Eight Singapore event groups and original photos: banks, cards, tokenized assets, agent ownership and Connextium’s proposed coordination of settlement across rails.',
     image: day2Hero.src,
     tags: ['Stablecoins', 'Generalayer', 'Payments', 'Tokenization', 'Agents'],
     highlights: [
@@ -64,7 +64,6 @@ const blogPosts = [
     highlights: [
       'RWA Capital Forum: The complete tokenization lifecycle beyond issuance',
       'Risky Business: Dependency visibility as core financial risk modeling',
-      'High-impact connections: Lili Zhao (MoneyOS), Aldiyar Bogenbayev (Brickken)',
     ],
   },
 ];
