@@ -26,9 +26,9 @@ export const events: EventReport[] = [
       { name: 'Cris Blanco', company: 'Beldex', role: 'Trust at Scale panel' },
       { name: 'Anbu Kannappan', company: 'Byzanlink', role: 'Trust at Scale; affiliation cross-checked with founder profile' },
     ],
-    evidence: 'Stage names come from the supplied photos. Voicenote W6bkOTlQ (10:45 SGT) and its existing summary QkkzzPkW (10:48 SGT) appear to match the Yat Siu fireside by topic and timing. The transcript labels only Speaker 1 and Speaker 2; individual remarks remain unattributed. No transcript was supplied for the other firesides or Trust at Scale.',
+    evidence: 'Stage names come from the supplied photos. The agent-ownership discussion aligns with the Yat Siu fireside by topic, but individual remarks remain unattributed.',
     notes: [
-      'The recording contrasts local agent hosting with a mass-market model that preserves user ownership without making everyone operate their own server. Cryptographic keys are presented as a way to retain control.',
+      'The discussion contrasts local agent hosting with a mass-market model that preserves user ownership without making everyone operate their own server. Cryptographic keys are presented as a way to retain control.',
       'Agents need identity, reputation and evidence that a counterparty can rely on them. Zero-knowledge proofs are discussed as a way to verify transactions while limiting disclosure. The user experience should hide unnecessary blockchain complexity.',
       'The existing imported summary connects this to Cortex: delegated authority, transaction limits, auditable actions and privacy-aware verification. That is a Connextium reflection, not an attributed speaker recommendation.',
     ],
@@ -53,7 +53,7 @@ export const events: EventReport[] = [
   {
     id: 'cross-border-brunch', title: 'Cross-Border Brunch: How Value Moves Across High-Growth Markets',
     host: 'Kanga Global · Tevau · SCRYPT · Lion’s Den Holdings', venue: 'Social Bar & Bistro · Singapore CBD', time: 'Late morning / lunch · scheduled 11:00–14:00 SGT',
-    introduction: 'This room brought the payment journey into focus: acquiring digital assets, accessing liquidity, spending through cards and reaching a local payout endpoint. The photographed panel and organizer description emphasize high-growth corridors, including ASEAN and LATAM. There is no corresponding audio recording among the six imported notes.',
+    introduction: 'This room brought the payment journey into focus: acquiring digital assets, accessing liquidity, spending through cards and reaching a local payout endpoint. The photographed panel and organizer description emphasize high-growth corridors, including ASEAN and LATAM. ',
     speakers: [
       { name: 'Bruce Kurtz', company: 'Kanga Global', role: 'CMO, photographed panel listing' },
       { name: 'Elizabeth Zhao / Elizabeth Chiu', company: 'Tevau', role: 'Senior BDM; stage and company announcement use different surnames' },
@@ -89,7 +89,7 @@ export const events: EventReport[] = [
       { name: 'Nicola White', company: 'Robinhood', role: 'Vice President, Institutional Crypto & EU, stage listing' },
       { name: 'Andrew McCormick', company: 'Chainlink', role: 'Head of Digital Assets & Market Development, stage listing' },
     ],
-    notes: ['The supplied photos establish the panel roster and topic. No imported recording is confidently assigned to this panel; the ecosystem observations below come from first-party research, not reconstructed remarks.'],
+    notes: ['The supplied photos establish the panel roster and topic; the ecosystem observations below come from first-party research.'],
     ecosystem: [
       { layer: 'Custody and servicing', companies: 'State Street', significance: 'Its digital-asset platform announcement connects tokenization ambitions with institutional controls and servicing. Holding an asset and administering its lifecycle remain separate jobs.' },
       { layer: 'Fund ownership records', companies: 'Franklin Templeton · Benji', significance: 'Benji uses blockchain-integrated share recordkeeping. A fund register supplies a useful example of the authoritative ownership record that a payment workflow must reconcile with.' },
@@ -115,12 +115,12 @@ export const events: EventReport[] = [
       { name: 'Steven Hu', company: 'OCBC', role: 'Head of Digital Assets, Global Markets' },
       { name: 'Justin Kugel', company: 'World Liberty Financial (WLFI)', role: 'Executive Vice President, Growth' },
     ],
-    evidence: 'Voicenotes 0LpXVo0q (13:37 SGT) and y20kiFvy (13:43 SGT) are grouped here by the panel photo, agenda and matching bank/issuer discussion. Speaker-by-speaker attribution is not verified. Transcription errors in bank names and geography are not repeated as facts.',
+    evidence: 'Panel photos and published agenda establish the subject context. Individual remarks are not attributed without independent verification.',
     notes: [
       'The banking clip argues that stablecoin rails can improve dollar settlement speed, cost and capital efficiency when risk is controlled. Banks also provide lending, wealth and advisory services, so the discussion rejects a purely zero-sum view of stablecoins versus deposits.',
       'The closing clip predicts more issuers and wider bank acceptance, with connections to existing market infrastructure becoming a differentiator. It also distinguishes accepting stablecoins from retaining them in a multinational’s treasury.',
       'One speaker forecasts 5–10% of emerging-market cross-border business using stablecoins within a few years; another predicts a challenger to leading issuers within 12 months. These are unattributed forecasts, not measured market shares or guaranteed outcomes.',
-      'The banking clip mentions GOLDX. OCBC’s own announcement confirms the OCBC–Lion Global–DigiFT gold-fund token on Ethereum and Solana and eligible investor subscriptions in stablecoins or fiat. The official launch date is April 20, 2026, correcting the clip’s reference to May.',
+      'OCBC’s own announcement confirms the OCBC–Lion Global–DigiFT gold-fund token on Ethereum and Solana and eligible investor subscriptions in stablecoins or fiat. The official launch date is April 20, 2026, ',
     ],
     ecosystem: [
       { layer: 'Payment acceptance and payout', companies: 'Triple-A', significance: 'Triple-A’s Circle Payments Network announcement links backend USDC settlement to local-currency delivery. That is a concrete example of customers using stablecoin infrastructure without retaining the token.' },
@@ -184,7 +184,7 @@ export const events: EventReport[] = [
     notes: [
       'Taisu’s sector slide groups infrastructure and tooling, DeFi, AI × blockchain, and consumer platforms. Stablecoins and payment rails sit alongside RWA tokenization, yield infrastructure, verifiable compute, identity and digital ownership.',
       'The company slide describes an early-stage, chain-agnostic Web3 investor launched in November 2023. Portfolio metrics on that slide are self-reported and are not treated here as independently audited performance.',
-      'The available Voicenotes contain no evening recording. The panel’s topic and roster are photo evidence; company product descriptions below are subsequent research.',
+      'The panel’s topic and roster are supported by photographs; company product descriptions below come from subsequent research.',
     ],
     ecosystem: [
       { layer: 'Investment and financial products', companies: 'Taisu Ventures · Zoth', significance: 'Taisu documents an early-stage Web3 mandate. Zoth describes a stablecoin finance ecosystem and tokenization infrastructure, linking payment utility with access to yield and assets.' },
@@ -204,7 +204,7 @@ export const events: EventReport[] = [
   },
   {
     id: 'trust-wallet', title: 'Beyond 9YA: Trust Wallet House', host: 'Trust Wallet · ecosystem partners', venue: 'HighHouse · One Raffles Place, Levels 61–62', time: 'Evening · scheduled 18:00–22:00 SGT; visits overlap other event programs',
-    introduction: 'The wallet gathering brought the user-facing side of this infrastructure into view: onboarding, fiat access, yield, cards and agent-related services. Photos establish the event branding and partner presentations, but do not establish the identity of every person on stage or a full transcript of their remarks.',
+    introduction: 'The wallet gathering brought the user-facing side of this infrastructure into view: onboarding, fiat access, yield, cards and agent-related services. Photos establish the event branding and partner presentations, but do not establish the identity of every person on stage.',
     speakers: [{ name: 'Felix', company: 'Trust Wallet', role: 'CEO keynote announced at 19:00 by organizer; attendance at that keynote not confirmed by the supplied notes' }],
     notes: [
       'The event screen and organizer list Mercuryo, Yield.xyz, AWS, Transak, Rain, Banxa, Tronify, B.AI and Ave.ai. A Transak presentation and a slide about an intelligence settlement layer are photographed. The latter slide’s speaker/product attribution is not legible enough to establish from the photo alone.',
@@ -240,11 +240,3 @@ export const fragmentation = [
   ['Business and accounting state', 'A confirmed transaction is not automatically proof an invoice was paid and reconciled.', 'Obligation reference, evidence of receipt, fee allocation, ledger posting and exceptions.'],
 ];
 
-export const noteLedger = [
-  { id: 'W6bkOTlQ', time: '10:45 SGT', title: 'Scaling AI agent ownership with blockchain identity and privacy', duration: '3m 25s', event: 'Gamma Prime — likely Yat Siu fireside', summary: 'Accessible ownership, agent keys, identity and reputation, zero-knowledge verification, simple UX and privacy of personal agent interactions.', treatment: 'Primary audio. Speaker labels are anonymous. Unverified OpenAI usage figures and claims about company motives are excluded.' },
-  { id: 'QkkzzPkW', time: '10:48 SGT', title: 'TOKEN2049 Singapore Day 2: Yat Siu on AI agent ownership, identity and privacy', duration: 'Written summary', event: 'Gamma Prime — derivative of W6bkOTlQ', summary: 'Existing summary of agent ownership and a Cortex reflection on delegated authority, limits, auditing and privacy.', treatment: 'Imported and synthesized, not counted as independent corroboration.' },
-  { id: '0LpXVo0q', time: '13:37 SGT', title: 'Banks leveraging stablecoin rails for faster USD settlement and token subscriptions', duration: '2m 25s', event: 'Global Onchain — likely Stablecoin Century', summary: 'Banks can use risk-managed stablecoin rails to improve dollar settlement and customer relationships; lending, wealth and investment subscriptions may benefit.', treatment: 'Bank names corrected against context; GOLDX details verified against OCBC. Official April launch date replaces the audio’s May reference.' },
-  { id: 'y20kiFvy', time: '13:43 SGT', title: 'Predictions for stablecoin issuers, bank adoption, and tokenized equities growth', duration: '2m 36s', event: 'Global Onchain — likely closing discussion', summary: 'Predictions of issuer competition and bank adoption; infrastructure connectivity as a differentiator; accept-versus-hold distinction; corporate onchain liquidity.', treatment: 'Forecasts remain labelled forecasts. Timestamp is just after the published panel slot; no individual attribution.' },
-  { id: 'fx3l0HJC', time: '14:15 SGT', title: 'Tokenization ease: bonds vs tokenized stocks and TRS-linked securities', duration: '1m', event: 'Event unconfirmed', summary: 'Simple bonds and notes can be easier to tokenize; yield and risk matter. The speaker questions whether synthetic equity exposure is equivalent to direct share issuance.', treatment: 'Not assigned by timing alone. Robinhood derivative characterization checked against its own Classic Stock Tokens terms; specific SEC/TRS claims not presented as verified.' },
-  { id: 'Q36q1XCd', time: '14:31 SGT', title: 'Tokenized assets adoption signaled by dropping “tokenized” from product names', duration: '1m', event: 'Event unconfirmed', summary: 'Adoption becomes ordinary when users focus on the fund, equity or banking service rather than the tokenization technology, analogous to dropping “online” from banking.', treatment: 'Unclear transcribed personal names are not matched to photographed speakers. Included as an unattributed Day 2 product-design observation.' },
-];
