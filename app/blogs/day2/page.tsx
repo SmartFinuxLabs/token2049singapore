@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import Gallery from './Gallery';
 import { photos } from './photos';
-import { events, fragmentation, noteLedger } from './report';
+import { events, fragmentation } from './report';
 
 export const metadata: Metadata = {
   title: 'Day 2: Stablecoins, Fragmentation & Generalayer · TOKEN2049 Singapore · Connextium',
