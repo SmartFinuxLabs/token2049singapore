@@ -7,7 +7,7 @@ import { events, fragmentation, noteLedger } from './report';
 
 export const metadata: Metadata = {
   title: 'Day 2: Stablecoins, Fragmentation & Generalayer · TOKEN2049 Singapore · Connextium',
-  description: 'October 6 field report: eight Singapore events, speaker and company maps, six Voicenotes, original photos, and Connextium’s Generalayer settlement thesis.',
+  description: 'October 6 field report: eight Singapore events, speaker and company maps, original photos, and Connextium’s Generalayer settlement thesis.',
 };
 
 export default function Day2Blog() {
@@ -45,7 +45,7 @@ export default function Day2Blog() {
           <div className="mt-5 flex flex-wrap gap-4 border-t border-slate-100 pt-4 text-sm font-semibold text-emerald-800">
             <a href="#unassigned-clips" className="hover:underline">Unassigned audio clips</a><a href="#generalayer" className="hover:underline">Fragmentation & Generalayer</a><a href="#source-notes" className="hover:underline">Imported note ledger</a>
           </div>
-          <p className="mt-4 text-xs leading-relaxed text-slate-500">Ordered by the field-log sequence. Published event windows overlap and do not establish exact arrival or departure times. Coverage combines recorded observations, stage photos and linked research; it is not a transcript of every event.</p>
+          <p className="mt-4 text-xs leading-relaxed text-slate-500">Ordered by the field-log sequence. Published event windows overlap and do not establish exact arrival or departure times. Coverage combines field observations, stage photos and linked research.</p>
         </nav>
 
         {events.map((event, index) => <article key={event.id} id={event.id} className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
@@ -74,12 +74,12 @@ export default function Day2Blog() {
         </article>)}
 
         <section id="unassigned-clips" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-950">Two useful clips, with event attribution still open</h2>
-          <p className="mt-4 leading-relaxed">The 14:15 and 14:31 recordings discuss tokenized assets. They may belong to the afternoon capital-markets program, but timing and transcribed names alone are insufficient to identify a panel or speaker. They remain part of Day 2 without a fabricated event attribution.</p>
-          <h3 className="mt-6 text-lg font-bold">14:15 SGT · What rights does a token carry?</h3>
-          <p className="mt-3 leading-relaxed">The speaker says simpler bonds and notes can be easier to tokenize, then emphasizes the combination of yield and risk. The clip questions whether synthetic stock exposure is equivalent to direct share issuance. Robinhood’s own Classic Stock Tokens terms describe derivative contracts tracking stock prices. That supports the distinction, but does not verify every statement in the recording about SEC actions or a specific total-return-swap structure.</p>
+          <h2 className="text-2xl font-bold text-slate-950">Two perspectives on tokenized assets</h2>
+          <p className="mt-4 leading-relaxed">These discussions explored the rights attached to tokenized assets and how the technology becomes less visible to users. The specific sessions and speakers are not independently verified.</p>
+          <h3 className="mt-6 text-lg font-bold">What rights does a token carry?</h3>
+          <p className="mt-3 leading-relaxed">Simpler bonds and notes may be easier to tokenize, but yield and risk still matter. Synthetic stock exposure is not necessarily equivalent to direct share issuance. Robinhood’s own Classic Stock Tokens terms describe derivative contracts tracking stock prices. That supports the distinction, but does not independently establish claims about regulatory action or specific total-return-swap structures.</p>
           <p className="mt-3 text-sm"><a className="text-emerald-800 underline" href="https://robinhood.com/eu/en/support/articles/about-stock-tokens/" target="_blank" rel="noopener noreferrer">Robinhood’s instrument description ↗</a></p>
-          <h3 className="mt-6 text-lg font-bold">14:31 SGT · When “tokenized” becomes invisible</h3>
+          <h3 className="mt-6 text-lg font-bold">When “tokenized” becomes invisible</h3>
           <p className="mt-3 leading-relaxed">The discussion uses banking as an analogy: technology adoption becomes ordinary when customers ask for a money market fund, equity or banking service without foregrounding the delivery technology. Our interpretation is a UX test, not a measured adoption milestone. The platform still has to preserve the instrument’s rights and operating controls even when it hides chain mechanics.</p>
         </section>
 
@@ -109,13 +109,6 @@ export default function Day2Blog() {
           </ul>
         </section>
 
-        <section id="source-notes" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-slate-950">Imported Voicenotes and source notes</h2>
-          <p className="mt-4 text-sm leading-relaxed text-slate-600">All six note records returned for October 6 in Singapore time were retrieved and synthesized: five audio recordings and one existing derivative summary. Times below are UTC+8, converted from note timestamps. Raw automatic transcripts contain name errors and unverified claims; this ledger preserves the editorial treatment and every note’s substantive contribution.</p>
-          <div className="mt-5 space-y-4">{noteLedger.map(note => <details key={note.id} className="rounded-xl border border-slate-200 p-4"><summary className="cursor-pointer text-sm font-semibold text-slate-950">{note.time} · {note.title}</summary><p className="mt-3 text-xs text-slate-500">Source ID: {note.id} · {note.duration} · {note.event}</p><p className="mt-3 text-sm leading-relaxed">{note.summary}</p><p className="mt-3 text-xs leading-relaxed text-slate-500">Editorial treatment: {note.treatment}</p></details>)}</div>
-          <p className="mt-6 text-xs leading-relaxed text-slate-500">Photo provenance: all 33 unique supplied images are retained in this route’s photos directory as metadata-stripped WebP files; duplicate uploads are merged. Session and roster evidence is shown first; venue context and alternate views are expandable. The adjacent photo-manifest.json records filenames, dimensions, hashes and duplicate mappings. No photos were generated. Public organizer and company sources were checked on October 6, 2026; product descriptions are self-descriptions, not independent validation of marketing performance.</p>
-          <div className="mt-8 border-t border-slate-200 pt-5"><Link href="/blogs/day1" className="text-sm font-semibold text-emerald-800 hover:underline">← Read Day 1: From Tokenization to the Infrastructure Underneath It</Link></div>
-        </section>
       </main>
     </div>
   );
