@@ -161,7 +161,7 @@ export default function Day3Blog() {
             <li>Identify which partner owns recipient delivery and which team handles exceptions.</li>
             <li>Prepare a separate Sui edition covering the community, ecosystem and practical payment integrations.</li>
           </ul>
-          <p className="mt-6 text-xs leading-relaxed text-slate-500">Photo provenance: fourteen original event photographs were inspected and converted to WebP, with orientation corrected and metadata removed. All are retained under this route’s photos directory; photo-manifest.json records source names, dimensions and hashes. The business-card image is not reproduced with personal contact details. The three Sui Basecamp photos include the stage, a projected tool interface and an on-chain finance stack slide. Research adds company context to personal notes; it does not establish a transcript or an endorsement.</p>
+          <p className="mt-6 text-xs leading-relaxed text-slate-500">Photo provenance: fourteen original event photographs were inspected and converted to WebP, with orientation corrected and metadata removed. All are retained under this route’s photos directory; photo-manifest.json records source names, dimensions and hashes. The business-card image is not reproduced with personal contact details. The three Sui Basecamp photos include the stage, a projected tool interface and an on-chain finance stack slide. Research adds company context to field observations; it does not imply an endorsement.</p>
           <div className="mt-8 border-t border-slate-200 pt-5"><Link href="/blogs/day2" className="text-sm font-semibold text-emerald-800 hover:underline">← Day 2: Stablecoins, Fragmentation and the Generalayer Thesis</Link></div>
         </section>
       </main>
