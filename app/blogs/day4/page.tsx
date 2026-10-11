@@ -51,7 +51,7 @@ export default function Day4Blog() {
             <div>
               <h2 id="day4-reporter" className="text-xs font-semibold uppercase tracking-wider text-slate-500">Day 4 reporter</h2>
               <p className="mt-1 font-semibold text-slate-900">Terence Heju</p>
-              <p className="mt-2">R&amp;D Builder of FinuxLabs, Founder of <a href="https://connextium.xyz" target="_blank" rel="noopener noreferrer" className="text-emerald-800 hover:underline">Connextium.xyz</a>. His work focuses on payment infrastructure, accounting-ledger systems and enterprise integration, informed by experience in banking payments and trade finance. He explores how programmable settlement and tokenized financial claims can improve reconciliation, liquidity management and recovery.</p>
+              <p className="mt-2">R&amp;D at FinuxLabs, Founder of <a href="https://connextium.xyz" target="_blank" rel="noopener noreferrer" className="text-emerald-800 hover:underline">Connextium.xyz</a>. His work focuses on payment infrastructure, accounting-ledger systems and enterprise integration, informed by experience in banking payments and trade finance. He explores how programmable settlement and tokenized financial claims can improve reconciliation, liquidity management and recovery.</p>
             </div>
           </footer>
         </article>
