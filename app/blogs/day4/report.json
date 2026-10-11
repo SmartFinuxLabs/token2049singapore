@@ -1,6 +1,6 @@
 {
   "title": "Tokenization, Stablecoins, and the Unfinished Playbook",
-  "tldr": "Tokenization can improve collateral mobility and reduce reconciliation work, but transferable tokens do not automatically create liquidity, finality, or wider access. Stablecoins, tokenized deposits, and fund units carry different claims. Adoption depends on dependable cash settlement, clear ownership and recovery rules, interoperable standards, and demonstrable savings across the complete workflow.",
+  "tldr": "Tokenization can improve collateral mobility and reduce reconciliation work, but transferable tokens do not automatically create liquidity, finality, or wider access. Stablecoins, tokenized deposits, and fund units carry different claims. Higher rates can increase interest income while restricting borrowing; neither interest payments nor bank-asset growth alone proves net stimulus. Adoption depends on dependable cash settlement, clear ownership and recovery rules, interoperable standards, and demonstrable savings across the complete workflow.",
   "references": [
     {
       "number": 1,
@@ -25,6 +25,50 @@
     {
       "number": 6,
       "url": "https://www.fsb.org/2024/10/the-financial-stability-implications-of-tokenisation/"
+    },
+    {
+      "number": 7,
+      "url": "https://www.federalreserve.gov/monetarypolicy/monetary-policy-what-are-its-goals-how-does-it-work.htm"
+    },
+    {
+      "number": 8,
+      "url": "https://www.federalreserve.gov/monetarypolicy/reserve-balances.htm"
+    },
+    {
+      "number": 9,
+      "url": "https://www.stlouisfed.org/in-plain-english/expansionary-and-contractionary-policy"
+    },
+    {
+      "number": 10,
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy"
+    },
+    {
+      "number": 11,
+      "url": "https://www.bankofengland.co.uk/explainers/how-is-money-created"
+    },
+    {
+      "number": 12,
+      "url": "https://www.federalreserve.gov/releases/h8/20260925/"
+    },
+    {
+      "number": 13,
+      "url": "https://www.newyorkfed.org/markets/domestic-market-operations/monetary-policy-implementation/treasury-securities/treasury-securities-operational-details"
+    },
+    {
+      "number": 14,
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20251125b.htm"
+    },
+    {
+      "number": 15,
+      "url": "https://www.federalreserve.gov/monetarypolicy/2025-06-mpr-part2.htm"
+    },
+    {
+      "number": 16,
+      "url": "https://www.federalreserve.gov/econres/notes/feds-notes/new-forms-of-money-and-the-u-s-monetary-aggregates-20260904.html"
+    },
+    {
+      "number": 17,
+      "url": "https://www.federalreserve.gov/econres/notes/feds-notes/banks-in-the-age-of-stablecoins-implications-for-deposits-credit-and-financial-intermediation-20251217.html"
     }
   ],
   "sections": [
@@ -75,6 +119,59 @@
       "paragraphs": [
         "The economics must be assessed across that complete service. Cheap network transactions may reduce one component of cost while introducing spending on integration, key management, monitoring, security, and parallel operation with existing systems. Assertions about dramatic savings should therefore be tested against comparable workflows and actual volumes. A useful benchmark would measure the cost of a completed, reconciled, serviced transaction, including exceptions. Savings become persuasive when duplicated work is removed and users receive the benefit. If the old process continues alongside a new token layer, the project may initially add complexity rather than remove it.",
         "Security and investor education reinforce this need for specificity. Wallet approval controls, signing interfaces, contract upgrades, and recovery procedures deserve attention alongside cryptographic design. The discussions also introduced quantum risk, but privacy features should not be treated as proof of resistance to future quantum attacks. Published post-quantum standards address particular encryption and signature mechanisms; adoption requires implementation and migration work. Familiar investment packaging can make access easier without making the underlying infrastructure easier to understand. Investors need explanations tied to actual exposures and controls, rather than reassurance built around technical vocabulary. [5]"
+      ]
+    },
+    {
+      "id": "higher-rates-liquidity",
+      "title": "Higher Rates, More Money? The Strongest Version of the Argument",
+      "paragraphs": [
+        "One presentation challenged the familiar assumption that higher rates necessarily mean less money. Its argument combined two mechanisms: rising interest payments on reserve balances and short-term government debt, and expanding commercial-bank balance sheets despite a pause in central-bank purchases.",
+        "The strongest version of this argument is not that tightening has become easing. It is that a policy-rate headline cannot describe every financial flow. Higher rates can discourage borrowing while simultaneously increasing income for holders of interest-bearing assets. Both effects can occur together; determining which dominates requires evidence about spending, lending and portfolio decisions. Official explanations of monetary transmission recognize that rates affect borrowing costs, asset prices, wealth and spending through multiple channels. [7]"
+      ]
+    },
+    {
+      "id": "interest-payment-arithmetic",
+      "title": "Interest Payments: Sound Arithmetic, Conditional Economics",
+      "paragraphs": [
+        "Using the presentation’s stated balances, a 0.25-percentage-point increase on $3.104 trillion produces approximately $7.76 billion in additional annual interest. Applying the same increase to $7 trillion produces $17.5 billion. Together, that is approximately $25.26 billion—consistent with the slide’s rounded headline.",
+        "This calculation verifies the arithmetic, not the underlying balances or the eventual economic impact. It assumes unchanged holdings, a full year at the higher rate, and complete repricing. Government bills reprice through issuance and rollover rather than all changing their contractual return immediately. The administered rate on reserves is also a distinct policy setting, not simply interchangeable with every market interest rate. [8]",
+        "The description of these payments as money going exclusively to the wealthy is also too broad. Ultimate beneficiaries may include individuals holding savings through funds and retirement arrangements. Bank interest income is not identical to bank profit: deposit costs and other expenses matter. The distributional question is legitimate, but it requires tracing the income to its final recipients."
+      ]
+    },
+    {
+      "id": "income-versus-stimulus",
+      "title": "Why More Interest Income Is Not Automatically More Stimulus",
+      "paragraphs": [
+        "The central weakness is the leap from additional payments to net economic expansion. Recipients might spend the income, but they might also save it or reinvest it in short-term government securities. Meanwhile, borrowers face higher financing costs, and investment projects become less attractive.",
+        "Interest on reserves is a policy instrument used to support control over short-term rates. Its payment is not economically equivalent to an asset-purchase programme intended to ease financial conditions. A fiscal interest payment is another distinct transaction; it cannot simply be labelled central-bank money creation without examining its financing and settlement. [8][9]",
+        "My assessment is therefore conditional: the income channel can offset some restrictive effects, but the presentation does not establish that it outweighs them. It identifies a mechanism worth measuring, not a universal reversal of monetary policy."
+      ]
+    },
+    {
+      "id": "bank-assets-money-supply",
+      "title": "Banks Can Create Money—But Total Assets Are Not Money Supply",
+      "paragraphs": [
+        "The presentation is on firmer ground when it emphasizes commercial-bank money creation. When a bank originates a loan and credits a borrower’s account, it creates a deposit alongside the loan asset. This does not require a simultaneous increase in central-bank asset purchases. Loan repayment can reverse that creation. [10][11]",
+        "However, total bank assets are not a direct measure of newly created spendable money. Balance-sheet growth can include reserves, securities and other assets, with different funding sources and counterparties. September 2026 official data support the approximate $25.8 trillion bank-asset level shown in the presentation, but that level alone does not establish an equivalent injection into households, businesses or crypto markets. [12]",
+        "Simply adding central-bank and commercial-bank assets introduces another problem: banks’ reserve assets are central-bank liabilities. An unconsolidated sum includes internal financial relationships and is not a clean measure of money available to the public. This is an accounting criticism of the proposed indicator, not a denial that bank credit matters."
+      ]
+    },
+    {
+      "id": "liquidity-evidence",
+      "title": "What the Evidence Supports—and What Remains Unproven",
+      "paragraphs": [
+        "The claim that reserve-management purchases paused from August 14 has primary-source support. The official schedule shows no such purchases for August 14–September 14, 2026, followed by another period without them. Reinvestment purchases nevertheless continued. The defensible description is a pause in that particular purchase programme, not an end to every liquidity-creating operation. [13]",
+        "The regulatory explanation needs greater caution. A leverage-capital recalibration intended to reduce disincentives for low-risk intermediation took effect on April 1, 2026, with optional earlier adoption. That supports a possible balance-sheet-capacity channel, but it does not establish that the rule caused the claimed $210 billion expansion after mid-August. Establishing causation would require matching dates, affected banks, asset categories and alternative explanations. [14]",
+        "A flat central-bank balance sheet also does not guarantee unchanged reserve liquidity. Official reporting documents how movements in government cash balances and reverse-repurchase balances can change reserves even during asset runoff. Composition matters alongside size. [15]"
+      ]
+    },
+    {
+      "id": "liquidity-tokenization",
+      "title": "The Implication for Stablecoins and Tokenization",
+      "paragraphs": [
+        "This debate connects directly to Day 4’s central theme: changing the form of a financial claim does not remove its economic dependencies. A tokenized deposit remains a bank liability. A tokenized fund unit remains an investment claim. Adding another transferable representation does not automatically create another dollar of underlying wealth; measurement must avoid double-counting the token and its backing. [16]",
+        "Stablecoin growth likewise does not mechanically expand or drain bank funding. Its effect depends on where buyers obtain their funds, how issuers invest reserves, and where counterparties place the proceeds. Higher rates can improve reserve income while increasing users’ opportunity cost of holding a non-interest-bearing token. Those are competing economic forces, not a single bullish signal. [17]",
+        "The presentation’s useful contribution is to challenge liquidity analysis based solely on the policy rate or one balance sheet. Its overreach is treating interest income, bank-asset growth and asset purchases as interchangeable evidence of money printing. For tokenized finance, liquidity must be traced through actual claims and transactions: who receives the income, who can borrow, who retains the yield, and who can redeem on what terms. Those questions reveal more about durable adoption than a rising balance-sheet chart or an assumed relationship between rate hikes and crypto prices."
       ]
     },
     {

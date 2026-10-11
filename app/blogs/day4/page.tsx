@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import report from './report.json';
 
@@ -45,6 +46,14 @@ export default function Day4Blog() {
           <nav aria-label="Adjacent blog reports" className="mt-8">
             <Link href="/blogs/day3" className="text-sm font-semibold text-emerald-800 hover:underline">← Day 3: Stablecoin Rails, Local Trust and the Business of Payments</Link>
           </nav>
+          <footer aria-labelledby="day4-reporter" className="mt-10 flex items-start gap-4 border-t border-slate-200 pt-6 text-sm leading-6 text-slate-600">
+            <Image src="/blogs/day4/terence-reporter.jpeg" alt="Terence Ju He, reporter for the Day 4 log" width={96} height={128} sizes="96px" className="h-32 w-24 shrink-0 rounded-lg object-contain" />
+            <div>
+              <h2 id="day4-reporter" className="text-xs font-semibold uppercase tracking-wider text-slate-500">Day 4 reporter</h2>
+              <p className="mt-1 font-semibold text-slate-900">Terence Ju He</p>
+              <p className="mt-2">Founder of <a href="https://connextium.xyz" target="_blank" rel="noopener noreferrer" className="text-emerald-800 hover:underline">Connextium.xyz</a>. His work focuses on payment infrastructure, accounting-ledger systems and enterprise integration, informed by experience in banking payments and trade finance. He explores how programmable settlement and tokenized financial claims can improve reconciliation, liquidity management and recovery.</p>
+            </div>
+          </footer>
         </article>
       </main>
     </div>
