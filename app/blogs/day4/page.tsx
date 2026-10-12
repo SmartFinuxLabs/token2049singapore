@@ -39,6 +39,14 @@ export default function Day4Blog() {
                 <div className="mt-5 space-y-6">
                   {section.paragraphs.map((text, index) => <ResearchParagraph key={index} text={text} />)}
                 </div>
+                {'subsections' in section && section.subsections?.map((subsection) => (
+                  <section key={subsection.id} aria-labelledby={subsection.id} className="mt-8">
+                    <h3 id={subsection.id} className="text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">{subsection.title}</h3>
+                    <div className="mt-4 space-y-6">
+                      {subsection.paragraphs.map((text, index) => <ResearchParagraph key={index} text={text} />)}
+                    </div>
+                  </section>
+                ))}
               </section>
             ))}
           </div>

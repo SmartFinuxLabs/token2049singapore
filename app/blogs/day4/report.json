@@ -69,6 +69,22 @@
     {
       "number": 17,
       "url": "https://www.federalreserve.gov/econres/notes/feds-notes/banks-in-the-age-of-stablecoins-implications-for-deposits-credit-and-financial-intermediation-20251217.html"
+    },
+    {
+      "number": 18,
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2024/2024/about-a-rate-of-general-interest-how-monetary-policy-transmits"
+    },
+    {
+      "number": 19,
+      "url": "https://www.federalreserve.gov/econres/notes/feds-notes/an-analysis-of-the-interest-rate-risk-of-the-federal-reserves-balance-sheet-part-1-20220715.html"
+    },
+    {
+      "number": 20,
+      "url": "https://www.federalreserve.gov/monetarypolicy/iorb-faqs.htm"
+    },
+    {
+      "number": 21,
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf"
     }
   ],
   "sections": [
@@ -122,41 +138,57 @@
       ]
     },
     {
-      "id": "higher-rates-liquidity",
-      "title": "Higher Rates, More Money? The Strongest Version of the Argument",
+      "id": "monetary-policy-interest-rates",
+      "title": "Monetary Policy and Interest Rates: Income, Credit and Money Creation",
       "paragraphs": [
-        "One presentation challenged the familiar assumption that higher rates necessarily mean less money. Its argument combined two mechanisms: rising interest payments on reserve balances and short-term government debt, and expanding commercial-bank balance sheets despite a pause in central-bank purchases.",
-        "The strongest version of this argument is not that tightening has become easing. It is that a policy-rate headline cannot describe every financial flow. Higher rates can discourage borrowing while simultaneously increasing income for holders of interest-bearing assets. Both effects can occur together; determining which dominates requires evidence about spending, lending and portfolio decisions. Official explanations of monetary transmission recognize that rates affect borrowing costs, asset prices, wealth and spending through multiple channels. [7]"
-      ]
-    },
-    {
-      "id": "interest-payment-arithmetic",
-      "title": "Interest Payments: Sound Arithmetic, Conditional Economics",
-      "paragraphs": [
-        "The presentation frames the calculation as follows: “Fed raises rates by 0.25%, +$25bn per year.”",
-        "“Prints money to pay banks”: Interest on Excess Reserves = $3,104 billion. Yearly payment to banks = $7.76 billion.",
-        "“Prints money to pay the rich”: Total T-bills outstanding = $7,000 billion. Yearly payment to the wealthy = $17.5 billion.",
-        "“Yearly money printed”: $7.76 billion + $17.5 billion = $25.26 billion. Using the presentation’s stated balances, this is the estimated additional annual interest from a 0.25-percentage-point increase, consistent with the rounded headline.",
-        "This calculation verifies the arithmetic, not the underlying balances or the eventual economic impact. It assumes unchanged holdings, a full year at the higher rate, and complete repricing. Government bills reprice through issuance and rollover rather than all changing their contractual return immediately. The administered rate on reserves is also a distinct policy setting, not simply interchangeable with every market interest rate. [8]",
-        "The description of these payments as money going exclusively to the wealthy is also too broad. Ultimate beneficiaries may include individuals holding savings through funds and retirement arrangements. Bank interest income is not identical to bank profit: deposit costs and other expenses matter. The distributional question is legitimate, but it requires tracing the income to its final recipients."
-      ]
-    },
-    {
-      "id": "income-versus-stimulus",
-      "title": "Why More Interest Income Is Not Automatically More Stimulus",
-      "paragraphs": [
-        "The central weakness is the leap from additional payments to net economic expansion. Recipients might spend the income, but they might also save it or reinvest it in short-term government securities. Meanwhile, borrowers face higher financing costs, and investment projects become less attractive.",
-        "Interest on reserves is a policy instrument used to support control over short-term rates. Its payment is not economically equivalent to an asset-purchase programme intended to ease financial conditions. A fiscal interest payment is another distinct transaction; it cannot simply be labelled central-bank money creation without examining its financing and settlement. [8][9]",
-        "My assessment is therefore conditional: the income channel can offset some restrictive effects, but the presentation does not establish that it outweighs them. It identifies a mechanism worth measuring, not a universal reversal of monetary policy."
-      ]
-    },
-    {
-      "id": "bank-assets-money-supply",
-      "title": "Banks Can Create Money—But Total Assets Are Not Money Supply",
-      "paragraphs": [
-        "The presentation is on firmer ground when it emphasizes commercial-bank money creation. When a bank originates a loan and credits a borrower’s account, it creates a deposit alongside the loan asset. This does not require a simultaneous increase in central-bank asset purchases. Loan repayment can reverse that creation. [10][11]",
-        "However, total bank assets are not a direct measure of newly created spendable money. Balance-sheet growth can include reserves, securities and other assets, with different funding sources and counterparties. September 2026 official data support the approximate $25.8 trillion bank-asset level shown in the presentation, but that level alone does not establish an equivalent injection into households, businesses or crypto markets. [12]",
-        "Simply adding central-bank and commercial-bank assets introduces another problem: banks’ reserve assets are central-bank liabilities. An unconsolidated sum includes internal financial relationships and is not a clean measure of money available to the public. This is an accounting criticism of the proposed indicator, not a denial that bank credit matters."
+        "The following four arguments form one monetary-policy discussion. Together, they test whether higher interest payments and expanding bank balance sheets justify describing a rate increase as money creation or economic stimulus. The answer requires separating accounting flows from the net effect on borrowing, spending and inflation."
+      ],
+      "subsections": [
+        {
+          "id": "higher-rates-liquidity",
+          "title": "Higher Rates, More Money? The Strongest Version of the Argument",
+          "paragraphs": [
+            "One presentation challenged the familiar assumption that higher rates necessarily mean less money. Its argument combined two mechanisms: rising interest payments on reserve balances and short-term government debt, and expanding commercial-bank balance sheets despite a pause in central-bank purchases.",
+            "The strongest version of this argument is not that tightening has become easing. It is that a policy-rate headline cannot describe every financial flow. Higher rates can discourage borrowing while simultaneously increasing income for holders of interest-bearing assets. Both effects can occur together; determining which dominates requires evidence about spending, lending and portfolio decisions. Official explanations of monetary transmission recognize that rates affect borrowing costs, asset prices, wealth and spending through multiple channels. [7]",
+            "Four different quantities run through this debate: the annual flow of interest income, the stock of central-bank reserves, the stock of commercial-bank deposits, and the stock of bank assets. An increase in one need not imply an equal increase in the others. The policy question is whether the combination changes credit availability, spending and inflation relative to what would have happened without the rate increase."
+          ]
+        },
+        {
+          "id": "interest-payment-arithmetic",
+          "title": "Interest Payments: Sound Arithmetic, Conditional Economics",
+          "paragraphs": [
+            "The presentation frames the calculation as follows: “Fed raises rates by 0.25%, +$25bn per year.”",
+            "“Prints money to pay banks”: Interest on Excess Reserves = $3,104 billion. Yearly payment to banks = $7.76 billion.",
+            "“Prints money to pay the rich”: Total T-bills outstanding = $7,000 billion. Yearly payment to the wealthy = $17.5 billion.",
+            "“Yearly money printed”: $7.76 billion + $17.5 billion = $25.26 billion. Using the presentation’s stated balances, this is the estimated additional annual interest from a 0.25-percentage-point increase, consistent with the rounded headline.",
+            "This calculation verifies the arithmetic, not the underlying balances or the eventual economic impact. It assumes unchanged holdings, a full year at the higher rate, and complete repricing. Government bills reprice through issuance and rollover rather than all changing their contractual return immediately. The administered rate on reserves is also a distinct policy setting, not simply interchangeable with every market interest rate. [8]",
+            "The description of these payments as money going exclusively to the wealthy is also too broad. Ultimate beneficiaries may include individuals holding savings through funds and retirement arrangements. Bank interest income is not identical to bank profit: deposit costs and other expenses matter. The distributional question is legitimate, but it requires tracing the income to its final recipients.",
+            "The public-sector accounts add another layer. Research on central-bank interest-rate risk describes how interest expense on short-term liabilities can adjust faster than income from longer-term securities. This mismatch can reduce net earnings and suspend remittances to the government, with a deferred asset recording earnings needed before remittances resume. Consequently, the additional payment to a private holder must be considered alongside the public-sector income and financing consequences. Accounting losses do not themselves prevent monetary-policy implementation. [19]"
+          ]
+        },
+        {
+          "id": "income-versus-stimulus",
+          "title": "Why More Interest Income Is Not Automatically More Stimulus",
+          "paragraphs": [
+            "The central weakness is the leap from additional payments to net economic expansion. Recipients might spend the income, but they might also save it or reinvest it in short-term government securities. Meanwhile, borrowers face higher financing costs, and investment projects become less attractive.",
+            "Interest on reserves is a policy instrument used to support control over short-term rates. Its payment is not economically equivalent to an asset-purchase programme intended to ease financial conditions. A fiscal interest payment is another distinct transaction; it cannot simply be labelled central-bank money creation without examining its financing and settlement. [8][9]",
+            "My assessment is therefore conditional: the income channel can offset some restrictive effects, but the presentation does not establish that it outweighs them. It identifies a mechanism worth measuring, not a universal reversal of monetary policy.",
+            "Research on monetary transmission distinguishes the cash-flow channel from the incentive to postpone consumption. Higher deposit returns help savers, while higher debt payments reduce borrowers’ disposable income. The spending effect depends on recipients’ and borrowers’ liquidity constraints and willingness to consume. Fixed-rate borrowing can delay the direct payment increase, although households may save before refinancing. These mechanisms are general analytical guidance; evidence from one country cannot establish the size of the effect in another. [18]",
+            "The nominal rate is also an incomplete guide to policy stance. A useful approximation to the expected real rate is the nominal rate minus expected inflation. If inflation expectations fall while nominal rates rise, the real financing burden can increase more than the headline rate change suggests. Expected future rates, rather than today’s rate alone, also influence longer-term financing. My inference is that a larger nominal interest-income flow cannot by itself establish stronger real demand. [18]"
+          ]
+        },
+        {
+          "id": "bank-assets-money-supply",
+          "title": "Banks Can Create Money—But Total Assets Are Not Money Supply",
+          "paragraphs": [
+            "The presentation is on firmer ground when it emphasizes commercial-bank money creation. When a bank originates a loan and credits a borrower’s account, it creates a deposit alongside the loan asset. This does not require a simultaneous increase in central-bank asset purchases. Loan repayment can reverse that creation. [10][11]",
+            "However, total bank assets are not a direct measure of newly created spendable money. Balance-sheet growth can include reserves, securities and other assets, with different funding sources and counterparties. September 2026 official data support the approximate $25.8 trillion bank-asset level shown in the presentation, but that level alone does not establish an equivalent injection into households, businesses or crypto markets. [12]",
+            "Simply adding central-bank and commercial-bank assets introduces another problem: banks’ reserve assets are central-bank liabilities. An unconsolidated sum includes internal financial relationships and is not a clean measure of money available to the public. This is an accounting criticism of the proposed indicator, not a denial that bank credit matters.",
+            "A simple loan illustrates the accounting. When a bank lends $100 and credits a customer’s deposit, it records a $100 loan asset and a $100 deposit liability. If the customer pays someone at another bank, reserves move between banks to settle the payment; this does not mean reserves were lent to the customer. Principal repayment reduces the loan and extinguishes deposit money. Lending remains constrained by profitability, borrower demand, capital, liquidity management and regulation rather than a mechanical multiplication of reserves. [21]",
+            "Rate control and reserve quantity are related but distinct tools. Official implementation guidance explains that interest on reserves can support rate control with either a large or a small central-bank balance sheet. Therefore, a stable asset total does not establish neutral policy, and a larger stock of reserves does not demonstrate proportionately greater lending. [20]",
+            "The empirical test should therefore track deposit growth, new lending and repayments, lending standards, financing rates, government interest flows and changes in reserve composition over consistent periods. To claim that rate hikes caused expansion, the analysis must also distinguish an unexpected policy change from a rate increase responding to an already strong economy. My conclusion is that the presentation identifies a plausible income channel, but its arithmetic and asset charts do not establish that this channel dominates the restrictive effects."
+          ]
+        }
       ]
     },
     {
