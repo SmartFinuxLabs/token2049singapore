@@ -11,6 +11,20 @@ export const metadata: Metadata = {
 
 const blogPosts = [
   {
+    day: 'Afterword',
+    date: 'October 18, 2026',
+    slug: 'afterword',
+    title: 'Building the Complete Capital Cycle',
+    summary: 'Three event ecosystems, one financial lifecycle: attract capital, move it, deploy it, service positions and return proceeds. A researched synthesis of institutional onchain finance, tokenized assets and financial agents.',
+    image: null,
+    tags: ['Capital Cycle', 'Institutional Finance', 'RWA', 'Agents', 'Servicing'],
+    highlights: [
+      'Published hosts and speaker programs across three TOKEN2049 events',
+      'The economics of deployment, servicing, redemption and investor returns',
+      'A concrete enterprise opportunity linking obligations, settlement and accounting',
+    ],
+  },
+  {
     day: 'Day 4',
     date: 'October 8, 2026',
     slug: 'day4',
@@ -134,7 +148,7 @@ export default function BlogsIndexPage() {
 
                     <div className="mb-5 space-y-1.5 rounded-xl bg-slate-50 p-3.5 border border-slate-100">
                       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                        {post.slug === 'day4' ? 'Key Arguments' : 'Key Session Highlights'}
+                        {post.slug === 'day4' || post.slug === 'afterword' ? 'Key Arguments' : 'Key Session Highlights'}
                       </div>
                       {post.highlights.map((highlight, idx) => (
                         <div key={idx} className="flex items-start gap-2 text-xs text-slate-700">
@@ -161,7 +175,7 @@ export default function BlogsIndexPage() {
                       href={`/blogs/${post.slug}`}
                       className="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-emerald-800 transition"
                     >
-                      Read Full {post.day} {post.slug === 'day4' ? 'Essay' : 'Field Report'} <ArrowRight size={14} />
+                      {post.slug === 'afterword' ? 'Read the Afterword' : `Read Full ${post.day} ${post.slug === 'day4' ? 'Essay' : 'Field Report'}`} <ArrowRight size={14} />
                     </Link>
                   </div>
                 </div>
