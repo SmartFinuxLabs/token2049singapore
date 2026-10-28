@@ -13,17 +13,19 @@ export const afterword = {
   title: 'Building the Complete Capital Cycle',
   date: 'October 18, 2026',
   dateTime: '2026-10-18',
+  updated: 'October 27, 2026',
+  updatedTime: '2026-10-27',
   description: 'A TOKEN2049 afterword connecting institutional onchain finance, Bitcoin capital, tokenized assets and financial agents—from capital formation to servicing and investor returns.',
   tldr: 'Across three TOKEN2049 side events, a common product challenge emerges: attract capital, move it, deploy it into an asset or strategy, service the position, and return proceeds to investors. The opportunity is to connect these stages through clear rights, usable liquidity, bounded authority and reconciled accounting.',
   methodology: 'Research checked on October 18, 2026. Event and speaker details come from published organizer programs; listings establish advertised participation, not confirmation of attendance or a transcript of remarks. Product descriptions reflect provider documentation. Ecosystem connections and product conclusions are the author’s interpretation, not evidence of a joint integration or independently verified performance.',
 };
 
 export const capitalCycle = [
-  { label: 'Attract', detail: 'Define the claim and investment mandate' },
-  { label: 'Move', detail: 'Deliver usable, reconciled funds' },
-  { label: 'Deploy', detail: 'Acquire the authorized exposure' },
-  { label: 'Service', detail: 'Maintain positions and collect cash flows' },
-  { label: 'Return', detail: 'Distribute proceeds and honor exits' },
+  { id: 'attract-capital', label: 'Attract', detail: 'Define the claim and investment mandate' },
+  { id: 'move-capital', label: 'Move', detail: 'Deliver usable, reconciled funds' },
+  { id: 'deploy-capital', label: 'Deploy', detail: 'Acquire the authorized exposure' },
+  { id: 'service-positions', label: 'Service', detail: 'Maintain positions and collect cash flows' },
+  { id: 'return-proceeds', label: 'Return', detail: 'Distribute proceeds and honor exits' },
 ];
 
 export const references = [
@@ -182,6 +184,23 @@ export const sections: ResearchSection[] = [
       ] },
       { type: 'paragraph', text: 'An individual investor may exit through a secondary sale without the underlying investment returning its capital. Borrowing may supply cash while retaining the original exposure and adding debt. These mechanisms have different implications for the completeness and resilience of the cycle.' },
       { type: 'paragraph', text: 'The FSB’s tokenization analysis, summarized by BIS, identifies liquidity and maturity mismatch as vulnerabilities when tokens are perceived as more liquid than their underlying assets. A credible exit design therefore identifies the payout asset, processing conditions and funding source, including what happens under stress. [23]' },
+    ],
+  },
+  {
+    id: 'worked-capital-cycle',
+    title: 'One position, from subscription to investor proceeds',
+    blocks: [
+      { type: 'paragraph', text: 'Consider a deliberately simplified receivable purchase. All amounts are illustrative US dollars, with no FX movement, tax or token-price change. One investor contributes $98,000 to purchase a verified $100,000 receivable due in 90 days. The agreed servicing fee is $500, payable only from a full collection in this example. This is a workflow illustration, not a quoted product, forecast or investment recommendation.' },
+      { type: 'table', caption: 'A worked example of the five capital-cycle handoffs', columns: ['Stage', 'Cash and position', 'Evidence needed to continue'], rows: [
+        ['Attract', 'Investor subscribes $98,000 under an agreed mandate.', 'Accepted subscription, investor eligibility, ownership record and agreed distribution terms.'],
+        ['Move', 'The $98,000 subscription reaches the designated account or wallet.', 'Receipt matched to the investor; settlement asset, custody and conversion responsibilities identified.'],
+        ['Deploy', '$98,000 is paid to acquire the $100,000 receivable; available cash becomes an investment position.', 'Verified claim, purchase agreement, assignment and confirmed seller credit.'],
+        ['Service', 'The position remains outstanding until collection; its face amount is not cash available for payout.', 'Maturity tracking, valuation, debtor notices, dispute handling and collection records.'],
+        ['Return', 'On full collection, $100,000 funds a $500 fee and $99,500 investor payout.', 'Collection reconciled, contractual allocation approved, payout confirmed and position closed.'],
+      ] },
+      { type: 'callout', title: 'Reconcile cash, principal and income separately', text: 'Full collection: $100,000 = $98,000 returned principal + $1,500 investor income + $500 servicing fee. The investor receives $99,500 in total, of which $1,500 is gain: approximately 1.53% of the original $98,000 over the assumed 90 days, before any excluded costs or taxes. Issuing or transferring a receipt token creates no additional income in this example.' },
+      { type: 'paragraph', text: 'Now suppose only $60,000 arrives at maturity. Before fees or distributions, $40,000 of the face claim remains uncollected. That outstanding claim is not evidence that the remaining cash will arrive. The operator must reconcile the partial collection, assess recovery and valuation, apply the actual contractual priorities, and report what remains exposed. A payout funded by a new subscription or a loan must be identified as such; it does not establish that the debtor paid.' },
+      { type: 'paragraph', text: 'This example links the five stages through one position and its records. The acceptance test is whether an investor can trace subscribed funds into a valid asset, understand its ongoing condition, and reconcile the final payment to principal, income, fees and any loss. The same questions apply when the deployment is a fund, a lending position or an automated strategy.' },
     ],
   },
   {
