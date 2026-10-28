@@ -109,7 +109,7 @@ export default function DashboardNav() {
               aria-expanded={blogsOpen}
               aria-controls="blog-navigation"
             >
-              <BookOpen size={14} /> Blogs <ChevronDown size={12} className={`transition-transform duration-150 ${blogsOpen ? 'rotate-180' : ''}`} />
+              <BookOpen size={14} /> Field Reports <ChevronDown size={12} className={`transition-transform duration-150 ${blogsOpen ? 'rotate-180' : ''}`} />
             </button>
             {blogsOpen && (
               <div

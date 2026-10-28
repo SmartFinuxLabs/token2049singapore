@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { afterword } from './afterword/report';
 import day2Hero from './day2/photos/IMG_2640.webp';
 import day3Hero from './day3/photos/IMG_2647.webp';
 import { Calendar, MapPin, ArrowRight, Sparkles } from 'lucide-react';
@@ -12,15 +13,15 @@ export const metadata: Metadata = {
 const blogPosts = [
   {
     day: 'Afterword',
-    date: 'October 18, 2026',
+    date: `${afterword.date} · Updated ${afterword.updated}`,
     slug: 'afterword',
-    title: 'Building the Complete Capital Cycle',
+    title: afterword.title,
     summary: 'Three event ecosystems, one financial lifecycle: attract capital, move it, deploy it, service positions and return proceeds. A researched synthesis of institutional onchain finance, tokenized assets and financial agents.',
     image: null,
     tags: ['Capital Cycle', 'Institutional Finance', 'RWA', 'Agents', 'Servicing'],
     highlights: [
       'Published hosts and speaker programs across three TOKEN2049 events',
-      'The economics of deployment, servicing, redemption and investor returns',
+      'A worked capital-cycle example tracing principal, income, fees and partial collection',
       'A concrete enterprise opportunity linking obligations, settlement and accounting',
     ],
   },

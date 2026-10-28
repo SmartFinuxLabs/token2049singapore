@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     title: `TOKEN2049 Afterword: ${afterword.title}`,
     description: afterword.description,
     publishedTime: afterword.dateTime,
-    authors: ['Terence'],
+    authors: ['Terence Heju'],
+    modifiedTime: afterword.updatedTime,
   },
 };
 
@@ -42,7 +43,7 @@ export default function AfterwordBlog() {
             <p className="text-xs font-bold uppercase tracking-widest text-emerald-800">TOKEN2049 Singapore · Afterword</p>
             <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">{afterword.title}</h1>
             <p className="mt-5 text-lg leading-8 text-slate-600">From institutional onchain finance to productive capital and financial agents.</p>
-            <p className="mt-4 text-sm text-slate-500">By Terence · <time dateTime={afterword.dateTime}>{afterword.date}</time> · Research and ecosystem analysis</p>
+            <p className="mt-4 text-sm text-slate-500">By Terence Heju · <time dateTime={afterword.dateTime}>{afterword.date}</time> · Updated <time dateTime={afterword.updatedTime}>{afterword.updated}</time> · Research and ecosystem analysis</p>
           </header>
 
           <section aria-labelledby="afterword-tldr" className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 sm:p-7">
@@ -56,7 +57,7 @@ export default function AfterwordBlog() {
               {capitalCycle.map((stage, index) => (
                 <li key={stage.label} className="rounded-xl border border-slate-200 bg-white p-4">
                   <span className="text-xs font-bold text-emerald-700">0{index + 1}</span>
-                  <p className="mt-2 font-bold text-slate-950">{stage.label}</p>
+                  <a href={`#${stage.id}`} className="mt-2 inline-block font-bold text-emerald-800 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600">{stage.label}</a>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{stage.detail}</p>
                 </li>
               ))}
@@ -137,7 +138,7 @@ export default function AfterwordBlog() {
           </section>
 
           <footer className="mt-10 border-t border-slate-200 pt-6 text-sm leading-7 text-slate-600">
-            <p className="font-semibold text-slate-950">Terence · R&amp;D at FinuxLabs · Founder of Connextium.xyz</p>
+            <p className="font-semibold text-slate-950">Terence Heju · R&amp;D at FinuxLabs · Founder of Connextium.xyz</p>
             <p className="mt-2">Researching payment infrastructure, accounting-ledger systems and enterprise integration, with a focus on settlement, reconciliation and the lifecycle of financial obligations.</p>
             <nav aria-label="Related blog reports" className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-semibold text-emerald-800">
               <Link href="/blogs/day4" className="hover:underline">← Day 4: Tokenization and stablecoins</Link>
